@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="D:\shenfeiWebservice" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="bin/log4net.dll" publishTime="05/30/2012 08:43:02" />
+    <file relUrl="bin/Lanxum.Domas.Extension.LogManager.dll" publishTime="05/30/2012 08:42:58" />
+    <file relUrl="bin/Lanxum.Domas.Extension.Configuration.dll" publishTime="05/30/2012 08:42:58" />
+    <file relUrl="bin/log4net.pdb" publishTime="05/30/2012 08:43:02" />
+    <file relUrl="Web.config" publishTime="07/17/2012 17:38:03" />
+    <file relUrl="Upload.asmx" publishTime="07/17/2012 17:39:06" />
+    <file relUrl="bin/WebService.pdb" publishTime="07/17/2012 17:35:32" />
+    <file relUrl="bin/WebService.dll" publishTime="07/17/2012 17:35:32" />
+    <file relUrl="bin/log4net.xml" publishTime="05/30/2012 08:43:08" />
+  </publishProfile>
+</publishData>

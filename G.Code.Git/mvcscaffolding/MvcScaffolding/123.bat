@@ -1,0 +1,2 @@
+Copy E:\SVN\MVCProj\domasmvc\mvcscaffolding\MvcScaffolding\bin\Debug\Scaffolders\Controller\*.t4 D:\View\Trunk\Domas.UI\Domas.MVC3\packages\MvcScaffolding.1.0.6\tools\Controller\ /y
+Copy E:\SVN\MVCProj\domasmvc\mvcscaffolding\MvcScaffolding\bin\Debug\Scaffolders\RazorView\*.t4 D:\View\Trunk\Domas.UI\Domas.MVC3\packages\MvcScaffolding.1.0.6\tools\RazorView\ /y

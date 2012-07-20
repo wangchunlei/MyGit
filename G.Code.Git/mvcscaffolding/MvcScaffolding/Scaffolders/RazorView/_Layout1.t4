@@ -1,0 +1,70 @@
+﻿<#@ template  debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+
+
+#>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>@ViewBag.Title</title>@*    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Content/themes/default/easyui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/icon.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery.easyui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/locale/easyui-lang-zh_CN.js")" type="text/javascript"></script>
+    <script language="javascript">
+        function showpage(url, title) {
+            //            window.parent.showpage(url);
+            $('#dd_content').load(url);
+            $('#dd').dialog({
+                modal: true,
+                title: '123',
+                buttons: [{
+                    text: '确定',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        alert('ok');
+                    }
+                }, {
+                    text: '取消',
+                    iconCls: 'icon-cancel',
+                    handler: function () {
+                        alert('ok');
+                    }
+                }]
+            });
+        }
+    </script>
+    @if (IsSectionDefined("jsDatagrid"))
+    {
+        @RenderSection("jsDatagrid")
+    }
+</head>
+<body class="easyui-layout">
+    <div region="center">
+        @if (IsSectionDefined("htmlTable"))
+        {
+            @RenderSection("htmlTable")
+        }
+        else
+        {
+            @RenderBody()
+        }
+    </div>
+    <div id="dd" style="width: 1000px; height: 500px;">
+        <div id="dd_content">
+        </div>
+    </div>
+</body>
+</html>
+
+

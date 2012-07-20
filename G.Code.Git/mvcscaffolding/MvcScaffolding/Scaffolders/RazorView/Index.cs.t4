@@ -1,0 +1,164 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.Data.Linq.Mapping" #>
+<#@ import namespace="System.Data.Objects.DataClasses" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Linq.Expressions" #>
+<#@ import namespace="System.Reflection" #>
+<# var viewDataType = (EnvDTE.CodeType) Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model IEnumerable<<#= viewDataType.FullName #>>
+
+<# } #>
+@{
+    ViewBag.Title = "<#= Model.ViewName #>";
+	Layout = "~/Views/Shared/_LayoutList.cshtml";
+<# if (!String.IsNullOrEmpty(Model.Layout)) { #>
+    Layout = "<#= Model.Layout #>";
+<# } #>
+}
+
+<#
+List<ModelProperty> properties = GetModelProperties(Model.ViewDataType, true);
+#>
+@section htmlSearch{
+    <div id="p">
+    </div>
+}
+@section htmlTable{
+	<div id="<#= viewDataType.Name #>_searchbox_div" style="padding-top: 3px;">
+	    <input id="<#= viewDataType.Name #>_ss" />
+	    <div id="<#= viewDataType.Name #>_mm" style="width: 120px; padding-top: 2px;">
+	    </div>
+	</div>
+	<table id="<#= viewDataType.Name #>Table"></table>
+}
+
+@section jsDatagrid{
+	<script type="text/javascript">
+	    $(document).ready(function () {
+			$('#p').load('@Url.Action("Search")');
+	        $('#<#= viewDataType.Name #>Table').datagrid({
+	            //title: '<#=  viewDataType.Name #> List',
+	           	iconCls: 'icon-save',          
+	            fitColumns: false,
+				striped: true,
+				sortName: 'CreatedOn',
+				sortOrder: 'desc',
+				remoteSort: true,
+				fit: true,
+				idField: 'ID',
+				frozenColumns:[[
+					{field: 'ID', checkbox: true}
+				]],
+	            nowrap: false,
+	            url: '@Url.Action("List")',
+	           	columns: [[
+				<#
+				var needComma = false;
+				for (int i=0; i<properties.Count; i++){
+					ModelProperty property = properties[i];
+	    			if (!property.IsPrimaryKey && !property.IsForeignKey&&(property.IsDateTime||!property.IsGeneric)&&!property.IsEnum) {
+				#>
+					<# if(needComma){ #>,<# } #>{
+					<# needComma=true; #>
+						field:'<#= property.Name #>',title: '<#= property.DisplayName #>',width: '<#= property.IsDateTime?100:80 #>'
+						<# if(property.IsDateTime){  #>
+								,sortable:true,formatter: function (value) {
+									if(value)
+	                        			return eval("new " + value.substr(1, value.length - 2)).toLocaleDateString();
+	                   		 	}
+						<# }else if(property.IsRefType){ #>
+								,formatter: function (value) {
+									if(value)
+	                        			return '<span id='+ value.Code+' >'+value.Name+'</span>';
+	                   		 	}
+						<# } #>
+					}
+				<# }} #>
+				]],
+	            pagination: true,
+				rownumbers: true,
+	            showFooter: true,
+				toolbar:[{
+	        		text:'新增',
+	        		iconCls:'icon-add',
+	        		handler:function(){
+	            		showpage('@Url.Action("Create")');
+	        		}
+	   			},{
+			        text:'修改',
+			        iconCls:'icon-save',
+			        handler:function(){
+			            var row = $('#<#= viewDataType.Name #>Table').datagrid('getSelected');
+						if(!row){
+							alert('选择要修改的行');
+							return;
+						}
+	                    var url = '@Url.Action("Edit",new {id="_TOREPLACE_"})';
+	                    url = url.replace('_TOREPLACE_', row.ID);
+	                    showpage(url);
+			        }
+			    },'-',{
+			        text:'删除',
+			        iconCls:'icon-cut',
+			        handler:function(){
+			            var row = $('#<#= viewDataType.Name #>Table').datagrid('getSelected');
+						if(!row){
+							alert('选择要删除的行');
+							return;
+						}
+	                    var url = '@Url.Action("Delete",new {id="_TOREPLACE_"})';
+	                    url = url.replace('_TOREPLACE_', row.ID);
+	                    showpage(url);
+			        }
+	    		}, '-', {
+                    text: '高级查询',
+                    iconCls: 'icon-search',
+                    handler: function () {
+                        collapse();
+                    }
+                }],
+	            onDblClickRow: function (rowIndex, rowData) {
+	                var url = '@Url.Action("Details",new {id="_TOREPLACE_"})';
+	                url = url.replace('_TOREPLACE_', rowData.ID);
+	                showpage(url);
+	            }
+	        });
+	    });
+		$(document).ready(function () {
+			var fields = $('#<#= viewDataType.Name #>Table').datagrid('getColumnFields');
+		    for (var i = 0; i < fields.length; i++) {
+		        var opts = $('#<#= viewDataType.Name #>Table').datagrid('getColumnOption', fields[i]);
+		        var muit = "<div name='" + fields[i] + "'>" + opts.title + "</div>";
+		        $('#<#= viewDataType.Name #>_mm').html($('#<#= viewDataType.Name #>_mm').html() + muit);
+		    }
+		    $('#<#= viewDataType.Name #>_ss').searchbox({
+		        width: 300,
+		        searcher: function (value, name) {
+					var params = {};
+		            if (value) {
+		                params[name] = value;
+		                $('#<#= viewDataType.Name #>Table').datagrid('options').queryParams = params;
+		                $('#<#= viewDataType.Name #>Table').datagrid('reload');
+		            }else{
+						$('#<#= viewDataType.Name #>Table').datagrid('options').queryParams = params;
+		                $('#<#= viewDataType.Name #>Table').datagrid('reload');
+					}
+		        },
+		        menu: '#<#= viewDataType.Name #>_mm',
+		        prompt: '请输入查询条件'
+		    });
+
+		    $('#<#= viewDataType.Name #>_searchbox_div').appendTo('.datagrid-toolbar');
+		});
+	</script>
+}

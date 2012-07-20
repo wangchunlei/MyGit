@@ -1,0 +1,119 @@
+﻿
+<#+
+// Describes the information about a property on the model
+class ModelProperty {
+    public string Name { get; set; }
+	public string DisplayName{get;set;}
+	public bool IsDateTime{get;set;}
+    public string ValueExpression { get; set; }
+	public EnvDTE.CodeTypeRef Type { get; set; }
+    public bool IsPrimaryKey { get; set; }
+	public bool IsForeignKey { get; set; }
+	public bool IsReadOnly { get; set; }
+	public bool IsRefType{get;set;}
+	public bool IsGeneric{get;set;}
+	public bool IsEnum{ get; set; }
+	public bool IsInt{ get; set; }
+	public bool IsDecimal{ get;set;}
+}
+
+// Change this list to include any non-primitive types you think should be eligible to be edited using a textbox
+static Type[] bindableNonPrimitiveTypes = new[] {
+    typeof(string),
+    typeof(decimal),
+    typeof(Guid),
+    typeof(DateTime),
+    typeof(DateTimeOffset),
+    typeof(TimeSpan),
+	typeof(int),
+	typeof(bool)
+};
+
+// Call this to get the list of properties in the model. Change this to modify or add your
+// own default formatting for display values.
+List<ModelProperty> GetModelProperties(EnvDTE.CodeType typeInfo, bool includeUnbindableProperties) {
+    List<ModelProperty> results = GetEligibleProperties(typeInfo, includeUnbindableProperties);
+    
+    foreach (ModelProperty prop in results) {
+        if (prop.Type.UnderlyingTypeIs<double>() || prop.Type.UnderlyingTypeIs<decimal>()) {
+            prop.ValueExpression = "String.Format(\"{0:F}\", " + prop.ValueExpression + ")";
+        }
+        else if (prop.Type.UnderlyingTypeIs<DateTime>()) {
+            prop.ValueExpression = "String.Format(\"{0:g}\", " + prop.ValueExpression + ")";
+        }
+		else if (!IsBindableType(prop.Type)) {
+			prop.ValueExpression = GetValueExpression("Model." + prop.Name, (EnvDTE.CodeType)prop.Type.CodeType);
+		}
+    }
+
+    return results;
+}
+string GetDisplayName(EnvDTE.CodeProperty typeInfo) {
+	 var attributes = typeInfo.Attributes.OfType<EnvDTE80.CodeAttribute2>();
+       		 var me = attributes.FirstOrDefault(x => x.Name == "DisplayName");
+  			 if (me == null) return string.Empty;
+          	 var firstArgValue = me.Value.Split(',').FirstOrDefault();;
+            if (string.IsNullOrEmpty(firstArgValue))
+                return string.Empty;
+
+            return firstArgValue.Replace("\"",string.Empty);
+}
+// Change this list to include the names of properties that should be selected to represent an entity as a single string
+static string[] displayPropertyNames = new[] { "Name", "Title", "LastName", "Surname", "Subject", "Count" };
+
+string GetValueExpression(string propertyExpression, EnvDTE.CodeType propertyType) {
+	if (propertyType != null) {
+		var chosenSubproperty = propertyType.DisplayColumnProperty() ?? propertyType.FindProperty(displayPropertyNames);
+		if (chosenSubproperty != null) {
+			var toStringSuffix = chosenSubproperty.Type.AsFullName == "System.String" ? "" : ".ToString()";
+			return String.Format("({0} == null ? \"None\" : {0}.{1}{2})", propertyExpression, chosenSubproperty.Name, toStringSuffix);
+		}
+	}
+	return "Html.DisplayTextFor(_ => " + propertyExpression + ").ToString()";
+}
+
+// Helper
+List<ModelProperty> GetEligibleProperties(EnvDTE.CodeType typeInfo, bool includeUnbindableProperties) {
+    List<ModelProperty> results = new List<ModelProperty>();
+
+	if (typeInfo != null) {
+		foreach (var prop in typeInfo.VisibleMembers().OfType<EnvDTE.CodeProperty>()) {
+			if (prop.IsReadable() && !prop.HasIndexParameters() && (includeUnbindableProperties || IsBindableType(prop.Type))) {
+				var disName=GetDisplayName(prop);
+				var ref2Type=prop.Type as EnvDTE80.CodeTypeRef2;
+				if(string.IsNullOrEmpty(disName))
+					disName=prop.Name;
+					results.Add(new ModelProperty {
+					Name = prop.Name,
+					DisplayName = disName,
+					ValueExpression = "Model." + prop.Name,
+					Type = prop.Type,
+					IsPrimaryKey = Model.PrimaryKeyName == prop.Name,
+					IsForeignKey = ParentRelations.Any(x => x.RelationProperty == prop),
+					IsReadOnly = !prop.IsWriteable(),
+					IsDateTime=IsDateTime(prop.Type),
+					IsRefType=!bindableNonPrimitiveTypes.Any(x => prop.Type.UnderlyingTypeIs(x)),
+					IsGeneric= ref2Type!=null && ref2Type.IsGeneric && !prop.Type.UnderlyingIsPrimitive(),
+					IsEnum = (prop.Type.CodeType as EnvDTE.CodeEnum)!=null?true:false,
+					IsInt = (prop.Type).IsType(typeof(int)),
+					IsDecimal = (prop.Type).IsType(typeof(decimal))
+				});
+			}
+		}
+	}
+
+    return results;
+}
+
+IEnumerable<RelatedEntityInfo> ParentRelations {
+	get { return ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>().Where(x => x.RelationType == RelationType.Parent); }
+}
+
+// Helper
+bool IsBindableType(EnvDTE.CodeTypeRef type) {
+    return type.UnderlyingIsPrimitive() || bindableNonPrimitiveTypes.Any(x => type.UnderlyingTypeIs(x))||type.CodeType is EnvDTE.CodeEnum;
+}
+bool IsDateTime(EnvDTE.CodeTypeRef type){
+	return type.UnderlyingTypeIs(typeof (DateTime));
+}
+#>

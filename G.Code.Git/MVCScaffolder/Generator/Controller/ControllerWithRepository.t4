@@ -1,0 +1,266 @@
+﻿<#@ template language="C#" HostSpecific="True"  inherits="ControllerBase" #>
+<#@ template debug="true" hostSpecific="true"  #>
+
+<#@ Output Extension="cs" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Linq.Dynamic;
+using System.Web;
+using System.Web.Mvc;
+<# if(!string.IsNullOrEmpty(Model.ModelTypeNamespace)) { #>
+using <#= Model.ModelTypeNamespace #>;
+<# } #>
+using <#= Model.RepositoryNamespace #>;
+
+
+namespace <#= Model.Namespace+".Controllers" #>
+{   
+<#  
+	var modelType = Model.ModelType; 
+    var modelName = Model.ModelName; 
+    var modelNamePlural = Model.ModelTypePluralized; 
+    var contextName = Model.ContextType; 
+    var primaryKeyProperty =Model.PrimaryKeyProperty;
+	var modelVariable = modelName.ToLower(); 
+	var routingName = Model.RoutingName;
+
+	var relatedEntities = Model.RelatedEntities;
+	var modelEnumTypes = Model.EnumTypeProperties;
+#>
+    public partial class <#= Model.ControllerName #> : Controller
+    {
+<# foreach(var repository in Model.Repositories.Values) { #>
+		private readonly I<#= repository.RepositoryTypeName #> <#= repository.VariableName #>;
+<# } #>
+		// If you are using Dependency Injection, you can delete the following constructor
+        public <#= Model.ControllerName #>() : this(<#= String.Join(", ", Model.Repositories.Values.Select(x => "new " + x.RepositoryTypeName + "()")) #>)
+        {
+        }
+
+        public <#= Model.ControllerName #>(<#= String.Join(", ", Model.Repositories.Values.Select(x => "I" + x.RepositoryTypeName + " " + x.VariableName)) #>)
+        {
+<# foreach(var repository in Model.Repositories.Values) { #>
+			this.<#= repository.VariableName #> = <#= repository.VariableName #>;
+<# } #>
+        }
+
+        //
+        // GET: /<#= routingName #>/
+
+        public ViewResult Index()
+        {
+<#
+	var includeExpression = String.Join(", ", relatedEntities.Values.Select(x => String.Format("{0} => {0}.{1}", modelVariable, x.Name)));
+	if (!string.IsNullOrEmpty(includeExpression)) {
+		includeExpression = "Including(" + includeExpression + ")";
+	}
+#>
+            return View();
+        }
+		
+		//
+		// POST: /<#= routingName#>/List
+		[HttpPost]
+		public JsonResult List(int page,int rows,string sort, string order)
+		{
+			try{
+				var cols = new string[] { "page", "rows", "sort", "order" };
+                NameValueCollection nvc = Request.Form;
+
+                var col = nvc.AllKeys.Except(cols).FirstOrDefault();
+				
+				var <#= modelVariable #>List = <#= Model.Repositories[Model.ModelName].VariableName #>.All<#= includeExpression #>;
+				
+                if (!string.IsNullOrEmpty(col))
+                {
+                    var cType = typeof(<#= modelName #>).GetProperty(col).PropertyType;
+                    if (cType.IsGenericType && cType.GetGenericTypeDefinition() == typeof(Nullable<>) && cType.GetGenericArguments()[0] == typeof(DateTime))
+                    {
+                        <#= modelVariable #>List = <#= modelVariable #>List.Where(string.Format("{0}=@0", col), DateTime.Parse(nvc[col]));
+                    }
+                    else if (cType.IsValueType || cType == typeof(string))
+                    {
+						<#= modelVariable #>List = <#= modelVariable #>List.Where(string.Format("{0}=@0", col), nvc[col]);
+                    }
+                    else
+                    {
+                        <#= modelVariable #>List = <#= modelVariable #>List.Where(string.Format("{0}.Code=@0", col), nvc[col]);
+                    }
+
+                }
+				
+				var total = <#= modelVariable #>List.Count();
+				return Json(new { total = total, rows = <#= modelVariable #>List.OrderBy(sort + " " + order).Skip((page - 1) * rows).Take(rows) });
+			}
+			catch(Exception ex){
+				throw;
+			}
+		}
+
+        //
+        // GET: /<#= routingName #>/Details/5
+
+        public ViewResult Details(<#= primaryKeyProperty #> id)
+        {
+            return View(<#= Model.Repositories[Model.ModelName].VariableName #>.Find(id));
+        }
+
+        //
+        // GET: /<#= routingName #>/Create
+
+        public ActionResult Create()
+        {
+<# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+            return View();
+        } 
+		public ActionResult Search()
+        {
+            <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+            return View();
+        }
+        //
+        // POST: /<#= routingName #>/Create
+
+        [HttpPost]
+        public ActionResult Create(<#= modelName #> <#= modelVariable #>)
+        {
+            if (ModelState.IsValid) {
+                <#= Model.Repositories[Model.ModelName].VariableName #>.InsertOrUpdate(<#= modelVariable #>);
+                <#= Model.Repositories[Model.ModelName].VariableName #>.Save();
+                return PartialView("Index");
+            } else {
+ <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+				return PartialView(<#= modelVariable #>);
+			}
+        }
+        
+        //
+        // GET: /<#= routingName #>/Edit/5
+ 
+        public ActionResult Edit(<#= primaryKeyProperty #> id)
+        {
+ <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+             return View(<#= Model.Repositories[Model.ModelName].VariableName #>.Find(id));
+        }
+
+        //
+        // POST: /<#= routingName #>/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(<#= modelName #> <#= modelVariable #>)
+        {
+            if (ModelState.IsValid) {
+                <#= Model.Repositories[Model.ModelName].VariableName #>.InsertOrUpdate(<#= modelVariable #>);
+                <#= Model.Repositories[Model.ModelName].VariableName #>.Save();
+                return PartialView("Index");
+            } else {
+ <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+				return PartialView(<#= modelVariable #>);
+			}
+        }
+		<# if(Model.IsApprovalOrder){ #>
+		//
+        // GET: /<#= routingName #>/Submit/5
+ 
+        public ActionResult Submit(<#= primaryKeyProperty #> id)
+        {
+			var <#= modelVariable #> = <#= Model.Repositories[Model.ModelName].VariableName #>.Find(id);
+ <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>()
+				.Select(option => new SelectListItem
+				{
+					Text = option.ToString(),
+                	Value = ((int)option).ToString(),
+                	Selected = (<#= modelVariable #> != null) && ((int)option == <#= modelVariable #>.<#= relatedEnum.ValueName #>)
+				});
+			<# } #>
+             return View(<#= modelVariable #>);
+        }
+		
+		//
+        // POST: /<#= routingName #>/Submit/5
+
+        [HttpPost]
+        public ActionResult Submit(<#= modelName #> <#= modelVariable #>)
+        {
+            if (ModelState.IsValid) {
+                <#= Model.Repositories[Model.ModelName].VariableName #>.InsertOrUpdate(<#= modelVariable #>);
+                <#= Model.Repositories[Model.ModelName].VariableName #>.Save();
+                return PartialView("Index");
+            } else {
+ <# foreach(var relatedEntity in relatedEntities.Values) { #>
+			ViewBag.Possible<#= relatedEntity.Name #>s = <#= Model.Repositories[relatedEntity.Name].VariableName #>.All;
+<# } #>
+			<# foreach(var relatedEnum in modelEnumTypes.Values ){ #>
+				ViewBag.Possible<#= relatedEnum.Name #> = Enum.GetValues(typeof (<#= relatedEnum.TypeName #>)).Cast<<#= relatedEnum.TypeName #>>();
+			<# } #>
+				return PartialView(<#= modelVariable #>);
+			}
+        }
+		
+		<# } #>
+        //
+        // GET: /<#= routingName #>/Delete/5
+ 
+        public ActionResult Delete(<#= primaryKeyProperty #> id)
+        {
+            return View(<#= Model.Repositories[Model.ModelName].VariableName #>.Find(id));
+        }
+
+        //
+        // POST: /<#= routingName #>/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(<#= primaryKeyProperty #> id)
+        {
+            <#= Model.Repositories[Model.ModelName].VariableName #>.Delete(id);
+            <#= Model.Repositories[Model.ModelName].VariableName #>.Save();
+
+            return PartialView("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) {
+<# foreach(var repository in Model.Repositories.Values) { #>
+                <#= repository.VariableName #>.Dispose();
+<# } #>
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

@@ -1,0 +1,107 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="ViewBase" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Linq.Expressions" #>
+<#@ import namespace="System.Reflection" #>
+<# var viewDataType = Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model <#= viewDataType.FullName #>
+
+<# } #>
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<table id="myTb" style="width: 100%; height: 100%" cellpadding="1" cellspacing="1"
+    bgcolor="LightYellow">
+<#
+int i=0;
+var propertyList=Model.ViewDataType.ViewModelProperties;
+foreach (ViewModelProperty property in propertyList) {
+    if (!property.IsPrimaryKey && !property.IsForeignKey) {
+	if(property.Name.EndsWith("_EnumValue")){
+		continue;	
+	}
+#>
+<# if(i % 2 ==0) { #>
+	<tr>
+<# } #>
+<td style="width: 10%;" align="left" bgcolor="LightGray">
+	@Html.Label("<#= property.DisplayName #>")
+</td>
+<td style="width: 2%" bgcolor="LightGray">
+        </td>
+<td style="width: 30%" align="left">
+	<# if(property.IsEnum){ #>
+	@Html.DropDownListFor(model => model.<#= property.Name #>_EnumValue, ((IEnumerable<<#= property.Type #>>)ViewBag.Possible<#= property.Name #>).Select(option => new SelectListItem
+	{
+	    Text = (option == null ? "None" : option.ToString()),
+	    Value = ((int)option).ToString(),
+	    Selected = (Model != null) && ((int)option == Model.<#= property.Name #>_EnumValue)
+	}))
+	<span style="color: red;">@Html.ValidationMessageFor(model => model.<#= property.Name #>_EnumValue)</span>
+	<# }else{ #>
+    @Html.EditorFor(model => model.<#= property.Name #>)
+	<span style="color: red;">@Html.ValidationMessageFor(model => model.<#= property.Name #>)</span>
+	<# } #>
+	<# if(property.IsDateTime) {#>
+	<script language="javascript">
+        $('#<#= property.Name #>').datebox({
+            
+        });
+    </script>
+	<# }else if(property.IsInt){ #>
+		<script language="javascript">
+        $('#<#= property.Name #>').numberbox({
+            min:0
+        });
+    </script>
+	<# }else if(property.IsDecimal){ #>
+		<script language="javascript">
+        $('#<#= property.Name #>').numberbox({
+            min:0,
+			precision:2
+        });
+    </script>
+	<# } #>
+</td>
+<# if((++i % 2 == 0)){ #>
+	</tr>
+<#
+}
+    }
+}
+
+foreach (var relation in Model.RelatedEntities.Values) {
+#>
+<# if(i % 2 ==0) { #>
+	<tr>
+<# } #>
+<td style="width: 10%;" align="left" bgcolor="LightGray">
+	 @Html.Label("<#= relation.DisplayName #>")
+</td>
+<td style="width: 2%" bgcolor="LightGray">
+        </td>
+<td style="width: 30%" align="left">
+    @Html.DropDownListFor(model => model.<#= relation.Name #>, ((IEnumerable<<#= relation.FullName #>>)ViewBag.Possible<#= relation.RelationNamePlural #>).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ID.ToString(),
+        Selected = (Model != null) && (option.ID == Model.<#= relation.Name #>)
+    }), "Choose...")
+    <span style="color: red;">@Html.ValidationMessageFor(model => model.<#= relation.Name #>ID)</span>
+</td>
+<# if((++i % 2 == 0)){ #>
+	</tr>
+<#
+}
+}
+#>
+<# if((++i % 2 == 0)){ #>
+	</tr>
+<# } #>
+</table>

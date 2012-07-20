@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/themes/default/easyui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/icon.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery.easyui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/locale/easyui-lang-zh_CN.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script language="javascript">
+        function showpage(url) {
+            var curTab = $('#tt').tabs('getSelected');
+            var framInfo = "<iframe  src='" + url + "' scrolling='no' frameborder='0' style='width: 100%; height: 100%;'></iframe>";
+
+            $('#tt').tabs('update', {
+                tab: curTab,
+                options: {
+                    content: framInfo
+                }
+            });
+            //            curTab.panel('refresh');
+        }
+
+        /************selectTab函数（Begin）**************/
+        function selectTab(tabTitle, url) {
+            var isExist = $('#tt').tabs('exists', tabTitle);
+            if (isExist) {
+                /*如果已经存在该tab页,则设置该页为选中状态。*/
+                $('#tt').tabs('select', tabTitle);
+            }
+            else {
+                /*2.如果不存在该tab页.增加Tab页签，并嵌一个iframe*/
+                var framInfo = "<iframe  src='" + url + "' scrolling='yes' frameborder='0' style='width: 100%; height: 100%;'></iframe>";
+                $('#tt').tabs('add', {
+                    title: tabTitle,
+                    content: framInfo,
+                    iconCls: 'icon-save',
+                    closable: true,
+                    border: false,
+                    fit: true,
+                    tools: [{
+                        iconCls: 'icon-undo',
+                        handler: function () {
+                            showpage(url);
+                        }
+                    }]
+                });
+            }
+        }
+
+        /************selectTab函数End**************/
+
+        /************Menu函数,控制显示 Begin**************/
+        $(document).ready(function () {
+            var position = "@ViewBag.Position";
+            if (position == "OrdinaryPosition") {
+                //                $("#SysManage").hide();
+                //                $("#mmSysManage").hide();
+                //                $("#Basic").hide();
+                //                $("#mmBasic").hide();
+                //                $("#DeviceManage").hide();
+                //                $("#mmDeviceManage").hide();
+                //                $("#ProcessManage").hide();
+                //                $("#mmProcessManage").hide();
+                //                $("#AuditManage").hide();
+                //                $("#mmAuditManage").hide();
+                //                $("#ClientManage").hide();
+                //                $("#mmClientManage").hide();
+                //                $("#FileManage").hide();
+                //                $("#mmFileManage").hide();
+                //                $("#ClientManage").hide();
+                //                $("#mmClientManage").hide();
+                //                $("#abc").hide(); //隐藏Menu
+                //                $("#bcd").hide();//隐藏子Menu
+            }
+
+        });
+        /************Menu函数,控制显示 Begin**************/
+    </script>
+</head>
+<body class="easyui-layout">
+    <div region="north" border="false" style="height: 70px; padding: 10px; background: white">
+        <table style="width: 100%; text-align: center; background-color: white">
+            <tr>
+                <td style="width: 10%; padding: 5px">
+                    <img src=@Url.Content("~/Content/LogoDomas.jpg")>
+                </td>
+                <td style="width: 15%; padding: 5px; text-align: left">
+                    @ViewBag.WelcomeInfo [@Html.ActionLink("退出", "LogOff", "AccountLogOn", new { area = "Area_LogOn" }, null)]
+                </td>
+                <td style="text-align: right; width: 75%">
+                    @if (IsSectionDefined("SubMenu"))
+                    {
+                        @RenderSection("SubMenu", false)
+                    }
+                    else
+                    {
+                        <p>
+                            SubMenu Section is not defined!</p>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div region="center" id="content">
+        @RenderBody()
+    </div>
+</body>
+</html>

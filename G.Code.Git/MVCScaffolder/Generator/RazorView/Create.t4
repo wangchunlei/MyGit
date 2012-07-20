@@ -1,0 +1,32 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="ViewBase" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<# var viewDataType = Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model <#= viewDataType.FullName #>
+
+<# } #>
+@{
+    ViewBag.Title = "Create";
+	Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+@using (Ajax.BeginForm("Create",new AjaxOptions(){OnSuccess = "showpage('/<#= Model.ModelName ?? String.Empty #>/Index')"})) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend><#= Model.ModelName ?? String.Empty #></legend>
+
+		@Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+

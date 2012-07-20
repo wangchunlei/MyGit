@@ -1,0 +1,107 @@
+﻿<#@ template language="C#" HostSpecific="True"  inherits="RepositoryBase" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ import namespace="System.Linq" #>
+<#@ Output Extension="cs" #>
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web;
+<# foreach(var ns in new[] { Model.ModelTypeNamespace, Model.DbContextNamespace }.Where(x => !string.IsNullOrEmpty(x) && (x != Model.RepositoryNamespace)).Distinct()) { #>
+using <#= ns #>;
+<# } #>
+
+namespace <#= Model.RepositoryNamespace #>
+{ 
+<# 
+    var modelType = Model.ModelType; 
+    var modelName = Model.ModelName; 
+    var modelNamePlural = Model.ModelTypePluralized; 
+    var contextName = Model.ContextType; 
+    var primaryKeyProperty =Model.PrimaryKeyProperty;
+    var isObjectContext = false;
+#>
+    public class <#= modelName #>Repository : I<#= modelName #>Repository
+    {
+        <#= contextName #> context = new <#= contextName #>();
+
+        public IQueryable<<#= modelType #>> All
+        {
+            get { return context.<#= modelNamePlural #>; }
+        }
+
+        public IQueryable<<#= modelType #>> AllIncluding(params Expression<Func<<#= modelType #>, object>>[] includeProperties)
+        {
+            IQueryable<<#= modelType #>> query = context.<#= modelNamePlural #>;
+            foreach (var includeProperty in includeProperties) {
+                query = query.Include(includeProperty);
+            }
+            return query;
+        }
+
+        public <#= modelType #> Find(<#= primaryKeyProperty #> id)
+        {
+<# if(isObjectContext) { #>
+            return context.<#= modelNamePlural #>.Single(x => x.<#= Model.PrimaryKey #> == id);
+<# } else { #>
+            return context.<#= modelNamePlural #>.Find(id);
+<# } #>
+        }
+
+        public void InsertOrUpdate(<#= modelType #> <#= modelName.ToLower() #>)
+        {
+            if (<#= modelName.ToLower() #>.<#= Model.PrimaryKey #> == default(<#= primaryKeyProperty #>)) {
+                // New entity
+<# if(primaryKeyProperty == "System.Guid") { #>
+               
+<# } #>
+<# if(isObjectContext) { #>
+                context.<#= modelNamePlural #>.AddObject(<#= modelName.ToLower() #>);
+<# } else { #>
+                context.<#= modelNamePlural #>.Add(<#= modelName.ToLower() #>);
+<# } #>
+            } else {
+                // Existing entity
+<# if(isObjectContext) { #>
+                context.<#= modelNamePlural #>.Attach(<#= modelName.ToLower() #>);
+                context.ObjectStateManager.ChangeObjectState(<#= modelName.ToLower() #>, EntityState.Modified);
+<# } else { #>
+                context.Entry(<#= modelName.ToLower() #>).State = EntityState.Modified;
+<# } #>
+            }
+        }
+
+        public void Delete(<#= primaryKeyProperty #> id)
+        {
+<# if(isObjectContext) { #>
+            var <#= modelName.ToLower() #> = context.<#= modelNamePlural #>.Single(x => x.<#= Model.PrimaryKey #> == id);
+            context.<#= modelNamePlural #>.DeleteObject(<#= modelName.ToLower() #>);
+<# } else { #>
+            var <#= modelName.ToLower() #> = context.<#= modelNamePlural #>.Find(id);
+            context.<#= modelNamePlural #>.Remove(<#= modelName.ToLower() #>);
+<# } #>
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
+
+        public void Dispose() 
+        {
+            context.Dispose();
+        }
+    }
+
+    public interface I<#= modelName #>Repository : IDisposable
+    {
+        IQueryable<<#= modelType #>> All { get; }
+        IQueryable<<#= modelType #>> AllIncluding(params Expression<Func<<#= modelType #>, object>>[] includeProperties);
+        <#= modelType #> Find(<#= primaryKeyProperty #> id);
+        void InsertOrUpdate(<#= modelType #> <#= modelName.ToLower() #>);
+        void Delete(<#= primaryKeyProperty #> id);
+        void Save();
+    }
+}

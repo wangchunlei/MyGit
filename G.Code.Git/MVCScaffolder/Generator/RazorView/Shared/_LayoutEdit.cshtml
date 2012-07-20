@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>@ViewBag.Title</title>@*    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />*@
+    <link href="@Url.Content("~/Content/themes/gray/easyui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/icon.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/jquery.easyui.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-easyui-1.2.5/locale/easyui-lang-zh_CN.js")" type="text/javascript"></script>
+    <script language="javascript">
+        function showpage(url, title) {
+            window.parent.showpage(url);
+        }
+        function OpenWindow(id) {
+            $('#' + id).window('open');
+        }
+        function CloseWindow(id) {
+            $('#' + id).window('close');
+        }
+        /*----指定样式写在此处Begin---*/
+        $(document).ready(function () {
+            $("input[type='text']").css("border-left", "medium none");
+            $("input[type='text']").css("border-right", "medium none");
+            $("input[type='text']").css("border-top", "medium none");
+            $("input[type='text']").css("border-bottom", "1px solid rgb(192,192,192)");
+            $("input[type='text']").css("background-color", "LightYellow");
+            $("input[type='text']").focus(function () {
+                $(this).css("color", "rgb(255,0,0)");
+            });
+            $("input[type='text']").blur(function () {
+                $(this).css("color", "Black");
+            });
+        });
+        /*----指定样式写在此处End---*/
+    </script>
+</head>
+<body class="easyui-layout">
+    <div region="center" style="overflow: hidden">
+        @RenderBody()
+    </div>
+    <div id="dd" style="width: 1000px; height: 500px;">
+        <div id="dd_content">
+        </div>
+    </div>
+</body>
+</html>

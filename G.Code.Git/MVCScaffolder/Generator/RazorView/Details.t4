@@ -1,0 +1,46 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="ViewBase" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<# var viewDataType = Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model <#= viewDataType.FullName #>
+
+<# } #>
+@{
+    ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+
+<fieldset>
+    <legend><#= Model.ModelName ?? String.Empty #></legend>
+<#
+foreach (ViewModelProperty property in Model.ViewDataType.ViewModelProperties) {
+    if (!property.IsPrimaryKey && !property.IsForeignKey) {
+#>
+
+    <div class="display-label"><#= property.DisplayName #></div>
+    <div class="display-field">@Model.<#= property.Name #></div>
+<#
+    }
+}
+#>
+</fieldset>
+<p>
+<# if (!String.IsNullOrEmpty(Model.PrimaryKey)) { #>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.<#= Model.PrimaryKey #> }) |
+    @Html.ActionLink("Back to List", "Index")
+<# } else { #>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+<# } #>
+</p>
+

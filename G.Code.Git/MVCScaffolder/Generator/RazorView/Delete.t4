@@ -1,0 +1,61 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="ViewBase" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<# var viewDataType = Model.ViewDataType; #>
+<# if(viewDataType != null) { #>
+@model <#= viewDataType.FullName #>
+
+<# } #>
+@{
+    ViewBag.Title = "Delete";
+	Layout = "~/Views/Shared/_LayoutEdit.cshtml";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend><#= Model.ModelName ?? String.Empty #></legend>
+	<table id="myTb" style="width: 100%; height: 100%" cellpadding="1" cellspacing="1"
+    bgcolor="LightYellow">
+<#
+int i=0;
+var propertyList=Model.ViewDataType.ViewModelProperties;
+foreach (ViewModelProperty property in propertyList) {
+    if (!property.IsPrimaryKey) {
+	if(property.Name.EndsWith("_EnumValue")){
+		continue;	
+	}
+#>
+<# if(i % 2 ==0) { #>
+	<tr>
+<# } #>
+<td style="width: 10%;" align="left" bgcolor="LightGray">
+	@Html.Label("<#= property.DisplayName #>")
+</td>
+<td style="width: 2%" bgcolor="LightGray">
+        </td>
+<td style="width: 30%" align="left">	
+    @Html.DisplayFor(model => model.<#= property.Name #>)
+</td>
+<# if((++i % 2 == 0)){ #>
+	</tr>
+<# } #>
+<# }} if((++i % 2 == 0)){ #>
+	</tr>
+<# } #>
+</table>
+</fieldset>
+@using (Ajax.BeginForm("Delete",new AjaxOptions(){OnSuccess = "showpage('/<#= Model.ModelName ?? String.Empty #>/Index')"})) {
+    <p>
+		@Html.HiddenFor(model => model.ID)
+        <input type="submit" value="Delete" /> |
+    </p>
+}
+

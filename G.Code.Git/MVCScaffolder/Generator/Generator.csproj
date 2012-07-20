@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2927EB50-5991-44D8-A45F-32DEC173515E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Generator</RootNamespace>
+    <AssemblyName>Generator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Domas.DAP.ADF.MetaData, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.MetaData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 2010 SDK SP1\VisualStudioIntegration\Common\Assemblies\v4.0\Microsoft.VisualStudio.TextTemplating.10.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base.cs" />
+    <Compile Include="Controller\ControllerBase.cs" />
+    <Compile Include="Controller\ControllerWithRepository.cs">
+      <DependentUpon>ControllerWithRepository.t4</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="EFRepository\RegisterArea.cs">
+      <DependentUpon>RegisterArea.t4</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="EFRepository\Repository.cs">
+      <DependentUpon>Repository.t4</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="EFRepository\RepositoryBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazorView\Create.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\Delete.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delete.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\Details.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Details.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\Edit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\Index.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\Search.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.t4</DependentUpon>
+    </Compile>
+    <Compile Include="RazorView\ViewBase.cs" />
+    <Compile Include="RazorView\_CreateOrEdit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CreateOrEdit.t4</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Controller\ControllerWithRepository.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ControllerWithRepository.cs</LastGenOutput>
+    </None>
+    <None Include="EFRepository\RegisterArea.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RegisterArea.cs</LastGenOutput>
+    </None>
+    <None Include="EFRepository\Repository.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Repository.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Create.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Create.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Delete.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Delete.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Details.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Details.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Edit.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Edit.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Index.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Index.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Search.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Search.cs</LastGenOutput>
+    </None>
+    <None Include="RazorView\Shared\_Layout.cshtml" />
+    <None Include="RazorView\Shared\_LayoutEdit.cshtml" />
+    <None Include="RazorView\Shared\_LayoutList.cshtml" />
+    <None Include="RazorView\_CreateOrEdit.t4">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>_CreateOrEdit.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

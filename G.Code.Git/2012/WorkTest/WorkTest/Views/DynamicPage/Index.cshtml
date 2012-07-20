@@ -1,0 +1,62 @@
+﻿@model dynamic
+@using UIFramwork.UI.UIFrom
+@{
+    var curPop = 1;
+    if (ViewBag.Pop != null)
+    {
+        //Layout = null;
+        curPop = int.Parse(ViewBag.Pop);
+        curPop += 1;
+    }
+    string tableName = ViewBag.FormParameter.TypeFullName;
+    tableName = tableName.Split('.').LastOrDefault() + "Table";
+}
+@*http://localhost:61671/DynamicPage?typeFullName=Domas.Service.Print.PrintTask.PO*@
+@using (Ajax.BeginForm("Save", "DynamicPage", new AjaxOptions() { OnSuccess = "closePage('" + tableName + "'," + (curPop - 1) + ");" }, new { id = "saveForm" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("ID")
+    @Html.Hidden("TypeFullName")
+    @Html.DynamicForm(ViewBag.FormParameter as FormParameter)
+}
+@section childGrid
+{
+    @if (ViewBag.Subs != null)
+    {
+        IEnumerable<string> subs = ViewBag.Subs;
+
+        foreach (var sub in subs)
+        {
+            string entityName = sub.Split('.').LastOrDefault();
+            var showModalpage = entityName + "_showModalpage";
+            var table = entityName + "Table";
+            var searchbox_div = entityName + "_searchbox_div";
+            var ss = entityName + "_ss";
+            var mm = entityName + "_mm";
+        <div id='@searchbox_div' style='padding-top: 3px;'>
+            <input id='@ss' />
+            <div id='@mm' style='width: 120px; padding-top: 2px;'>
+            </div>
+        </div>
+        <table id='@table'></table>
+        }
+    }
+}
+@section children
+ {
+    @if (ViewBag.Subs != null)
+    {
+        IEnumerable<string> subs = ViewBag.Subs;
+
+        foreach (var sub in subs)
+        {
+        @Html.DynamicForm(new FormParameter
+           {
+               Pop = curPop,
+               TypeFullName = sub,
+               FormType = FormTypeEnum.List,
+               ParentId = Model.ID.ToString()
+           })
+        }
+    }
+}

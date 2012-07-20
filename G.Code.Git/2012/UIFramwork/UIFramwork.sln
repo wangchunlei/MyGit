@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIFramwork", "UIFramwork\UIFramwork.csproj", "{D85E0166-1219-4DB5-B1EE-A9DC0B32892B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D85E0166-1219-4DB5-B1EE-A9DC0B32892B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85E0166-1219-4DB5-B1EE-A9DC0B32892B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D85E0166-1219-4DB5-B1EE-A9DC0B32892B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D85E0166-1219-4DB5-B1EE-A9DC0B32892B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

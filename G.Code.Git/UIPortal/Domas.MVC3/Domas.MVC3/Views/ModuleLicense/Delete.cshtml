@@ -1,0 +1,44 @@
+@model Domas.DAP.ADF.License.License.ModuleLicense
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ModuleLicense</legend>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">Createdby</div>
+    <div class="display-field">@Model.Createdby</div>
+
+    <div class="display-label">ModifiedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ModifiedOn)</div>
+
+    <div class="display-label">Modifiedby</div>
+    <div class="display-field">@Model.Modifiedby</div>
+
+    <div class="display-label">Module</div>
+    <div class="display-field">@(Model.Module == null ? "None" : Model.Module.Name)</div>
+
+    <div class="display-label">Price</div>
+    <div class="display-field">@Model.Price</div>
+
+    <div class="display-label">StartTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.StartTime)</div>
+
+    <div class="display-label">EndTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.EndTime)</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

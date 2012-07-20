@@ -1,0 +1,52 @@
+@model Domas.DAP.ADF.License.Service.Service
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CreatedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CreatedOn)
+    @Html.ValidationMessageFor(model => model.CreatedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Createdby)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Createdby)
+    @Html.ValidationMessageFor(model => model.Createdby)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ModifiedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ModifiedOn)
+    @Html.ValidationMessageFor(model => model.ModifiedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Modifiedby)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Modifiedby)
+    @Html.ValidationMessageFor(model => model.Modifiedby)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Code)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Code)
+    @Html.ValidationMessageFor(model => model.Code)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+

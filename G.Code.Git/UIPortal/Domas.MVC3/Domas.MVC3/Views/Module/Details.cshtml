@@ -1,0 +1,47 @@
+@model Domas.DAP.ADF.License.Module.Module
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Module</legend>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">Createdby</div>
+    <div class="display-field">@Model.Createdby</div>
+
+    <div class="display-label">ModifiedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ModifiedOn)</div>
+
+    <div class="display-label">Modifiedby</div>
+    <div class="display-field">@Model.Modifiedby</div>
+
+    <div class="display-label">Code</div>
+    <div class="display-field">@Model.Code</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+
+    <div class="display-label">IsEditable</div>
+    <div class="display-field">@Model.IsEditable</div>
+
+    <div class="display-label">Price</div>
+    <div class="display-field">@Model.Price</div>
+
+    <div class="display-label">Memo</div>
+    <div class="display-field">@Model.Memo</div>
+
+    <div class="display-label">Service</div>
+    <div class="display-field">@(Model.Service == null ? "None" : Model.Service.Name)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

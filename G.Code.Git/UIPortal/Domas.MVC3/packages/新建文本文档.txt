@@ -1,0 +1,1 @@
+Scaffold Controller Domas.DAP.ADF.License.Module.Module -DbContextType:Domas.DAP.ADF.License.LicenseContext -Repository -Force

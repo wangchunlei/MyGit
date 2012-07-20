@@ -1,0 +1,65 @@
+@model IEnumerable<Domas.DAP.ADF.License.Service.Service>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            Createdby
+        </th>
+        <th>
+            ModifiedOn
+        </th>
+        <th>
+            Modifiedby
+        </th>
+        <th>
+            Code
+        </th>
+        <th>
+            Name
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@item.Createdby
+        </td>
+        <td>
+			@String.Format("{0:g}", item.ModifiedOn)
+        </td>
+        <td>
+			@item.Modifiedby
+        </td>
+        <td>
+			@item.Code
+        </td>
+        <td>
+			@item.Name
+        </td>
+    </tr>
+}
+
+</table>
+
+

@@ -1,0 +1,35 @@
+@model Domas.DAP.ADF.License.Service.Service
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Service</legend>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">Createdby</div>
+    <div class="display-field">@Model.Createdby</div>
+
+    <div class="display-label">ModifiedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ModifiedOn)</div>
+
+    <div class="display-label">Modifiedby</div>
+    <div class="display-field">@Model.Modifiedby</div>
+
+    <div class="display-label">Code</div>
+    <div class="display-field">@Model.Code</div>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Name</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

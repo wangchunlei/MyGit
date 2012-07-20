@@ -1,0 +1,89 @@
+@model IEnumerable<Domas.DAP.ADF.License.Module.Module>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            Createdby
+        </th>
+        <th>
+            ModifiedOn
+        </th>
+        <th>
+            Modifiedby
+        </th>
+        <th>
+            Code
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            IsEditable
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Memo
+        </th>
+        <th>
+            Service
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@item.Createdby
+        </td>
+        <td>
+			@String.Format("{0:g}", item.ModifiedOn)
+        </td>
+        <td>
+			@item.Modifiedby
+        </td>
+        <td>
+			@item.Code
+        </td>
+        <td>
+			@item.Name
+        </td>
+        <td>
+			@item.IsEditable
+        </td>
+        <td>
+			@item.Price
+        </td>
+        <td>
+			@item.Memo
+        </td>
+        <td>
+			@(item.Service == null ? "None" : item.Service.Name)
+        </td>
+    </tr>
+}
+
+</table>
+
+

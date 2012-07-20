@@ -1,0 +1,77 @@
+@model IEnumerable<Domas.DAP.ADF.License.License.ModuleLicense>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            Createdby
+        </th>
+        <th>
+            ModifiedOn
+        </th>
+        <th>
+            Modifiedby
+        </th>
+        <th>
+            Module
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            StartTime
+        </th>
+        <th>
+            EndTime
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@item.Createdby
+        </td>
+        <td>
+			@String.Format("{0:g}", item.ModifiedOn)
+        </td>
+        <td>
+			@item.Modifiedby
+        </td>
+        <td>
+			@(item.Module == null ? "None" : item.Module.Name)
+        </td>
+        <td>
+			@item.Price
+        </td>
+        <td>
+			@String.Format("{0:g}", item.StartTime)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.EndTime)
+        </td>
+    </tr>
+}
+
+</table>
+
+

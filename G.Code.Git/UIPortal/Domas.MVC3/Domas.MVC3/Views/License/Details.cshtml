@@ -1,0 +1,59 @@
+@model Domas.DAP.ADF.License.License.License
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>License</legend>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">Createdby</div>
+    <div class="display-field">@Model.Createdby</div>
+
+    <div class="display-label">ModifiedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.ModifiedOn)</div>
+
+    <div class="display-label">Modifiedby</div>
+    <div class="display-field">@Model.Modifiedby</div>
+
+    <div class="display-label">StartTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.StartTime)</div>
+
+    <div class="display-label">EndTime</div>
+    <div class="display-field">@String.Format("{0:g}", Model.EndTime)</div>
+
+    <div class="display-label">UserCount</div>
+    <div class="display-field">@Model.UserCount</div>
+
+    <div class="display-label">Memo</div>
+    <div class="display-field">@Model.Memo</div>
+
+    <div class="display-label">PublicKey</div>
+    <div class="display-field">@Model.PublicKey</div>
+
+    <div class="display-label">PrivateKey</div>
+    <div class="display-field">@Model.PrivateKey</div>
+
+    <div class="display-label">HardwareInfoCode</div>
+    <div class="display-field">@Model.HardwareInfoCode</div>
+
+    <div class="display-label">PrinterCount</div>
+    <div class="display-field">@Model.PrinterCount</div>
+
+    <div class="display-label">BurnerCount</div>
+    <div class="display-field">@Model.BurnerCount</div>
+
+    <div class="display-label">CopiersCount</div>
+    <div class="display-field">@Model.CopiersCount</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

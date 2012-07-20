@@ -1,0 +1,82 @@
+@model Domas.DAP.ADF.License.License.ModuleLicense
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CreatedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CreatedOn)
+    @Html.ValidationMessageFor(model => model.CreatedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Createdby)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Createdby)
+    @Html.ValidationMessageFor(model => model.Createdby)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.ModifiedOn)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.ModifiedOn)
+    @Html.ValidationMessageFor(model => model.ModifiedOn)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Modifiedby)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Modifiedby)
+    @Html.ValidationMessageFor(model => model.Modifiedby)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Price)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Price)
+    @Html.ValidationMessageFor(model => model.Price)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.StartTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.StartTime)
+    @Html.ValidationMessageFor(model => model.StartTime)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.EndTime)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.EndTime)
+    @Html.ValidationMessageFor(model => model.EndTime)
+</div>
+
+<div class="editor-label">
+    Module
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ModuleID, ((IEnumerable<Domas.DAP.ADF.License.Module.Module>)ViewBag.PossibleModules).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ID.ToString(),
+        Selected = (Model != null) && (option.ID == Model.ModuleID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ModuleID)
+</div>
+<div class="editor-label">
+    Service
+</div>
+<div class="editor-field">
+    @Html.DropDownListFor(model => model.ServiceID, ((IEnumerable<Domas.DAP.ADF.License.Service.Service>)ViewBag.PossibleServices).Select(option => new SelectListItem {
+        Text = (option == null ? "None" : option.Name), 
+        Value = option.ID.ToString(),
+        Selected = (Model != null) && (option.ID == Model.ServiceID)
+    }), "Choose...")
+    @Html.ValidationMessageFor(model => model.ServiceID)
+</div>

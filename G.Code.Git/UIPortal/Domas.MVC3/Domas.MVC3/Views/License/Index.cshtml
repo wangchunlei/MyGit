@@ -1,0 +1,113 @@
+@model IEnumerable<Domas.DAP.ADF.License.License.License>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            Createdby
+        </th>
+        <th>
+            ModifiedOn
+        </th>
+        <th>
+            Modifiedby
+        </th>
+        <th>
+            StartTime
+        </th>
+        <th>
+            EndTime
+        </th>
+        <th>
+            UserCount
+        </th>
+        <th>
+            Memo
+        </th>
+        <th>
+            PublicKey
+        </th>
+        <th>
+            PrivateKey
+        </th>
+        <th>
+            HardwareInfoCode
+        </th>
+        <th>
+            PrinterCount
+        </th>
+        <th>
+            BurnerCount
+        </th>
+        <th>
+            CopiersCount
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@item.Createdby
+        </td>
+        <td>
+			@String.Format("{0:g}", item.ModifiedOn)
+        </td>
+        <td>
+			@item.Modifiedby
+        </td>
+        <td>
+			@String.Format("{0:g}", item.StartTime)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.EndTime)
+        </td>
+        <td>
+			@item.UserCount
+        </td>
+        <td>
+			@item.Memo
+        </td>
+        <td>
+			@item.PublicKey
+        </td>
+        <td>
+			@item.PrivateKey
+        </td>
+        <td>
+			@item.HardwareInfoCode
+        </td>
+        <td>
+			@item.PrinterCount
+        </td>
+        <td>
+			@item.BurnerCount
+        </td>
+        <td>
+			@item.CopiersCount
+        </td>
+    </tr>
+}
+
+</table>
+
+

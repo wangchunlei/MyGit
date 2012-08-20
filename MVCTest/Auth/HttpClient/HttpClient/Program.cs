@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 //using System.Net.Http;
@@ -15,71 +16,45 @@ using System.Text;
 using System.Net;
 using System.Linq;
 using System.Collections.Generic;
-namespace PCTools
-{
-    /**/
-    ///<summary>
-    /// 获取Cookie的方法类。
-    ///</summary>
-    public class CookieManger
-    {
-        [DllImport("wininet.dll", SetLastError = true)]
-        public static extern bool InternetGetCookie(string url, string cookieName, StringBuilder cookieData, ref int size);
-        public static CookieContainer GetUriCookieContainer(Uri uri)
-        {
-            CookieContainer cookies = null;
-            //定义Cookie数据的大小。
-            int datasize = 256;
-            StringBuilder cookieData = new StringBuilder(datasize);
-            if (!InternetGetCookie(uri.ToString(), ".ASPXAUTH", cookieData, ref datasize))
-            {
-                if (datasize < 0) return null;
-                // 确信有足够大的空间来容纳Cookie数据。
-                cookieData = new StringBuilder(datasize);
-                if (!InternetGetCookie(uri.ToString(), ".ASPXAUTH", cookieData, ref datasize)) return null;
-            }
-            if (cookieData.Length > 0)
-            {
-                cookies = new CookieContainer();
-                cookies.SetCookies(uri, cookieData.ToString().Replace(';', ','));
-            }
-            return cookies;
-        }
-        public static void PrintCookies(CookieContainer cookies, Uri uri)
-        {
-            CookieCollection cc = cookies.GetCookies(uri);
-            foreach (var cook in cc)
-            {
-                Console.WriteLine(cook);
-            }
-        }
-    }
-    public class Test
-    {
-        static void Main(string[] args)
-        {
-            string url = @"http://localhost:8006/";
-            Uri uri = new Uri(url);
-            CookieContainer cookies = CookieManger.GetUriCookieContainer(uri);
-            CookieManger.PrintCookies(cookies, uri);
-
-            Console.ReadKey();
-        }
-    }
-}
 namespace HttpClient
 {
     class Program
     {
-        static void Main1(string[] args)
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+        static void Main(string[] args)
         {
-            //var httpClientHandler = new HttpClientHandler();
-            //httpClientHandler.UseDefaultCredentials = true;
-            //var client = new System.Net.Http.HttpClient(httpClientHandler);
+            var client = new RestClient("http://localhost:8006/");
+            //client.Authenticator = new NtlmAuthenticator(@"administrator", "Lanxum123456");
+            var request = new RestRequest(Method.GET);
 
-            //client.BaseAddress = new Uri("http://localhost/");
+            //request.AddUrlSegment("api", "POAPI");
+            //request.AddUrlSegment("method", "CreatePO");
+            //request.AddHeader("content-type", "application/json; charset=utf-8");
+            //request.AddHeader("Accept", "applicaiton/json");
 
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            request.RequestFormat = DataFormat.Json;
+            var cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
+            if (cookieContainer == null || cookieContainer.Count == 0)
+            {
+                int i = 3;
+                while (cookieContainer == null || cookieContainer.Count == 0)
+                {
+                    Process process = new Process();
+                    process.StartInfo.FileName = "iexplore.exe";
+                    process.StartInfo.Arguments = "http://localhost:8006";
+
+                    process.Start();
+
+                    process.WaitForExit();
+                    cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
+                    if (i-- == 0)
+                    {
+                        break;
+                    }
+                }
+            }
+
             //var dto = new PODTO()
             //{
             //    DriverName = "123",
@@ -88,22 +63,21 @@ namespace HttpClient
             //    CreatedOn = DateTime.Now,
             //    Createdby = "zhangzs",
             //    SafeLevel = SafeLevel.Classified,
-            //    PrintBy = new Guid("AE065557-B9E0-4D93-9DE5-54C6D85400C1")
+            //    PrintBy = new Guid("86F6C414-9D34-4970-9A17-25FCE4CF563A")
             //};
-            //HttpResponseMessage resp =
-            //    client.PostAsJsonAsync(
-            //        "api/POAPI/CreatPO", dto).Result;
+            //request.AddBody(new
+            //    {
+            //        username = "admin",
+            //        password = "admin"
+            //    });
 
-            //if (resp.IsSuccessStatusCode)
-            //{
-            //    var result = resp.Content.ReadAsStringAsync().Result;
-            //}
+            client.CookieContainer = cookieContainer;
+            var response = client.Execute(request);
+            var content = response.Content;
 
-            //RestClientInvoke1();
-            ReadCookie();
-            //GetCooKie("http://localhost:8006/");
-            //RestClientInvoke();
         }
+
+
         private static void ReadCookie()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);

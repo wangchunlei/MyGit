@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" EnableSessionState="ReadOnly" AutoEventWireup="true" CodeBehind="Handler.aspx.cs" Inherits="PokeIn_WCF_Sample.Handler" %>

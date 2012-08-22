@@ -1,0 +1,12 @@
+﻿* PokeIn Comet Ajax Library v2.032 (03 August 2012)
+* Copyright © PokeIn http://pokein.com
+
+What's new? 
+
+2.032
+
+- NEW : Connection stability support for network package lost (after connection - below 10%)
+
+This version is tested under ~100K virtual users’ load before released
+To boost your server performance (IIS) you may need to check our new "open source" IIS Tuner tool from http://IISTuner.codeplex.com
+

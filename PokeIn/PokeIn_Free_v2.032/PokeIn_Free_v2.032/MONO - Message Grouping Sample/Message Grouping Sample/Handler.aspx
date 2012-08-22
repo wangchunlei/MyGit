@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" EnableSessionState="ReadOnly" AutoEventWireup="true" CodeBehind="Handler.aspx.cs" Inherits="Message_Grouping_Sample.Handler" %>

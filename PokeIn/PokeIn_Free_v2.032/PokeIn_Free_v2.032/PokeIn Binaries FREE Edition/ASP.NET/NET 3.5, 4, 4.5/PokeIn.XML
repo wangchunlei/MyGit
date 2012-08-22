@@ -1,0 +1,1562 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PokeIn</name>
+    </assembly>
+    <members>
+        <member name="T:PokeIn.Comet.ResourceType">
+            <summary>
+            Resource Type
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.ResourceManager">
+            <summary>
+            Thread Safe Resource Manager Class for your static files and dynamic resources.
+            Use this class instead opening another connection from the client.
+            Additionaly, using this class will help your server efficiency
+            
+            This class uses your hardware's memory to store the resources.
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.GetResourceURL(System.String,PokeIn.Comet.ResourceType)">
+            <summary>
+            Returns public URL for a resource. (CometSettings.ResourceTarget must be defined in order to use this method)
+            </summary>
+            <param name="specialName">name of the resource</param>
+            <param name="type">type</param>
+            <returns></returns>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.FreeClientResources(System.String)">
+            <summary>
+            Deletes all the resources associated with a clientId or a jointId
+            After a client disconnected, PokeIn calls this method automaticly to free the unnecessary resources
+            </summary>
+            <param name="clientOrJointId">clientId or JointId</param>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.AddReplaceResource(System.String,System.String,PokeIn.Comet.ResourceType,System.String)">
+            <summary>
+            Adds or Updates a resource dependent on a given key name. (specialName)
+            </summary>
+            <param name="fileLocation">Resource File Location</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <param name="clientOrJointId">clientId or JointId</param> 
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.AddReplaceResource(System.Byte[]@,System.String,PokeIn.Comet.ResourceType,System.String,System.String)">
+            <summary>
+            Adds or Updates a resource dependent on a given key name. (specialName)
+            </summary>
+            <param name="bytes">Resource Data</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <param name="fileMime">File Extension</param>
+            <param name="clientOrJointId">clientId or jointId</param>
+            <example>
+            <code>
+               byte[] bytes;
+               System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+               System.IO.Stream stm = asm.GetManifestResourceStream("MyPicture.jpg");
+               bytes = new byte[stm.Length];
+               stm.Read(bytes, 0, (System.Int32)stm.Length);
+               stm.Close();
+               PokeIn.Comet.ResourceManager.AddReplaceResource(ref bytes, "MyPicture", ResourceType.Image, "jpg", clientId);
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.AddResource(System.String,System.String,PokeIn.Comet.ResourceType,System.String)">
+            <summary>
+            Adds a resource.
+            </summary>
+            <param name="fileLocation">Resource File Location</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <param name="clientOrJointId">clientId or JointId</param>
+            <exception cref="T:System.Exception">Special Name is already Exist</exception>
+            <returns>false if a resource exist with the same name</returns>
+            <remarks>
+            If you fill the 4. parameter with clientId, the resource will be removed after the client disconnected.
+            Otherwise, you fill that with a jointId, the resource will remain until there is no client left in the joint
+            </remarks>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.AddResource(System.Byte[]@,System.String,PokeIn.Comet.ResourceType,System.String,System.String)">
+            <summary>
+            Adds a resource.
+            </summary>
+            <param name="bytes">Resource Data</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <param name="fileMime">File Extension</param>
+            <param name="clientOrJointId">clientId or JointId</param>
+            <example>
+            <code>
+               byte[] bytes;
+               System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+               System.IO.Stream stm = asm.GetManifestResourceStream("MyPicture.jpg");
+               bytes = new byte[stm.Length];
+               stm.Read(bytes, 0, (System.Int32)stm.Length);
+               stm.Close();
+               PokeIn.Comet.ResourceManager.AddResource(ref bytes, "MyPicture", ResourceType.Image, "jpg", clientId);
+            </code>
+            <remarks>
+            If you fill the 4. parameter with clientId, the resource will be removed after the client disconnected.
+            Otherwise, you fill that with a jointId, the resource will remain until there is no client left in the joint
+            </remarks>
+            </example>
+            <returns>false if a resource exist with the same name</returns>
+            <exception cref="T:System.Exception">Special Name is already exist</exception>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.GetBytes(System.String,PokeIn.Comet.ResourceType,System.Byte[]@)">
+            <summary>
+            Get bytes from resource cache
+            </summary>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Type of the resource</param>
+            <param name="bytes">Byte array</param>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.AppendResource(System.Byte[]@,System.String,PokeIn.Comet.ResourceType,System.String)">
+            <summary>
+            Appends data to the existing resource. Useful for text based resources.
+            </summary>
+            <param name="bytes">Resource Data</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param> 
+            <param name="clientOrJointId">clientId or JointId</param>
+            <returns>returns true if the operation was successful</returns>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.UpdateResource(System.String,System.String,PokeIn.Comet.ResourceType)">
+            <summary>
+            Updates a resource.
+            </summary>
+            <param name="fileLocation">Resource File Location</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <exception cref="T:System.Exception">Special Name is not Exist</exception>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.UpdateResource(System.Byte[]@,System.String,PokeIn.Comet.ResourceType,System.String)">
+            <summary>
+            Updates a resource.
+            </summary>
+            <param name="bytes">Resource Data</param>
+            <param name="specialName">Name of the resource</param>
+            <param name="type">Resource Type</param>
+            <param name="fileMime">File Extension (leave empty if you don't want to update) </param>
+            <exception cref="T:System.Exception">Special Name is not exist</exception>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.IsResourceExist(System.String)">
+            <summary>
+            Check specialName inside the resource inventory
+            </summary>
+            <param name="specialName">Name of the resource</param>
+            <returns></returns>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.DeleteResource(System.String)">
+            <summary>
+            Deletes a resource.
+            </summary>
+            <param name="specialName">Resource File Key</param>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.ResourceOneShot(System.String)">
+            <summary>
+            Makes a resource one time available. After the first call from the client, resource removes itself from the memory
+            </summary>
+            <param name="specialName">name of the resource</param>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.GetImage(System.String,System.Byte[]@,System.String@)">
+            <summary>
+            Gets Image Resource. (CometWorker.Resource() method uses this function internally)
+            </summary>
+            <param name="specialName">name of the resource</param>
+            <param name="bytes">output byte array</param>
+            <param name="mime">output resource mime</param>
+            <returns>If special name exist, returns true</returns>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.GetVideo(System.String,System.Byte[]@,System.String@)">
+            <summary>
+            Gets Video Resource. (CometWorker.Resource() method uses this function internally)
+            </summary>
+            <param name="specialName">name of the resource</param>
+            <param name="bytes">output byte array</param>
+            <param name="mime">output resource mime</param>
+            <returns>If special name exist, returns true</returns>
+        </member>
+        <member name="M:PokeIn.Comet.ResourceManager.GetText(System.String,System.Byte[]@,System.String@,PokeIn.Comet.ResourceManager.Compress)">
+            <summary>
+            Gets Text Resource. (CometWorker.Resource() method uses this function internally)
+            </summary>
+            <param name="specialName">name of the resource</param>
+            <param name="bytes">output byte array</param>
+            <param name="mime">output resource mime</param>
+            <param name="comp">Compression type</param>
+            <returns>If special name exist, returns true</returns>
+        </member>
+        <member name="T:PokeIn.Comet.ResourceManager.Compress">
+            <summary>
+            Compression type for Text resources
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.HttpFile">
+            <summary>
+            HttpFile class
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.HttpFile.#ctor(System.Web.HttpPostedFile@,System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="file">posted file</param>
+            <param name="mapPath">application's server path</param>
+            <param name="clientId">clientId</param>
+            <param name="controlId">client side control id</param>
+        </member>
+        <member name="M:PokeIn.Comet.HttpFile.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.HttpFile.SaveAs(System.String)">
+            <summary>
+            Saves file to given location
+            </summary>
+            <param name="fileName">server side location</param>
+        </member>
+        <member name="P:PokeIn.Comet.HttpFile.ClientId">
+            <summary>
+            Active ClientId
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.HttpFile.FileName">
+            <summary>
+            File name
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.HttpFile.ServerMapPath">
+            <summary>
+            Application's server path
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.HttpFile.ContentLength">
+            <summary>
+            Length of content
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.HttpFile.ContentType">
+            <summary>
+            Type of content
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.PokeInHandler">
+            <summary>
+            Internal HttpHandler class
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.PokeInHandler.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="context"></param>
+            <param name="cb"></param>
+            <param name="extraData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PokeIn.Comet.PokeInHandler.EndProcessRequest(System.IAsyncResult)">
+            <summary>
+            EndProcessRequest
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:PokeIn.Comet.PokeInHandler.ProcessRequest(System.Web.HttpContext)">
+            <summary>
+            Not Available
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:PokeIn.Comet.PokeInHandler.IsReusable">
+            <summary>
+            True
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.PokeInHandlerNoSession">
+            <summary>
+            Internal HttpHandler class
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.PokeInHandlerNoSession.BeginProcessRequest(System.Web.HttpContext,System.AsyncCallback,System.Object)">
+            <summary>
+            Internal use only
+            </summary>
+            <param name="context"></param>
+            <param name="cb"></param>
+            <param name="extraData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PokeIn.IVISUALJSON">
+            <summary>
+            VisualJS Internal object
+            </summary>
+        </member>
+        <member name="M:PokeIn.IVISUALJSON.json">
+            <summary>
+            json value
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:PokeIn.JSON">
+            <summary>
+            JSON functionality helper class
+            </summary>
+        </member>
+        <member name="M:PokeIn.JSON.Tidy(System.String)">
+            <summary>
+            Provides safe transfers for string parameters
+            </summary>
+            <param name="parameter">Parameter To Tidy</param>
+            <returns>Safely transferable string content</returns>
+            <example>
+            <code>
+            CometWorker.SendToClient(clientId, "MessageReceived('" + JSON.Tidy(message) + "');");
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.JSON.ArrayTo(System.Array)">
+            <summary>
+            Converts Array to JSON Array 
+            </summary>
+            <param name="parameter"></param>
+            <returns>JSON Array</returns>
+            <example>
+            <code>
+            string [] items = new string[]{ "max", "min" };
+            string jsonArr = JSON.ArrayTo(arr); //Generates : ["max", "min"]
+            CometWorker.SendToClient(clientId, "ItemsUpdated('" + jsonArr + "');");
+            
+            More:
+            public class MyCustomClass{
+                public string itemName;
+                public DateTime creationTime;
+                public MyCustomClass(){ creationTime = DateTime.MinValue; itemName = ""; }
+                public MyCustomClass(string name){
+                    itemName = name;
+                    creationTime = DateTime.Now;
+                }
+             }
+             
+             MyCustomClass [] arr = new MyCustomClass[] { new MyCustomClass("apple"), new MyCustomClass("banana") };
+             string jsonArr = JSON.ArrayTo(arr); //Generates : [ {itemName:'apple', creationDate:new Date(...)}, 
+                                                 //              {itemName:'banana', creationDate:new Date(...)} ];
+                                                 
+             CometWorker.SendToClient( clientId, "ItemsUpdated('" + jsonArr +"');");                                      
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.JSON.DateTo(System.DateTime)">
+            <summary>
+            Converts .Net DateTime object to JSON
+            </summary>
+            <param name="dt">DateTime to Convert</param>
+            <returns>JSON DateTime Definition</returns>
+            <example>
+            <code>
+            CometWorker.SendToClient(clientId, "DateChanged('" + JSON.DateTo(DateTime.Now) + "');");
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.JSON.ClassTo(System.Object)">
+            <summary>
+            Converts .Net Type To JSON
+            </summary>
+            <param name="parameter"></param>
+            <returns>JSON definition for Class Type</returns>
+            <example>
+            <code> 
+            public class MyCustomClass{
+                public string itemName;
+                public DateTime creationTime;
+                public MyCustomClass(){ creationTime = DateTime.MinValue; itemName = ""; }
+                public MyCustomClass(string name){
+                    itemName = name;
+                    creationTime = DateTime.Now;
+                }
+             }
+             
+             MyCustomClass cs = new MyCustomClass("apple");
+             string json = JSON.ClassTo(cs); //Generates : {itemName:'apple', creationDate:new Date(...)}
+                                                 
+             CometWorker.SendToClient( clientId, "ItemUpdated('" + json +"');");                                      
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.JSON.Method(System.String,System.Object[])">
+            <summary>
+            Creates JS Method with parameters
+            </summary>
+            <param name="methodName"></param>
+            <param name="parameters"></param>
+            <returns>JSON Definition for Method</returns>
+            <example>
+            <code>
+                class User{
+                    public User(string name, int id)
+                    {
+                        UserName = name;
+                        UserId = id;
+                    }
+                    public string UserName;
+                    public int UserId;
+                }
+                
+                JSON.Method( "MessageReceived", "Hello", new User("PokeIn", 1) );
+                Returns:
+                MessageReceived("Hello", {UserName:"PokeIn", UserId:1});
+                
+                Or
+                
+                JSON.Method( "MessageReceived", new User("PokeIn", 1) );
+                Returns:
+                MessageReceived({UserName:"PokeIn", UserId:1});
+            </code>
+            </example>
+        </member>
+        <member name="M:PokeIn.JSON.Method(System.String@,System.String@,System.Object[])">
+            <summary>
+            VISUALJS Control Interface
+            </summary>
+            <param name="control"></param>
+            <param name="methodName"></param>
+            <param name="parameters"></param>
+            <returns>JSON Definition for Method</returns>
+        </member>
+        <member name="M:PokeIn.JSON.Method(System.String,System.String)">
+            <summary>
+            Creates JS Method with parameters
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameter">the parameter.</param>
+            <returns>JSON Definition for Method</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:PokeIn.JSON.Method``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            Creates JS Method with parameters
+            </summary>
+            <typeparam name="TK">The type of the parameter list</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameter">the parameter.</param>
+            <returns>JSON Definition for Method</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:PokeIn.JSON.Method``2(System.String,System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Creates JS Method with parameters
+            </summary>
+            <typeparam name="TK">The type of the keys.</typeparam>
+            <typeparam name="TV">The type of the values.</typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameter">the parameter.</param>
+            <returns>JSON Definition for Method</returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:PokeIn.JSON.Method(System.String,System.Array)">
+            <summary>
+            Creates JS Method with parameters
+            </summary>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameter">the parameter.</param>
+            <returns>JSON Definition for Method</returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:PokeIn.Comet.CometSettings">
+            <summary>
+            PokeIn settings class
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ChunkedMode">
+            <summary>
+            PokeIn keeps listener connections as much as possible. 
+            Make sure that Dynamic Compression is disabled on your web server.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.SocketPort">
+            <summary>
+            Gets or sets the SocketServer's port address. Default -1 (Disabled)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.SocketServerIP">
+            <summary>
+            Gets or sets the IP address of SocketServer. Default value is IPAddress.None (Disabled)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.SocketOrigin">
+            <summary>
+            Gets or sets Socket Security Origin. Accept connections from given URL only. Default is empty (ALL)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.AcceptDesktopClients">
+            <summary>
+            Set false to prevent DesktopClient calls
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.Base64EncyrptedTransfers">
+            <summary>
+            Base64 Encrypted transfers between the clients and server
+            You may not use this option under CrossDomain Listeners Mode (CometSettings.ListenTargets)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.SerializationEncoding">
+            <summary>
+            PokeIn serializes messages by the given type of encoding. Default value is UTF8
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.SleepMode">
+            <summary>
+            Disables server push mode when it is true
+            Efficient choice for the applications which doesn't require server side async messages.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.QueueLength">
+            <summary>
+            This parameter defines how many messages in a client's queue will be delivered to the client. 
+            For example; If you set this parameter to 2 , always the last 2 messages will be sent and the other messages in queue will be deleted on each delivery.
+            To disable this option, assign it to 0. Default value is 0(disabled).
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ResourceOutputCharset">
+            <summary>
+            Set charset property for text resources. Default is UTF8
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ListenerTimeout">
+            <summary>
+            Gets or sets the Listener timeout in milliseconds (Lifetime of every listener calls) 
+            Default value is 90000(Recommended). Min 20000, Max 600000
+            Do not play with this parameter unless you are trying to implement off-topic solution
+            Make sure that corresponding IIS/Apache setting is compatible with the value
+            </summary> 
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ReConnectToSameInstanceTimeout">
+            <summary>
+            Gets or sets the Reconnection to the same server object timeout. Default value is 6000
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ClientTimeout">
+            <summary>
+            Gets or sets the Client timeout in milliseconds. Assign 0 to disable timeout. Default value is 0
+            If you want to activate client timeout, you should be considering the effect to ReConnectToSameInstanceTimeout value. ClientTimeout value must be bigger.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ConnectionLostTimeout">
+            <summary>
+            Gets or sets the connection lost timeout. (Maximum time between the two listener calls). 
+            Default value is 15000(Recommended). Min 10000, Max 30000
+            Do not play with this parameter unless you are trying to implement off-topic solution
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.LogClientScripts">
+            <summary>
+            Gets or sets the status of client script logging. 
+            Set true to enable script logging. Default value is false.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.UploadTarget">
+            <summary>
+            Gets or sets Upload manager target. Default value is empty which means uses same target with main handler.
+            The reason for this property is, if you use HTTPHandler as main PokeIn handler target, you should define
+            UploadTarget parameter additionaly, which must point to a real ASPX page.  
+            Consider using full URL path of Upload Handler. 
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.ResourceTarget">
+            <summary>
+            Gets or sets Resource manager target. Default value is Resources.aspx (VisualJS only)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometSettings.AutoReconnectOnPageBacks">
+            <summary>
+            Gets or sets the decision of PokeIn automatic reconnection support for a client who clicks the back button of browser to turn back to the application and disconnects instantly due to browser cache.  (Default value is true)
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.DefineClassObjects">
+            <summary>
+            Definitions of initialized server side class list
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.DecisionDelegate">
+            <summary>
+            Pre initialization of already connected clients
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.FirstJointObjects">
+            <summary>
+            Definitions of initialized server side class list for a joint
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.ClientDisconnectedDelegate">
+            <summary>
+            Client Disconnected Delegate
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.ClientJoinDelegate">
+            <summary>
+            Join Notification Delegate
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.ClientCreatedDelegate">
+            <summary>
+            Client Creation Delegate
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.OnFileUploadRequest">
+            <summary>
+            Event delegate for upload requests
+            </summary>
+            <param name="file">HttpFile reference</param>
+        </member>
+        <member name="T:PokeIn.Comet.CometWorker">
+            <summary>
+            Main class to use ajax functionalities
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ReadSessionObject(System.String)">
+            <summary>
+            Gets the object from the active session by its name. (Requires Handler with Session - ReadOnly)
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ReadSessionObject(System.Int32)">
+            <summary>
+            Gets the object from the active session by its index. (Requires Handler with Session - ReadOnly)
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetSessionId(System.String)">
+            <summary>
+            Returns ASP.NET session id for given clientId
+            </summary>
+            <param name="clientId">ClientId</param>
+            <returns>SessionId</returns>
+            <exception cref="T:System.Exception">client doesn't exist</exception>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ForceExitBySessionId(System.String,System.String)">
+            <summary>
+            Force connections to close for given sessionId (if exists)
+            </summary>
+            <param name="sessionId">SessionId</param>
+            <param name="exceptClientId">set String.Empty to force exit all the clients or give specific client id to prevent one of them from exit</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetClientIdsBySessionId(System.String)">
+            <summary>
+            Returns the clientIds associated with given session id
+            </summary>
+            <param name="sessionId">SessionId</param>
+            <returns>List of ClientIds</returns>
+            <exception cref="T:System.Exception">There is no associated client with this sessionId.</exception>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetClientObject``1(System.String,System.String,``0@)">
+            <summary>
+            Gets the given type of object from client's instance
+            </summary>
+            <param name="clientId">ClientId</param>
+            <param name="objectClientName">Client name of object</param>
+            <param name="clientObject">if there is no match for given object name, return value will be a default instance of Type T</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetClientObjects(System.String,System.Collections.Generic.List{System.Object}@)">
+            <summary>
+            Gets all the objects from client's instance
+            </summary>
+            <param name="clientId">ClientId</param>
+            <param name="clientObjects">List of object instances of a client</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Resource">
+            <summary>
+            Resource Handler Function. 
+            </summary> 
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Handle">
+            <summary>
+            Data transfer handler for PokeIn messages and resources. 
+            </summary> 
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.SendToClient(System.String,System.String)">
+            <summary>
+            Puts a message into the client's message que to send.
+            </summary>
+            <param name="clientId">The client id.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.SendToJoint(System.String,System.String)">
+            <summary>
+            Puts a message into the joint's message que to send. All the joined clients will have the message
+            </summary>
+            <param name="jointId">The client id.</param>
+            <param name="message">The message.</param>
+            <returns>returns the number of clients received message</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.SendToClients(System.String[],System.String)">
+            <summary>
+            Puts a message into multiple client's que. Use this method instead to loop SendToClient for thread efficiency
+            </summary>
+            <param name="clientIds">The client ids.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.SendToAll(System.String)">
+            <summary>
+            Puts a message into all active client's message que. 
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetClientIds">
+            <summary>
+            Gets the array of active client ids.
+            </summary>
+            <returns>string[]</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetJointByClientId(System.String)">
+            <summary>
+            Gets joint name for a clientId.
+            </summary>
+            <returns>jointId</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetClientIdsByJoint(System.String)">
+            <summary>
+            Gets the array of active client ids in a joint.
+            </summary>
+            <returns>string[]</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.RemoveClient(System.String)">
+            <summary>
+            Removes a client. Closes it's application. Clears its resources.
+            </summary>
+            <param name="clientId">Client ID</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.GetApplicationPath">
+            <summary>
+            Returns the exact disk location of current application domain
+            </summary>
+            <returns>Path</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.AddLog(System.String)">
+            <summary>
+            Adds the given string into the defined log file. You must set PokeIn_LogFolder under web.config in order to use this method.
+            </summary>
+            <param name="log">text to log</param>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnFirstJoint">
+            <summary>
+            Fires when PokeIn handler receives a new client connection request for a joint first time. 
+            A listener for this event must be assigned to use dynamic PokeIn connections. 
+            Please notice that; You may assign only 1 listener for this event. Otherwise, it throws  
+            "OnFirstJoint event listener has already assigned." exception. 
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnReConnectionDecision">
+            <summary>
+            Fires when PokeIn handler receives a connection from already connected client. Only available under PokeIn.Handler mode
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnClientConnected">
+            <summary>
+            Fires when PokeIn handler receives a new client connection request. 
+            A listener for this event must be assigned to use dynamic PokeIn connections.  
+            Please notice that; You may assign only 1 listener for this event. Otherwise, it throws  
+            "OnClientConnected event listener has already assigned." exception. 
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometWorker.ActiveSessionId">
+            <summary>
+            Gets the active session Id. (Requires Handler with Session - ReadOnly)
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnClientDisconnected">
+            <summary>
+            Fires when one of the client connections disconnected.
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnClientCreated">
+            <summary>
+            Fires when a server side instance of a new connected client is successfully created.
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.OnClientJoined">
+            <summary>
+            Fires when someone joins to an existing joint session
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometWorker.IsApplicationRecycling">
+            <summary>
+            Get the status of web application
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.CometWorker.FileUploadRequested">
+            <summary>
+            Fires when a file upload request received
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CometWorker.ActiveClientCount">
+            <summary>
+            Returns active client count
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.CometWorker.ClientLog">
+            <summary>
+            Container for detailed logs
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ClientLog.GetClientLogs(System.String)">
+            <summary>
+            Returns the client logs.
+            </summary>
+            <param name="clientId">clientId</param>
+            <returns>Script log for a specific client</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ClientLog.ClearClientScriptLog(System.String)">
+            <summary>
+            Clears the client script log.
+            </summary>
+            <param name="clientId">clientId</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.ClientLog.Export(System.String,System.Boolean)">
+            <summary>
+            Write Logs to the disk.
+            </summary>
+            <param name="fileLocation">target file location</param>
+            <param name="eraseAfterExport">Erase the logs after export</param>
+        </member>
+        <member name="T:PokeIn.Comet.CometWorker.Groups">
+            <summary>
+            Group messaging support
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.GroupHasMembers(System.String)">
+            <summary>
+            Get whether a group has any members or not
+            </summary>
+            <param name="groupName">group name to check</param>
+            <returns>boolean</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.PinClientID(System.String,System.String)">
+            <summary>
+            Subscribe a client to a channel by client id
+            </summary>
+            <param name="clientId">clientId</param>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.UnpinClient(System.String,System.String)">
+            <summary>
+            Unsubscribe a client from a channel by client id
+            </summary>
+            <param name="clientId">client id</param>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.UnpinClient(System.String)">
+            <summary>
+            Unsubscribe a client from all the channels subscribed
+            </summary>
+            <param name="clientId">client id</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.PinSessionMembers(System.String,System.String)">
+            <summary>
+            Subscribe the clients to a channel by ASP.NET session id
+            </summary>
+            <param name="sessionId">session id</param>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.UnpinSessionMembers(System.String,System.String)">
+            <summary>
+            Unsubscribe the clients from a channel by ASP.NET session id
+            </summary>  
+            <param name="sessionId">session id</param>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.UnpinSessionMembers(System.String)">
+            <summary>
+            Unsubscribe the clients from all the channels subscribed by ASP.NET session id
+            </summary>  
+            <param name="sessionId">session id</param> 
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.GetClientIDs(System.String)">
+            <summary>
+            Get all the client ids associated with the channel name
+            </summary>
+            <param name="groupName">channel name</param>
+            <returns>list of client ids</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.GetClientGroups(System.String)">
+            <summary>
+            Get all the channel list associated with a client id
+            </summary>
+            <param name="clientId">client id</param>
+            <returns>list of channel names</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.GetSessionGroups(System.String)">
+            <summary>
+            Get all the channel list associated with an ASP.NET session id
+            </summary>
+            <param name="sessionId">session id</param>
+            <returns>list of channel names</returns>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.Clear(System.String)">
+            <summary>
+            Remove a channel and clear all the associated memberships
+            </summary>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.Send(System.String,System.String)">
+            <summary>
+            Send a message to the channel
+            </summary>
+            <param name="groupName">channel name</param>
+            <param name="message">message</param>
+        </member>
+        <member name="M:PokeIn.Comet.CometWorker.Groups.Kick(System.String)">
+            <summary>
+            Kick all the members of channel
+            </summary>
+            <param name="groupName">channel name</param>
+        </member>
+        <member name="T:PokeIn.XMLTransfer">
+            <summary>
+            Transfer class
+            </summary>
+        </member>
+        <member name="M:PokeIn.XMLTransfer.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="F:PokeIn.XMLTransfer.method_name">
+            <summary>
+            method name
+            </summary>
+        </member>
+        <member name="F:PokeIn.XMLTransfer.parameters">
+            <summary>
+            method parameters
+            </summary>
+        </member>
+        <member name="T:PokeIn.EXTML">
+            <summary>
+            DesktopClient method serializer
+            </summary>
+        </member>
+        <member name="M:PokeIn.EXTML.Method(System.String,System.Object[])">
+            <summary>
+            Serializes a remote method from given parameters
+            </summary>
+            <param name="methodName">remote method name</param>
+            <param name="parameters">method parameters</param>
+            <returns>serialized method info</returns> 
+        </member>
+        <member name="M:PokeIn.EXTML.Method(System.String,System.String)">
+            <summary>
+            Serializes a remote method from given parameters
+            </summary>
+            <param name="methodName">remote method name</param>
+            <param name="parameter">method parameter</param>
+            <returns>serialized method info</returns> 
+        </member>
+        <member name="M:PokeIn.EXTML.Method``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            Serializes a remote method from given parameters
+            </summary>
+            <param name="methodName">remote method name</param>
+            <param name="parameter">method parameter</param>
+            <returns>serialized method info</returns> 
+        </member>
+        <member name="M:PokeIn.EXTML.Method``2(System.String,System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Serializes a remote method from given parameters
+            </summary>
+            <param name="methodName">remote method name</param>
+            <param name="parameter">method parameter</param>
+            <returns>serialized method info</returns> 
+        </member>
+        <member name="M:PokeIn.EXTML.Method(System.String,System.Array)">
+            <summary>
+            Serializes a remote method from given parameters
+            </summary>
+            <param name="methodName">remote method name</param>
+            <param name="parameter">method parameter</param>
+            <returns>serialized method info</returns> 
+        </member>
+        <member name="T:PokeIn.Comet.CallTrack">
+            <summary>
+            Contains information about the calling method.
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CallTrack.#ctor">
+            <summary>
+            Gets the calling method.
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CallTrack.#ctor(System.Type)">
+            <summary>
+            Gets the calling method, ignoring calls from the specified type.
+            </summary>
+            <param name="ignoreType">All calls made from this type will be ignored.
+            Use this when wrapping this class in another class. OK if null.</param>
+        </member>
+        <member name="M:PokeIn.Comet.CallTrack.Initialize">
+            <summary>
+            Initializes the calling method information.
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.CallTrack.ToString">
+            <summary>
+            Gets the full method signature, file and line number.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.FileName">
+            <summary>
+            Gets the name of the file that contained the method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.FilePath">
+            <summary>
+            Gets the path of the file that contained the method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.IgnoreType">
+            <summary>
+            Gets the type that will be ignored.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.LineNumber">
+            <summary>
+            Gets the line number in the file that called the method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.MethodNameFull">
+            <summary>
+            Gets the full name of this method, with namespace.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.Method">
+            <summary>
+            Gets the calling method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.MethodName">
+            <summary>
+            Gets the name of this method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.MethodSignatureFull">
+            <summary>
+            Gets the complete method signature
+            with return type, full method name, and arguments.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.MethodSignature">
+            <summary>
+            Gets the method name and arguments.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.Namespace">
+            <summary>
+            Gets the namespace containing the object containing this method.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.ReturnName">
+            <summary>
+            Gets the name of the return type.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.Text">
+            <summary>
+            Gets the full method signature, file and line number.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.TypeNameFull">
+            <summary>
+            Gets the full name of the type that contains this method,
+            including the namespace.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.TypeName">
+            <summary>
+            Gets the name of the type that contains this method,
+            not including the namespace.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.CallTrack.Type">
+            <summary>
+            Gets the type that contains this method.
+            </summary>
+        </member>
+        <member name="T:PokeIn.Internal.JDefiner">
+            <summary>
+            PokeIn AddIn Module Definer
+            </summary>
+        </member>
+        <member name="M:PokeIn.Internal.JDefiner.Definer(System.Object@,System.String,System.String,System.String@)">
+            <summary>
+            Defines an Add-In
+            </summary>
+            <param name="component">object to define</param>
+            <param name="moduleName">module name</param>
+            <param name="clientId">clientId</param>
+            <param name="codeDefinition">definition</param>
+        </member>
+        <member name="T:PokeIn.CustomConfig.PokeInTargets">
+            <summary>
+            Custom PokeIn Event Configuration Class
+            </summary>
+        </member>
+        <member name="M:PokeIn.CustomConfig.PokeInTargets.GetConfiguration">
+            <summary>
+            Gets the active configuration
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:PokeIn.CustomConfig.PokeInTargets.Events">
+            <summary>
+            OnEventElement
+            </summary>
+        </member>
+        <member name="T:PokeIn.CustomConfig.EventElement">
+            <summary>
+            Event Configuration Element
+            </summary>
+        </member>
+        <member name="P:PokeIn.CustomConfig.EventElement.EventType">
+            <summary>
+            Event Type
+            </summary>
+        </member>
+        <member name="P:PokeIn.CustomConfig.EventElement.StrongName">
+            <summary>
+            Strong Name of the hosting type
+            </summary>
+        </member>
+        <member name="P:PokeIn.CustomConfig.EventElement.Handler">
+            <summary>
+            Public static event handler
+            </summary>
+        </member>
+        <member name="P:PokeIn.CustomConfig.EventElement.UniqueName">
+            <summary>
+            UniqueName for Request Param 'evTarget'
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.OnConnection">
+            <summary>
+            Delegate definition for DesktopClient.OnClientConnected and DesktopClient.OnClientDisconnected events
+            </summary>
+            <param name="c">Holds the sender object</param>
+        </member>
+        <member name="T:PokeIn.Comet.OnError">
+            <summary>
+            Delegate definition for DesktopClient.OnErrorReceived event
+            </summary>
+            <param name="c">Holds the sender object</param>
+            <param name="errorMessage">Error message received</param>
+        </member>
+        <member name="T:PokeIn.Comet.DesktopClient">
+            <summary>
+            PokeIn connection class for non browser clients
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.#ctor(System.Object,System.String,System.String)">
+            <summary>
+            DesktopClient class constructor
+            </summary>
+            <param name="localTarget">Local object instance to handle server side method calls</param>
+            <param name="handlerUrl">PokeInHandler URL</param>
+            <param name="jointName">Leave empty if you don't use joint feature on your application</param>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.#ctor(System.Net.WebProxy,System.Object,System.String,System.String)">
+            <summary>
+            DesktopClient class constructor
+            </summary>
+            <param name="webProxy">Proxy definition</param>
+            <param name="localTarget">Local object instance to handle server side method calls</param>
+            <param name="handlerUrl">PokeInHandler URL</param>
+            <param name="jointName">Leave empty if you don't use joint feature on your application</param>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SocketConfig(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Configures Socket variables in order to connect server over WebSocket interface
+            </summary>
+            <param name="socketIP"></param>
+            <param name="socketPort"></param>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.GetTextResource(System.String,System.String@)">
+            <summary>
+            Gets defined text resource from server
+            </summary>
+            <param name="resourceName">pre-defined resource name</param>
+            <param name="data">downloaded text resource</param>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.GetImageResource(System.String,System.Drawing.Image@)">
+            <summary>
+            Gets defined image resource from server
+            </summary>
+            <param name="resourceName">pre-defined resource name</param>
+            <param name="image">downloaded image resource</param>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.Close">
+            <summary>
+            Closes the active connection
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.Connect">
+            <summary>
+            Starts connection process
+            </summary>
+            <returns>returns true,if the connection process is successful</returns>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SendAsync(System.String,System.Object[])">
+            <summary>
+            Calls server side method
+            </summary>
+            <param name="method">definitionName.methodName</param>
+            <param name="param">parameter list</param>
+            <example>
+            SendAsync("Dummy.GetServerTime", true)
+            </example>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SendAsync(System.String,System.String)">
+            <summary>
+            Calls server side method
+            </summary>
+            <param name="method">definitionName.methodName</param>
+            <param name="parameter">parameter</param>
+            <example>
+            SendAsync("Dummy.GetServerTime", "test")
+            </example>
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SendAsync``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            Calls server side method
+            </summary>
+            <param name="method">definitionName.methodName</param>
+            <param name="parameter">parameter list</param> 
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SendAsync``2(System.String,System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Calls server side method
+            </summary>
+            <param name="method">definitionName.methodName</param>
+            <param name="parameter">parameter list</param> 
+        </member>
+        <member name="M:PokeIn.Comet.DesktopClient.SendAsync(System.String,System.Array)">
+            <summary>
+            Calls server side method
+            </summary>
+            <param name="method">definitionName.methodName</param>
+            <param name="parameter">parameter list</param> 
+        </member>
+        <member name="P:PokeIn.Comet.DesktopClient.ClientCredentials">
+            <summary>
+            Connection credentials
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.DesktopClient.OnClientConnected">
+            <summary>
+            Fires when a the server connection task is completed
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.DesktopClient.OnErrorReceived">
+            <summary>
+            Fires when the server side throws an exception
+            </summary>
+        </member>
+        <member name="E:PokeIn.Comet.DesktopClient.OnClientDisconnected">
+            <summary>
+            Fires when the active connection is closed
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.DesktopClient.IsSocketConnected">
+            <summary>
+            Gets the connection status of socket interface
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.DesktopClient.ClientID">
+            <summary>
+            ClientId of the connection.
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.DesktopClient.IsConnected">
+            <summary>
+            Status of the connection
+            </summary>
+        </member>
+        <member name="T:PokeIn.Internal.ModuleDefiner">
+            <summary>
+            ModuleDefiner
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:PokeIn.Internal.ModuleDefiner.ModuleName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:PokeIn.Internal.ModuleDefiner.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:PokeIn.Internal.ModuleDefiner.ControlType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:PokeIn.Internal.ModuleDefiner.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PokeIn.Internal.ModuleDefiner"/> class.
+            </summary>
+            <param name="controlType">Type of the control.</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:PokeIn.Internal.ModuleDefiner.#ctor(PokeIn.Internal.ModuleDefiner)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PokeIn.Internal.ModuleDefiner"/> class.
+            </summary>
+            <param name="mf">The mf.</param>
+            <remarks></remarks>
+        </member>
+        <member name="T:PokeIn.Caching.CachedItemRemovedReason">
+            <summary>
+            Information enumeration for CachedItemRemovedCallback. PCache class supports expirable cache items.
+            </summary>
+        </member>
+        <member name="F:PokeIn.Caching.CachedItemRemovedReason.Expired">
+            <summary>
+            Removed due to expiration
+            </summary>
+        </member>
+        <member name="F:PokeIn.Caching.CachedItemRemovedReason.Removed">
+            <summary>
+            Removed due to cleanup
+            </summary>
+        </member>
+        <member name="T:PokeIn.Caching.CachedItemRemovedCallback">
+            <summary>
+            Callback type definition for [PCache].OnItemRemoved event
+            </summary>
+            <param name="name">key name</param>
+            <param name="value">cached object</param>
+            <param name="reason">reason to remove</param>
+        </member>
+        <member name="T:PokeIn.Caching.PCache">
+            <summary>
+            Thread safe Cache class
+            </summary>
+        </member>
+        <member name="F:PokeIn.Caching.PCache.NoSlidingExpiration">
+            <summary>
+            Disable sliding expiration option by this value
+            </summary>
+        </member>
+        <member name="F:PokeIn.Caching.PCache.NoAbsoluteExpiration">
+            <summary>
+            Disable absolute expiration option by this value
+            </summary>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Dispose">
+            <summary>
+            Removes the cache instance from the main pool
+            </summary>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Remove(System.String)">
+            <summary>
+            if the key exist, removes it from the cache and returns value of the key, otherwise returns null
+            </summary>
+            <param name="key">key name</param> 
+        </member>
+        <member name="M:PokeIn.Caching.PCache.RemoveNoEvent(System.String,System.Object@)">
+            <summary>
+            Remove item from cache and do not invoke the item removed callback
+            </summary>
+            <param name="key">key name</param> 
+            <param name="value">stored object</param> 
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Insert(System.String,System.Object)">
+            <summary>
+            Insert an item into the cache
+            </summary>
+            <param name="key">key name</param>
+            <param name="value">item</param> 
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Insert(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            Insert an item into the cache
+            </summary>
+            <param name="key">key name</param>
+            <param name="value">item</param> 
+            <param name="slidingExpiration">Sliding Expiration</param>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Insert(System.String,System.Object,System.DateTime)">
+            <summary>
+            Insert an item into the cache
+            </summary>
+            <param name="key">key name</param>
+            <param name="value">item</param>
+            <param name="absoluteExpiration">Absolute Expiration</param>
+        </member>
+        <member name="F:PokeIn.Caching.PCache.OnItemRemoved">
+            <summary>
+            Callback member for notifications of removals
+            </summary>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Insert(System.String,System.Object,System.DateTime,System.TimeSpan)">
+            <summary>
+            Insert an item into the cache
+            </summary>
+            <param name="key">key name</param>
+            <param name="value">item</param>
+            <param name="absoluteExpiration">Absolute Expiration</param>
+            <param name="slidingExpiration">Sliding Expiration</param>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.BackupCache(System.Byte[]@,System.Boolean)">
+            <summary>
+            Convert all the in-memory cache into the byte array.
+            </summary>
+            <param name="backupData">byte array</param>
+            <param name="encrypted">encrypt byte array</param>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.RestoreCache(System.Byte[],System.Boolean)">
+            <summary>
+            Restore cache from backup byte array
+            </summary>
+            <param name="backupData">byte array</param>
+            <param name="isEncrypted">byte array encrypted?</param>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Get(System.String)">
+            <summary>
+            Gets item from the cache and refreshes its sliding expiration value (if it is applicable). Removes the object if it is expired already
+            </summary>
+            <param name="key">key name</param>
+            <returns>cached object</returns>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.ContainsKey(System.String)">
+            <summary>
+            Checks the key within the Cache
+            </summary>
+            <param name="key">key name</param>
+            <returns>boolean</returns>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.GetNoRefresh(System.String)">
+            <summary>
+            Gets item from the cache and does not refresh its sliding expiration value. Removes the object if it is expired already
+            </summary>
+            <param name="key">key name</param>
+            <returns>cached object</returns>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.GetKeys">
+            <summary>
+            Gets the keys of items
+            </summary>
+        </member>
+        <member name="P:PokeIn.Caching.PCache.TimerInterval">
+            <summary>
+            Set or get timer interval for expiration checkes on cached items. Min. 6000 milliseconds. Default is 7000
+            </summary>
+        </member>
+        <member name="P:PokeIn.Caching.PCache.Item(System.String)">
+            <summary>
+            Gets item from the cache and refreshes its sliding expiration value (if it is applicable). Removes the object if it is expired already
+            Sets or updates the item and also refreshes its sliding expiration value (if it is applicable)
+            </summary>
+            <param name="key">key name</param>
+        </member>
+        <member name="P:PokeIn.Caching.PCache.Count">
+            <summary>
+            Cached item count in the inventory
+            </summary>
+        </member>
+        <member name="T:PokeIn.Caching.PCache.Backup">
+            <summary>
+            Internal Class
+            </summary>
+        </member>
+        <member name="F:PokeIn.Caching.PCache.Backup.Caches">
+            <summary>
+            Internal
+            </summary>
+        </member>
+        <member name="M:PokeIn.Caching.PCache.Backup.#ctor">
+            <summary>
+            Internal
+            </summary>
+        </member>
+        <member name="T:PokeIn.Comet.ConnectionDetails">
+            <summary>
+            Holds the details of active connection request
+            </summary>
+        </member>
+        <member name="M:PokeIn.Comet.ConnectionDetails.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="F:PokeIn.Comet.ConnectionDetails.RequestParams">
+            <summary>
+            Clone of the Request parameters of ASP.NET Request class
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.ClientId">
+            <summary>
+            Active ClientId
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.Context">
+            <summary>
+            Active ClientId
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.SessionId">
+            <summary>
+            Active SessionID (You may need to activate ASP.NET/or third party session ids)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.RequestPath">
+            <summary>
+            RequestPath from ASP.NET Request class
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.Url">
+            <summary>
+            URL
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.UrlReferrer">
+            <summary>
+            Referrer URL
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.UserAgent">
+            <summary>
+            UserAgent information from client browser / application
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.UserHostAddress">
+            <summary>
+            User's host address
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.UserHostName">
+            <summary>
+            User's host name. (Needs reverse DNS lookup settings are enabled to work properly)
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.IsSecureConnection">
+            <summary>
+            isSecureConnection from ASP.NET Request class
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.IsDesktopClient">
+            <summary>
+            Shows whether the connection request has came from the PokeIn.DesktopClient or a browser
+            </summary>
+        </member>
+        <member name="P:PokeIn.Comet.ConnectionDetails.IsAuthenticated">
+            <summary>
+            IsAuthenticated from ASP.NET Request class
+            </summary>
+        </member>
+    </members>
+</doc>

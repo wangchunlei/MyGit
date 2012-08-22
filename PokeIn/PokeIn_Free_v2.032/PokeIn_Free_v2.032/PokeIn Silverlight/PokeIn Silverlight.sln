@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeIn Silverlight", "PokeIn Silverlight\PokeIn Silverlight.csproj", "{592319F4-7733-413E-B81B-602FD642AD85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeIn Silverlight.Web", "PokeIn Silverlight.Web\PokeIn Silverlight.Web.csproj", "{A37901C8-8C99-4C9D-9A7F-5C065373FCDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{592319F4-7733-413E-B81B-602FD642AD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592319F4-7733-413E-B81B-602FD642AD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592319F4-7733-413E-B81B-602FD642AD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592319F4-7733-413E-B81B-602FD642AD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37901C8-8C99-4C9D-9A7F-5C065373FCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37901C8-8C99-4C9D-9A7F-5C065373FCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37901C8-8C99-4C9D-9A7F-5C065373FCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37901C8-8C99-4C9D-9A7F-5C065373FCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

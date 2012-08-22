@@ -1,0 +1,253 @@
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+
+/* Custom CSS */
+
+body
+{
+    margin: 0px;
+    padding: 0px;
+    font: normal normal 10pt 'sans' , 'Arial';
+}
+#chats
+{
+    color: White;
+    margin: 0px;
+    padding: 0px;
+    width: 380px;
+}
+#chatWrapper
+{
+    background-color: orange;
+    border: 1px solid #FF6699;
+    height: 450px;
+    margin: 20px 10px;
+    width: 650px;
+}
+#chatBase
+{
+    float:left;
+    margin:10px;
+    width: 400px;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: solid 1px #006699;
+    background-color: #336699;
+}
+#lbl
+{
+    padding-top:5px;
+    float:left;
+    width:80px;
+}
+#info
+{            
+    width: 260px;
+    height: 20px;
+    border: solid 1px #006699;
+}
+input[type="button"]
+{
+    cursor: pointer;
+}
+        
+#messageArea
+{
+    clear:both;
+    margin:10px 10px 0px 10px;
+}
+#btnPrivate
+{
+    margin-left:15px;
+    display:none;
+}
+
+#userListWrapper
+{
+    background-color: white;
+    border:1px solid #006699;
+    float:left;
+    display:block;
+    height:400px;
+    left:412px;
+    margin:10px;
+    width:200px;
+}
+#userList 
+{ 
+	height:100%;
+    width:100%;
+    font-weight:bold;
+}
+
+
+#userList option
+{
+    padding:5px;
+    border-style: none none dotted none;
+    border-width: 1px;
+    border-color: #CCCCCC;
+} 
+
+#messagesList{
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+
+#messagesList li{
+    padding:10px;
+    list-style:none;
+}
+
+#messagesList li.even {
+    background:#679FD2;
+}
+
+
+#privateMessage {
+    width: 100%;
+    heigth: 100%;
+    padding:0px;
+    margin:0px;
+}
+
+
+
+/*  modal popup */
+
+
+.jqmWindow {
+    display: none;    
+    position: fixed;
+    top: 17%;
+    left: 50%;    
+    margin-left: -300px;
+    width: 600px;    
+ /* background-color: #EEE; */
+    color: #333;
+ /* border: 1px solid black; */
+    padding: 12px;
+}
+
+.jqmOverlay { background-color: #000; }
+
+/* Background iframe styling for IE6. Prevents ActiveX bleed-through (<select> form elements, etc.) */
+* iframe.jqm {position:absolute;top:0;left:0;z-index:-1;
+	width: expression(this.parentNode.offsetWidth);
+	height: expression(this.parentNode.offsetHeight);
+}
+
+/* Fixed posistioning emulation for IE6
+     Star selector used to hide definition from browsers other than IE6
+     For valid CSS, use a conditional include instead */
+* html .jqmWindow, * html div.jqmConfirm {
+     position: absolute;
+     top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100));
+}
+
+div.jqmConfirm { /* contains + positions the alert window */
+  display: none;  
+  position: fixed;
+  top: 40%;
+  width: 100%;
+}
+    
+div.jqmConfirmWindow {
+  height:auto;
+  width: 100px;
+  margin: auto;  
+  max-width:100px;  
+  background:#FFF;  
+  border:solid 1px #111;
+  background-color:#fff;
+  padding:10px 5px;
+}
+
+
+.overlay-content {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    -moz-border-radius-bottomleft:6px;
+    -moz-border-radius-bottomright:6px;
+    -moz-border-radius-topleft:6px;
+    -moz-border-radius-topright:6px;
+    -moz-box-shadow:0 0 5px #DDDDDD;
+    background:#DDDDDD none repeat scroll 0 0;
+    border:2px solid #FFFFFF;
+    padding:0px;
+    width:430px;
+    margin-left:-215px;
+    top:15%;
+}
+
+.padded {
+    padding:10px;
+}
+
+.header
+{
+    /* -moz-border-radius-topleft:5px; */
+    background-color: #F6F6F6;
+    border-color: #B9B9B9;
+    border-style: solid;
+    border-width: 0 0 1px;
+}
+
+.header h2
+{
+    color: #666666;
+    font-size: 20px;
+    font-family: Arial;
+    letter-spacing: -1px;
+    font-weight: normal;
+    margin:0;
+    text-shadow: 0 1px 2px #FFFFFF;
+}
+
+.content{
+    padding:10px 20px;
+}
+
+.fancy_close
+{
+    display: block;
+    background:transparent url(/Content/fancy_closebox.png) no-repeat scroll left top;
+    cursor:pointer;
+    display:none;
+    height:30px;
+    position:absolute;
+    right:-15px;
+    top:-15px;
+    width:30px;
+    z-index:181;
+}

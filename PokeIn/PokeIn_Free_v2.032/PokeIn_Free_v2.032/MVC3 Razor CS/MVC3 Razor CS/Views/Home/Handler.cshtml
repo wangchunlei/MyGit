@@ -1,0 +1,10 @@
+﻿@{
+    if (Request.IsAuthenticated){
+        PokeIn.Comet.CometWorker.Handle();
+    }
+else
+    {
+        <text>Please login to your account</text>    
+    }
+    Layout = null;
+}

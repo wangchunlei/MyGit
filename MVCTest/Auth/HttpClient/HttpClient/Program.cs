@@ -46,7 +46,7 @@ namespace HttpClient
 
                     process.Start();
 
-                    process.WaitForExit();
+                    process.WaitForExit(int.MaxValue);
                     cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
                     if (i-- == 0)
                     {

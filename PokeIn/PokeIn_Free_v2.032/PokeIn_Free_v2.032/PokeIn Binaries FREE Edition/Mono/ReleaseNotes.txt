@@ -1,0 +1,14 @@
+﻿* PokeIn Comet Ajax Library v1.59 (18 Sep 2011)
+* Copyright © PokeIn http://pokein.com
+
+What's new? 
+Features:
+* Reconnection to same server object feature is only available under PokeInHandler mode
+* Deprecated CometWorker.Send and ComerWorker.Listen methods removed from the binary. (use ComerWorker.Handle instead)
+* SleepMode connections improved
+* Reconnection feature is improved
+* minor fixes and improvements
+
+This edition is tested under ~25K virtual users’ load before released
+To boost your server performance (IIS) you may need to check our new "open source" IIS Tuner tool at http://IISTuner.codeplex.com
+

@@ -1,0 +1,10 @@
+﻿* PokeIn Comet Library v0.86
+* Copyright © 2010 Oguz Bastemur http://pokein.codeplex.com (info@pokein.com)
+
+* This version of PokeIn contains; 
+  Browser compability fixes	
+  Timeout support fixes
+  Minor Encoding Fix
+
+!!
+All the compiled editions of PokeIn Library added to PokeIn Binaries Folder.

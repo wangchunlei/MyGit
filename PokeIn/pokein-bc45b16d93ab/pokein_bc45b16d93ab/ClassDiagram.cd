@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="PokeIn.Comet.ClientCodeStatus">
+    <Position X="3.5" Y="5.5" Width="3.75" />
+    <Members>
+      <Field Name="Events" Hidden="true" />
+      <Field Name="LastListen" Hidden="true" />
+      <Field Name="LastSend" Hidden="true" />
+      <Field Name="Worker" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAEAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Comet\ClientCodeStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokeIn.Comet.CometWorker">
+    <Position X="0.5" Y="0.5" Width="7.5" />
+    <Members>
+      <Field Name="_clientId" Hidden="true" />
+      <Field Name="_clients" Hidden="true" />
+      <Field Name="_clientScriptsLog" Hidden="true" />
+      <Field Name="_code" Hidden="true" />
+      <Field Name="_codesToRun" Hidden="true" />
+      <Field Name="_hClientId" Hidden="true" />
+      <Field Name="_thread" Hidden="true" />
+      <Field Name="ClientStatus" Hidden="true" />
+      <Method Name="ClientThread" Hidden="true" />
+      <Method Name="CometWorker" Hidden="true" />
+      <Method Name="ExecuteJobs" Hidden="true" />
+      <Method Name="GrabClientMessages" Hidden="true" />
+      <Property Name="NewClientId" Hidden="true" />
+      <Method Name="UpdateUserTime" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="PokeIn.Comet.CometWorker.ClientLog">
+        <TypeIdentifier>
+          <NewMemberFileName>Comet\CometWorker.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAggAAAAEAAAGAABEgBAAACAAAAgMIChBEAAAAgAEA=</HashCode>
+      <FileName>Comet\CometWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokeIn.Comet.BrowserHelper">
+    <Position X="0.5" Y="7.5" Width="8.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="PokeIn.Comet.BrowserHelper.ClientElementEventReceived">
+        <TypeIdentifier>
+          <NewMemberFileName>Comet\BrowserHelper.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAgAAAAAAAAAAAAAAAAAAABgAAAAAAAAAA=</HashCode>
+      <FileName>Comet\BrowserHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PokeIn.Comet.CometSettings">
+    <Position X="0.5" Y="5.5" Width="2.75" />
+    <Members>
+      <Field Name="_clientTimeout" Hidden="true" />
+      <Field Name="_connectionLostTimeout" Hidden="true" />
+      <Field Name="_listenerTimeout" Hidden="true" />
+      <Field Name="_logClientScripts" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIQAAAAAAABAICAAAAAAAIAAAAAAAICA=</HashCode>
+      <FileName>Comet\CometSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="PokeIn.Comet.DefineClassObjects">
+    <Position X="8.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comet\CometWorker.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

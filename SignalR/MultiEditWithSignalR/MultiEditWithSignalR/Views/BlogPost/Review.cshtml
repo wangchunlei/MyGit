@@ -1,0 +1,83 @@
+﻿@model MultiEditWithSignalR.Models.BlogPost
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="../../Scripts/diff_match_patch.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery.signalR.min.js" type="text/javascript"></script>
+<script src="../../Scripts/json2.min.js" type="text/javascript"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>BlogPost</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BlogBody)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BlogBody)
+            @Html.ValidationMessageFor(model => model.BlogBody)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" /> <br />
+            Session ID: <input id="sessinId" value="@Session.SessionID" disabled="disabled" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        // Proxy created on the fly
+        var blog = $.connection.blogHub;
+        //Create instance of the diff-match-patch javascript class
+        var dmp = new diff_match_patch();
+        // Declare a function on the blog hub so the server can invoke it
+        blog.addMessage = function (message, sessnId) {
+            var sessId = $('#sessinId').val();
+            if (sessId != sessnId) // if this is not the page that initated
+                                   // the publish
+            {
+                dmp.Match_Distance = 1000;
+                dmp.Match_Threshold = 0.5;
+                dmp.Patch_DeleteThreshold = 0.5;
+                // Diff between text currently in text box and 'message' sent
+                // by hub
+                var patches = dmp.patch_make($('#BlogBody').val(), message);
+                // Get the patch results
+                var results = dmp.patch_apply(patches, $('#BlogBody').val());
+                // Set the patch value in the current client
+                $('#BlogBody').val(results[0]);
+            }
+        };
+        // Start the connection
+        $.connection.hub.start();
+        // Send message to hub saying text may have changed
+        $("#BlogBody").keyup(function (event) {
+            var sessId = $("#sessinId").val();
+            blog.send($("#BlogBody").val(), sessId);
+        });
+    });
+</script>

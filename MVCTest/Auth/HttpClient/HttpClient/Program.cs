@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Net;
 using System.Text;
 using Domas.Service.Base.Common;
 using Domas.Service.Print.PrintTask;
+using Domas.Web.QueryFramework.Deploy;
 using RestSharp;
 using System;
 using System.Runtime.InteropServices;
@@ -16,6 +18,8 @@ using System.Text;
 using System.Net;
 using System.Linq;
 using System.Collections.Generic;
+using RestSharp.Serializers;
+
 namespace HttpClient
 {
     class Program
@@ -24,36 +28,37 @@ namespace HttpClient
         internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
         static void Main(string[] args)
         {
-            var client = new RestClient("http://localhost:8006/");
+            var client = new RestClient("http://localhost:54226/");
             //client.Authenticator = new NtlmAuthenticator(@"administrator", "Lanxum123456");
-            var request = new RestRequest(Method.GET);
+            var request = new RestRequest("api/{api}/{method}", Method.POST);
 
-            //request.AddUrlSegment("api", "POAPI");
-            //request.AddUrlSegment("method", "CreatePO");
+            request.AddUrlSegment("api", "QueryApi");
+            request.AddUrlSegment("method", "Query");
             //request.AddHeader("content-type", "application/json; charset=utf-8");
-            //request.AddHeader("Accept", "applicaiton/json");
+            request.AddHeader("Accept", "applicaiton/json");
 
             request.RequestFormat = DataFormat.Json;
+
             var cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
-            if (cookieContainer == null || cookieContainer.Count == 0)
-            {
-                int i = 3;
-                while (cookieContainer == null || cookieContainer.Count == 0)
-                {
-                    Process process = new Process();
-                    process.StartInfo.FileName = "iexplore.exe";
-                    process.StartInfo.Arguments = "http://localhost:8006";
+            //if (cookieContainer == null || cookieContainer.Count == 0)
+            //{
+            //    int i = 3;
+            //    while (cookieContainer == null || cookieContainer.Count == 0)
+            //    {
+            //        Process process = new Process();
+            //        process.StartInfo.FileName = "iexplore.exe";
+            //        process.StartInfo.Arguments = "http://localhost";
 
-                    process.Start();
+            //        process.Start();
 
-                    process.WaitForExit(int.MaxValue);
-                    cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
-                    if (i-- == 0)
-                    {
-                        break;
-                    }
-                }
-            }
+            //        process.WaitForExit(int.MaxValue);
+            //        cookieContainer = CookieManger.GetUriCookieContainer(new Uri(client.BaseUrl));
+            //        if (i-- == 0)
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
 
             //var dto = new PODTO()
             //{
@@ -65,19 +70,41 @@ namespace HttpClient
             //    SafeLevel = SafeLevel.Classified,
             //    PrintBy = new Guid("86F6C414-9D34-4970-9A17-25FCE4CF563A")
             //};
-            //request.AddBody(new
-            //    {
-            //        username = "admin",
-            //        password = "admin"
-            //    });
+            DataTable table = new DataTable();
+            table.Columns.Add("name");
+            for (int i = 0; i < 10; i++)
+            {
+                var row = table.NewRow();
+                row["name"] = "a" + i;
 
-            client.CookieContainer = cookieContainer;
+                table.Rows.Add(row);
+            }
+            request.AddBody(new
+                {
+                    username = "admin",
+                    password = "admin",
+                    xxx = new List<DateTime>
+                        {
+                            DateTime.Now
+                        },
+                    abc = (object)null,
+                    table = new string[] { "1", "2" }
+
+                });
+
+            request.OnBeforeDeserialization = Deserial;
+
+            //request.AddBody("abc=123");
+            // client.CookieContainer = cookieContainer;
             var response = client.Execute(request);
-            var content = response.Content;
+            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<DateTime>(response.Content);
 
         }
 
-
+        private static void Deserial(IRestResponse resp)
+        {
+            //var data = Newtonsoft.Json.JsonConvert.DeserializeObject<QueryResultDTO>(resp.Content);
+        }
         private static void ReadCookie()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);

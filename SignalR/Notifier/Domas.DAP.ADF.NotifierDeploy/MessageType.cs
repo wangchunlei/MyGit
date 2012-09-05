@@ -8,6 +8,7 @@ namespace Domas.DAP.ADF.NotifierDeploy
     [Serializable]
     public enum MessageType
     {
-        ToOutPut,ToApprove,ToNotify,ToUpdate,ToReset
+        ToSubmit, ToApprove, ToOutPut, ToRecycle, ApprovePassed, ApproveRefused, ToTransfer, ToRegister,
+        ToNotify, ToUpdate, ToReset, ToLogOff
     }
 }

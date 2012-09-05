@@ -34,6 +34,13 @@
     <Reference Include="Domas.DAP.ADF.Configuration">
       <HintPath>..\..\..\..\..\Domas.Component\DAP\Domas.DAP.ADF.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="Domas.DAP.ADF.Context">
+      <HintPath>..\..\..\..\..\Domas.Component\DAP\Domas.DAP.ADF.Context.dll</HintPath>
+    </Reference>
+    <Reference Include="Domas.DAP.ADF.Cookie, Version=4.5.55.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.Cookie.dll</HintPath>
+    </Reference>
     <Reference Include="Domas.DAP.ADF.LogManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Domas.Component\DAP\Domas.DAP.ADF.LogManager.dll</HintPath>
@@ -62,8 +69,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hubs\NotifierHub.cs" />
+    <Compile Include="Infrastructure\SafeCollection.cs" />
     <Compile Include="MessageHttpHandler.cs" />
     <Compile Include="EmailNotification.cs" />
+    <Compile Include="Models\ClientMessage.cs" />
+    <Compile Include="Models\ClientUser.cs" />
+    <Compile Include="Services\INotifierRepository.cs" />
+    <Compile Include="Services\MemoryRepository.cs" />
+    <Compile Include="SignalRConnectionFactory.cs" />
     <None Include="MessageHttpHandler.ashx" />
     <Compile Include="NotifierServer.cs" />
     <Compile Include="NotificationManager.cs" />
@@ -75,9 +89,11 @@
       <Name>Domas.DAP.ADF.NotifierDeploy</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) $(ProjectDir)..\..\..\..\..\Domas.Component\DAP /y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

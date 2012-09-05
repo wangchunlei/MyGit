@@ -60,16 +60,7 @@ namespace HttpClient
             //    }
             //}
 
-            //var dto = new PODTO()
-            //{
-            //    DriverName = "123",
-            //    FileName = "231",
-            //    OrderNo = "order",
-            //    CreatedOn = DateTime.Now,
-            //    Createdby = "zhangzs",
-            //    SafeLevel = SafeLevel.Classified,
-            //    PrintBy = new Guid("86F6C414-9D34-4970-9A17-25FCE4CF563A")
-            //};
+
             DataTable table = new DataTable();
             table.Columns.Add("name");
             for (int i = 0; i < 10; i++)
@@ -79,7 +70,7 @@ namespace HttpClient
 
                 table.Rows.Add(row);
             }
-            request.AddBody(new
+            var body = new
                 {
                     username = "admin",
                     password = "admin",
@@ -88,16 +79,30 @@ namespace HttpClient
                             DateTime.Now
                         },
                     abc = (object)null,
-                    table = new string[] { "1", "2" }
+                    table = new string[] { "1", "2" },
+                    x = new
+                        {
+                            a = "123",
+                            b = "222",
+                            c = new { d = 1, e = 2 },
+                            f = new string[] { "2,", "5" }
+                        },
+                    y = new QueryResultDTO()
+                        {
+                            Code = "code"
+                        }
 
-                });
+                };
+            //var abc = Newtonsoft.Json.JsonConvert.SerializeObject(dto);
+            //dto = Newtonsoft.Json.JsonConvert.DeserializeObject<QueryResultDTO>(abc);
+            request.AddBody(body);
 
             request.OnBeforeDeserialization = Deserial;
 
             //request.AddBody("abc=123");
             // client.CookieContainer = cookieContainer;
             var response = client.Execute(request);
-            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<DateTime>(response.Content);
+            var data = Newtonsoft.Json.JsonConvert.DeserializeObject<QueryResultDTO>(response.Content);
 
         }
 

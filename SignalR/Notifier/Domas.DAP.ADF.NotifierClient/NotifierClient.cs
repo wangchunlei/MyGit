@@ -10,25 +10,77 @@ namespace Domas.DAP.ADF.NotifierClient
 {
     public class NotifierClient
     {
-        public static void StartListen(string hubName, string baseUrl, Action<NotifierDTO> callback)
+        private HubConnection connection;
+        private IHubProxy hubProxy = null;
+        private Domas.DAP.ADF.LogManager.ILogger logger;
+
+        public void Stop()
         {
-            var connection = new HubConnection(baseUrl);
-
-            var hubProxy = connection.CreateProxy(hubName);
-
-            hubProxy.On("addMessage", callback);
-
-            connection.Start().Wait();
+            this.connection.Stop();
         }
-
-        public static void StartListen(string hubName, string baseUrl, CookieContainer cookieContainer, Action<NotifierDTO> callback)
+        public void InvokeServer(string method)
         {
-            var connection = new HubConnection(baseUrl);
-            connection.CookieContainer = cookieContainer;
-            var hubProxy = connection.CreateProxy(hubName);
+            hubProxy.Invoke(method);
+        }
+        public void StartListen(string hubName, string baseUrl, CookieContainer cookieContainer, Action<NotifierDTO> callback)
+        {
+            logger = Domas.DAP.ADF.LogManager.LogManager.GetLogger("NotifierClinet");
+            connection = new HubConnection(baseUrl);
 
-            hubProxy.On("addMessage", callback);
-            connection.Start().Wait();
+            var auth_cookie = cookieContainer.GetCookies(new Uri(baseUrl))[".ASPXAUTH"];
+            if (auth_cookie == null)
+            {
+               // throw new Exception("请登录");
+            }
+            var user_cookie = cookieContainer.GetCookies(new Uri(baseUrl))["UserInfo"];
+            var userDto = Domas.DAP.ADF.Cookie.CookieManger.DecryCookie(user_cookie.Value);
+            if (userDto != null)
+            {
+                connection.ConnectionId = userDto.LoginID;
+            }
+
+            connection.CookieContainer = cookieContainer;
+            hubProxy = connection.CreateProxy(hubName);
+
+            hubProxy.On<NotifierDTO>("addMessage", (data) =>
+                {
+                    lock (connection)
+                    {
+                        if (connection.State==SignalR.Client.ConnectionState.Disconnected)
+                        {
+                            connection.Start().Wait();
+                        }
+                    }
+                    hubProxy.Invoke("ServerCallback", data.MessageId).ContinueWith(task =>
+                        {
+                            if (task.IsFaulted)
+                            {
+                                logger.Error("Task 报错");
+                            }
+                            else
+                            {
+                                callback(data);
+                            }
+                        }).Wait();
+                });
+            connection.Start().ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        throw new Exception("连接服务器失败");
+                    }
+                    else
+                    {
+                        ////登录成功
+                        //hubProxy.Invoke<string>("ServerCallback", "").ContinueWith(invoke =>
+                        //    {
+                        //        if (invoke.IsFaulted)
+                        //        {
+                        //            logger.Error("Login invoke error");
+                        //        }
+                        //    });
+                    }
+                }).Wait();
         }
     }
 }

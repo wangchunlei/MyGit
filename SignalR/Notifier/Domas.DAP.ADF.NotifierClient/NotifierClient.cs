@@ -20,9 +20,10 @@ namespace Domas.DAP.ADF.NotifierClient
         }
         public void InvokeServer(string method)
         {
-            hubProxy.Invoke(method);
+            hubProxy.Invoke("InvokeByClient","123");
         }
-        public void StartListen(string hubName, string baseUrl, CookieContainer cookieContainer, Action<NotifierDTO> callback)
+
+        public void StartListen(string hubName, string baseUrl, CookieContainer cookieContainer, Action<string> callback)
         {
             logger = Domas.DAP.ADF.LogManager.LogManager.GetLogger("NotifierClinet");
             connection = new HubConnection(baseUrl);
@@ -30,7 +31,7 @@ namespace Domas.DAP.ADF.NotifierClient
             var auth_cookie = cookieContainer.GetCookies(new Uri(baseUrl))[".ASPXAUTH"];
             if (auth_cookie == null)
             {
-               // throw new Exception("请登录");
+                 throw new Exception("请登录");
             }
             var user_cookie = cookieContainer.GetCookies(new Uri(baseUrl))["UserInfo"];
             var userDto = Domas.DAP.ADF.Cookie.CookieManger.DecryCookie(user_cookie.Value);
@@ -44,43 +45,46 @@ namespace Domas.DAP.ADF.NotifierClient
 
             hubProxy.On<NotifierDTO>("addMessage", (data) =>
                 {
-                    lock (connection)
+                    callback("服务器调用客户端，现在开始回调");
+                lock (connection)
+                {
+                    if (connection.State == SignalR.Client.ConnectionState.Disconnected)
                     {
-                        if (connection.State==SignalR.Client.ConnectionState.Disconnected)
-                        {
-                            connection.Start().Wait();
-                        }
+                        connection.Start().Wait();
                     }
-                    hubProxy.Invoke("ServerCallback", data.MessageId).ContinueWith(task =>
-                        {
-                            if (task.IsFaulted)
-                            {
-                                logger.Error("Task 报错");
-                            }
-                            else
-                            {
-                                callback(data);
-                            }
-                        }).Wait();
-                });
-            connection.Start().ContinueWith(task =>
+                }
+                hubProxy.Invoke("ServerCallback", data.MessageId).ContinueWith(task =>
                 {
                     if (task.IsFaulted)
                     {
-                        throw new Exception("连接服务器失败");
+                        logger.Error("Task 报错");
                     }
                     else
                     {
-                        ////登录成功
-                        //hubProxy.Invoke<string>("ServerCallback", "").ContinueWith(invoke =>
-                        //    {
-                        //        if (invoke.IsFaulted)
-                        //        {
-                        //            logger.Error("Login invoke error");
-                        //        }
-                        //    });
+                        callback(data.MessageId);
                     }
                 }).Wait();
+            });
+
+            
+            connection.Start().ContinueWith(task =>
+            {
+                if (task.IsFaulted)
+                {
+                    throw new Exception("连接服务器失败");
+                }
+                else
+                {
+                    ////登录成功
+                    //hubProxy.Invoke<string>("ServerCallback", "").ContinueWith(invoke =>
+                    //    {
+                    //        if (invoke.IsFaulted)
+                    //        {
+                    //            logger.Error("Login invoke error");
+                    //        }
+                    //    });
+                }
+            }).Wait();
         }
     }
 }

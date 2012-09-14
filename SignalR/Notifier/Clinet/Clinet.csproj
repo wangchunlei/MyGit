@@ -39,6 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.Cookie.dll</HintPath>
     </Reference>
+    <Reference Include="Domas.DAP.ADF.NotifierClient, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.NotifierClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Domas.DAP.ADF.NotifierDeploy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.NotifierDeploy.dll</HintPath>
+    </Reference>
     <Reference Include="Domas.DAP.ADF.URI">
       <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.URI.dll</HintPath>
     </Reference>
@@ -48,8 +56,16 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\View\Trunk\Domas.Component\DAP\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SignalR.Client.Net35, Version=0.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\SignalR.Client.Net35.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\System.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -91,16 +107,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domas.DAP.ADF.NotifierClient\Domas.DAP.ADF.NotifierClient.csproj">
-      <Project>{AEC01E2D-D6C8-45C8-9A14-67E348A559EB}</Project>
-      <Name>Domas.DAP.ADF.NotifierClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domas.DAP.ADF.NotifierDeploy\Domas.DAP.ADF.NotifierDeploy.csproj">
-      <Project>{C6B6B6A5-8BEF-43D1-A2C4-BA030C559B3A}</Project>
-      <Name>Domas.DAP.ADF.NotifierDeploy</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

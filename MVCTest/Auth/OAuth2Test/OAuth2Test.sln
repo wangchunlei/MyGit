@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthCosumer", "OAuthCosumer\OAuthCosumer.csproj", "{4768677C-1935-4FA2-9428-E51C89BEDEA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIdProviderMvc", "..\DotNetOpenAuth-4.1.2.12274\Samples\OpenIdProviderMvc\OpenIdProviderMvc.csproj", "{AEA29D4D-396F-47F6-BC81-B58D4B855245}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4768677C-1935-4FA2-9428-E51C89BEDEA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4768677C-1935-4FA2-9428-E51C89BEDEA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4768677C-1935-4FA2-9428-E51C89BEDEA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4768677C-1935-4FA2-9428-E51C89BEDEA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA29D4D-396F-47F6-BC81-B58D4B855245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA29D4D-396F-47F6-BC81-B58D4B855245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA29D4D-396F-47F6-BC81-B58D4B855245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA29D4D-396F-47F6-BC81-B58D4B855245}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

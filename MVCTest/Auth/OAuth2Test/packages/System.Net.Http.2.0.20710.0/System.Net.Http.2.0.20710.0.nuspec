@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>System.Net.Http</id>
+    <version>2.0.20710.0</version>
+    <title>System.Net.Http</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/MVC_4_eula_ENU.htm</licenseUrl>
+    <projectUrl>http://www.asp.net/web-api</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Legacy package, System.Net.Http is now included in the 'Microsoft.Net.Http' package.</description>
+    <dependencies>
+      <dependency id="Microsoft.Net.Http" version="[2.0.20710.0, 2.1)" />
+    </dependencies>
+  </metadata>
+</package>

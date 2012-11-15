@@ -10,49 +10,27 @@ namespace RestTest
 {
     class Program
     {
-        private const string BING = "http://www.bing.com";
-        private const string IMG_URL = "http://www.bing.com/HPImageArchive" +
-                                       ".aspx?format=xml&idx=0&n={0}&mkt={1}";
-        //private static string[] Markets = new string[] { "en-US", "zh-CN", 
-        //                              "ja-JP", "en-AU", "en-UK", 
-        //                              "de-DE", "en-NZ", "en-CA" };
-
-        private static string[] Markets = new string[]
-            {
-                "en-US", "zh-CN",
-                "ja-JP", "en-AU"
-            };
-        private const int NUMBER_OF_IMAGES = 1;
-
-        public const int SPI_SETDESKWALLPAPER = 20;
-        public const int SPIF_UPDATEINIFILE = 1;
-        public const int SPIF_SENDCHANGE = 2;
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern int SystemParametersInfo(
-          int uAction, int uParam, string lpvParam, int fuWinIni);
-
         static void Main(string[] args)
         {
-            //var client = new RestClient(BING);
-            //var request = new RestRequest("HPImageArchive.aspx??format=xml&idx=0&n={number}&mkt={local}", Method.GET);
+            var client = new RestClient("http://192.168.100.254");
+            var request = new RestRequest("", Method.POST);
 
-            //request.AddUrlSegment("number", NUMBER_OF_IMAGES.ToString());
-            //request.AddUrlSegment("local", Markets[0]);
+            var username = args[0];
+            var password = args[1];
+            request.AddParameter("username", username);
+            request.AddParameter("password", password);
+            request.AddParameter("password_enc", "bHgzMTQxMTQ%3D&newpassword_enc=");
+            request.AddParameter("login", "1");
+            request.AddParameter("login_type", "login");
+            request.AddParameter("uri", "aHR0cDovLzE5Mi4xNjguNjAuNjUv");
+            request.AddParameter("password_type", "normal");
 
-            //var response = client.Execute(request);
+            var response = client.Execute(request);
 
-            //var content = response.Content;
-
-            //var xml = new XmlDocument();
-            //xml.LoadXml(content);
-
-            //var item = xml.GetElementsByTagName("url")[0].InnerText;
-            //var picUrl = string.Format(BING + "/" + item);
-
-
-            var fs = BingImages.DownLoadImages();
-            SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, fs[0], SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
+            var content = response.Content;
+            Console.WriteLine(content);
+            Console.WriteLine("完成");
+            Console.ReadKey(false);
         }
     }
 }

@@ -410,10 +410,10 @@ namespace ReadCookie
                 strPath = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);
                 Version v = Environment.OSVersion.Version;
 
-                if (IsWindows7())
-                {
-                    strPath += @"\low";
-                }
+                //if (IsWindows7())
+                //{
+                //    strPath += @"\low";
+                //}
 
                 fp = Directory.GetFiles(strPath, "*.txt");
 
@@ -536,8 +536,8 @@ namespace ReadCookie
         static void Main(string[] args)
         {
             // Search cookies for the cntid field of the codeproject cookie
-            _strHostName = "codeproject.com";
-            _strField = "cntid";
+            _strHostName = "127.0.0.1";
+            _strField = "userinfo";
 
             // Configure a menu of selections
             Menu menu = new Menu();

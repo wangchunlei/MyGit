@@ -9,8 +9,9 @@ namespace Coze.Host
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapHubs();
+
             routes.MapRoute(
-                name: "Default",
+                name: "Default01",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );

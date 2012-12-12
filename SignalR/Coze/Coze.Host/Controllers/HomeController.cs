@@ -6,7 +6,7 @@ namespace Coze.Host.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Redirect(Url.Content("~/Coze/index.htm"));
         }
     }
 }

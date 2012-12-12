@@ -3,12 +3,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Security;
 using Coze.Core.ContentProviders;
 using MS.Internal.Xml.XPath;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -33,6 +35,16 @@ namespace Coze.Core.Hubs
                 new YouTubeContentProvider(),
                 new CollegeHumorContentProvider()
             };
+        public IEnumerable<CozeUser> GetUsers()
+        {
+            string room = Clients.Caller.room;
+            if (string.IsNullOrEmpty(room))
+            {
+                return Enumerable.Empty<CozeUser>();
+            }
+
+            return _rooms[room].Users.Select(u => _users[u]);
+        }
 
         private T TryGetDicValue<T>(IDictionary<string, T> dictionary, string key) where T : class
         {
@@ -150,11 +162,11 @@ namespace Coze.Core.Hubs
                     string newUserName = string.Join(" ", parts.Skip(1));
                     if (string.IsNullOrEmpty(newUserName))
                     {
-                        throw new InvalidOperationException(string.Format("没有该用户[{0}]!", newUserName));
+                        throw new InvalidOperationException("用户名不能为空!");
                     }
                     if (newUserName.Equals(name, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw new InvalidOperationException("不能给自己发消息");
+                        throw new InvalidOperationException("新名字与原来相同...");
                     }
 
                     if (!_users.ContainsKey(newUserName))
@@ -170,7 +182,7 @@ namespace Coze.Core.Hubs
                                 {
                                     Name = newUserName,
                                     Hash = GetMD5Hash(newUserName),
-                                    Id = oldUser.Id,
+                                    Id = oldUser.Id,                                   
                                     ConnectionId = oldUser.ConnectionId
                                 };
 
@@ -194,14 +206,13 @@ namespace Coze.Core.Hubs
 
                             Clients.Caller.hash = newUser.Hash;
                             Clients.Caller.name = newUser.Name;
-
+                            Clients.Caller.iconame = newUser.IcoName;
                             Clients.Caller.changeUserName(oldUser, newUser);
                         }
                     }
                     else
                     {
-                        throw new InvalidOperationException(string.Format("UserName '{0}' is already taken!",
-                                                                          newUserName));
+                        throw new InvalidOperationException(String.Format("用户名 '{0}' 已被使用!", newUserName));
                     }
 
                     return true;
@@ -225,7 +236,7 @@ namespace Coze.Core.Hubs
                     {
                         if (parts.Length == 1)
                         {
-                            throw new InvalidOperationException("Join which room?");
+                            throw new InvalidOperationException("请选择房间");
                         }
 
                         string newRoom = parts[1];
@@ -239,7 +250,7 @@ namespace Coze.Core.Hubs
                         if (!string.IsNullOrEmpty(room))
                         {
                             _userRooms[name].Remove(room);
-                            _rooms[name].Users.Remove(name);
+                            _rooms[room].Users.Remove(name);
 
                             Clients.Group(room).leave(_users[name]);
                             Groups.Remove(Context.ConnectionId, room);
@@ -248,7 +259,7 @@ namespace Coze.Core.Hubs
                         _userRooms[name].Add(newRoom);
                         if (!cozeRoom.Users.Add(name))
                         {
-                            throw new InvalidOperationException("You`re already in that room");
+                            throw new InvalidOperationException("你已经在此房间了!");
                         }
 
                         Clients.Group(newRoom).addUser(_users[name]);
@@ -263,30 +274,30 @@ namespace Coze.Core.Hubs
                     {
                         if (_users.Count == 1)
                         {
-                            throw new InvalidOperationException("You're the only person in here...");
+                            throw new InvalidOperationException("这里就只有你一个人");
                         }
 
                         if (parts.Length < 2)
                         {
-                            throw new InvalidOperationException("Who are you trying send a private message to?");
+                            throw new InvalidOperationException("你要给谁发私人消息?");
                         }
 
                         string to = parts[1];
                         if (to.Equals(name, StringComparison.OrdinalIgnoreCase))
                         {
-                            throw new InvalidOperationException("You can't private message yourself!");
+                            throw new InvalidOperationException("不能给自己发私人消息!");
                         }
 
                         if (!_users.ContainsKey(to))
                         {
-                            throw new InvalidOperationException(String.Format("Couldn't find any user named '{0}'.", to));
+                            throw new InvalidOperationException(String.Format("不能打到此人 '{0}'.", to));
                         }
 
                         string messageText = String.Join(" ", parts.Skip(2)).Trim();
 
                         if (String.IsNullOrEmpty(messageText))
                         {
-                            throw new InvalidOperationException(String.Format("What did you want to say to '{0}'.", to));
+                            throw new InvalidOperationException(String.Format("你想跟 '{0}' 说什么.", to));
                         }
 
                         string recipientId = _users[to].ConnectionId;
@@ -303,7 +314,7 @@ namespace Coze.Core.Hubs
                         {
                             if (parts.Length == 1)
                             {
-                                throw new InvalidProgramException("You what?");
+                                throw new InvalidProgramException("你要干什么?");
                             }
                             var content = String.Join(" ", parts.Skip(1));
 
@@ -328,7 +339,7 @@ namespace Coze.Core.Hubs
                             return true;
                         }
 
-                        throw new InvalidOperationException(String.Format("'{0}' is not a valid command.", parts[0]));
+                        throw new InvalidOperationException(String.Format("'{0}' 错误的命令.", parts[0]));
                     }
                 }
             }
@@ -345,7 +356,7 @@ namespace Coze.Core.Hubs
             Clients.Caller.name = user.Name;
             Clients.Caller.hash = user.Hash;
             Clients.Caller.id = user.Id;
-
+            Clients.Caller.iconame = user.IcoName;
             Clients.Caller.addUser(user);
 
             return user;
@@ -362,7 +373,7 @@ namespace Coze.Core.Hubs
             string name = Clients.Caller.name;
             if (string.IsNullOrEmpty(name) || !_users.ContainsKey(name))
             {
-                throw new InvalidOperationException("You don`t have a name. Pick a name using '/nick nickname'.");
+                throw new InvalidOperationException("你还没有用户名. 请使用 '/nick nickname' 创建一个.");
             }
         }
 
@@ -376,14 +387,13 @@ namespace Coze.Core.Hubs
 
             if (string.IsNullOrEmpty(room) || !_rooms.ContainsKey(room))
             {
-                throw new InvalidOperationException("Use '/join room' to join a room");
+                throw new InvalidOperationException("请使用 '/join roomname' 加入一个房间.");
             }
 
             HashSet<string> rooms;
             if (!_userRooms.TryGetValue(name, out rooms) || !rooms.Contains(room))
             {
-                throw new InvalidOperationException(string.Format("You`re not in '{0}'. Use '/join {0}' to join it.",
-                                                                  room));
+                throw new InvalidOperationException(String.Format("你不在房间 '{0}'. 请使用 '/join {0}' 加入.", room));
             }
         }
 
@@ -449,17 +459,29 @@ namespace Coze.Core.Hubs
             public string Id { get; set; }
             public string Name { get; set; }
             public string Hash { get; set; }
-
+            public string IcoName { get; set; }
             public CozeUser()
             {
-
+                this.IcoName = GetIcoName();
             }
 
             public CozeUser(string name, string hash)
             {
                 this.Name = name;
                 this.Hash = hash;
+                this.Id = Guid.NewGuid().ToString("d");
+                this.IcoName = GetIcoName();
             }
+            private string GetIcoName()
+            {
+                var path = AppDomain.CurrentDomain.BaseDirectory;
+                path = Path.Combine(path, "Content/images/faces");
+
+                var files = Directory.GetFiles(path, "*.ico");
+                return Path.GetFileName(files.RandomItem());
+            }
+
+
         }
 
         public class CozeRoom
@@ -472,6 +494,18 @@ namespace Coze.Core.Hubs
                 Messages = new List<CozeMessage>();
                 Users = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             }
+        }
+    }
+    public static class Helper
+    {
+        private static readonly Random random = new Random();
+        public static T RandomItem<T>(this IList<T> list)
+        {
+            if (list != null)
+            {
+                return list[random.Next(list.Count)];
+            }
+            return default(T);
         }
     }
 }

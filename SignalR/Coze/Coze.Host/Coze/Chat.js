@@ -49,12 +49,12 @@ $(function () {
                 $('#new-message').focus();
             });
 
-        addMessage('Entered ' + room, 'notification');
+        addMessage('进入房间 ' + room, 'notification');
     };
 
     chat.client.showRooms = function (rooms) {
         if (!rooms.length) {
-            addMessage('No rooms available', 'notification');
+            addMessage('还没有房间，你来创建一个吧', 'notification');
         }
         else {
             $.each(rooms, function () {
@@ -92,7 +92,8 @@ $(function () {
 
         var data = {
             name: user.Name,
-            hash: user.Hash
+            //hash: user.Hash,
+            iconame: user.IcoName
         };
 
         var e = $('#new-user-template').tmpl(data)
@@ -100,7 +101,7 @@ $(function () {
         refreshUsers();
 
         if (!exists && this.state.name != user.Name) {
-            addMessage(user.Name + ' just entered ' + this.state.room, 'notification');
+            addMessage(user.Name + ' 进入 ' + this.state.room, 'notification');
             e.hide().fadeIn('slow');
         }
 
@@ -111,17 +112,18 @@ $(function () {
         $('#u-' + oldUser.Name).replaceWith(
                 $('#new-user-template').tmpl({
                     name: newUser.Name,
-                    hash: newUser.Hash
+                    //hash: newUser.Hash
+                    iconame: newUser.IcoName
                 })
         );
         refreshUsers();
 
         if (newUser.Name === this.state.name) {
-            addMessage('Your name is now ' + newUser.Name, 'notification');
+            addMessage('你现在的名字是 ' + newUser.Name, 'notification');
             updateCookie();
         }
         else {
-            addMessage(oldUser.Name + '\'s nick has changed to ' + newUser.Name, 'notification');
+            addMessage(oldUser.Name + '\' 改名为 ' + newUser.Name, 'notification');
         }
     };
 
@@ -164,7 +166,7 @@ $(function () {
     $(window).focus(function () {
         chat.state.focus = true;
         chat.state.unread = 0;
-        document.title = 'SignalR Chat';
+        document.title = '茶室';
     });
 
     function updateUnread() {
@@ -179,10 +181,10 @@ $(function () {
 
     function updateTitle() {
         if (chat.state.unread == 0) {
-            document.title = 'SignalR Chat';
+            document.title = '茶室';
         }
         else {
-            document.title = 'SignalR Chat (' + chat.state.unread + ')';
+            document.title = '茶室 (' + chat.state.unread + ')';
         }
     }
 
@@ -190,7 +192,7 @@ $(function () {
         $.cookie('userid', chat.state.id, { path: '/', expires: 30 });
     }
 
-    addMessage('Welcome to the SignalR IRC clone', 'notification');
+    addMessage('欢迎来到茶室', 'notification');
 
     $('#new-message').val('');
     $('#new-message').focus();
@@ -200,9 +202,9 @@ $(function () {
             .done(function (success) {
                 if (success === false) {
                     $.cookie('userid', '');
-                    addMessage('Choose a name using "/nick nickname".', 'notification');
+                    addMessage('使用 "/nick nickname" 来创建一个用户.', 'notification');
                 }
-                addMessage('After that, you can view rooms using "/rooms" and join a room using "/join roomname".', 'notification');
+                addMessage('然后, 可以使用 "/rooms" 来查看房间，或使用 "/join roomname" 加入房间.', 'notification');
             });
     });
 });

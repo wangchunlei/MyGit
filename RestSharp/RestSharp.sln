@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpProxy", "HttpProxy\HttpProxy.csproj", "{0D332E19-EB36-4616-B3D4-019AE2573873}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp", "RestSharp\RestSharp.csproj", "{4EDCB651-FABE-49D6-9077-027C35B646CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{0D332E19-EB36-4616-B3D4-019AE2573873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D332E19-EB36-4616-B3D4-019AE2573873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D332E19-EB36-4616-B3D4-019AE2573873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EDCB651-FABE-49D6-9077-027C35B646CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDCB651-FABE-49D6-9077-027C35B646CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDCB651-FABE-49D6-9077-027C35B646CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDCB651-FABE-49D6-9077-027C35B646CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

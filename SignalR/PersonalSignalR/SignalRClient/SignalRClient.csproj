@@ -42,8 +42,9 @@
     <Reference Include="Domas.DAP.ADF.NotifierDeploy">
       <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.NotifierDeploy.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client.Net">
-      <HintPath>..\packages\SignalR\Microsoft.AspNet.SignalR.Client.Net.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.SignalR.Client.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\View\Trunk\Domas.Component\DAP\Microsoft.AspNet.SignalR.Client.Net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\View\Trunk\Domas.Component\DAP\net35\Newtonsoft.Json.dll</HintPath>

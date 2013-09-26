@@ -20,13 +20,17 @@ namespace Host.Controllers
         // GET api/values/5
         public string Get(int id)
         {
+
             return "value";
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
-            logger.Debug(value);
+            logger.Debug("begin:" + value);
+            System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
+            logger.Debug("end:" + value);
+            //logger.Debug(value);
         }
 
         // PUT api/values/5

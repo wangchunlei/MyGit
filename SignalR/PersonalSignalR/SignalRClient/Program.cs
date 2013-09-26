@@ -15,23 +15,14 @@ namespace SignalRClient
     {
         static void Main(string[] args)
         {
-            var url = "http://localhost:8999";
-            //StartListen("NotifierServer", "http://127.0.0.1:8999", () =>
-            //{
-
-            //});
-            int i = 1;
-            while (true)
-            {
-                var client = Domas.DAP.ADF.NotifierClient.NotifierClient.Start(url, (dto) =>
+            var url = "http://192.168.20.222:8088";
+            var client = Domas.DAP.ADF.NotifierClient.NotifierClient.Create(url, null);
+            client.StateChanged += e =>
                 {
+                    Console.WriteLine(e.NewState.ToString());
+                };
 
-                });
-                Console.WriteLine("完成{0}次", i++);
-                client.Stop();
-                break;
-            }
-
+            client.Start();
         }
 
         private static HubConnection connection;

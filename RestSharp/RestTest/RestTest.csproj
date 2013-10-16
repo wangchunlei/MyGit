@@ -33,36 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Domas.DAP.ADF.AgentCommon">
-      <HintPath>D:\View\DomasV5\trunk\Domas.Component\DAP\Domas.DAP.ADF.AgentCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="Domas.DAP.ADF.Cookie">
-      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.Cookie.dll</HintPath>
-    </Reference>
-    <Reference Include="Domas.DAP.ADF.NotifierDeploy">
-      <HintPath>D:\View\Trunk\Domas.Component\DAP\Domas.DAP.ADF.NotifierDeploy.dll</HintPath>
-    </Reference>
-    <Reference Include="Domas.DAP.ADF.Query">
-      <HintPath>D:\View\DomasV5\trunk\Domas.Component\DAP\Domas.DAP.ADF.Query.dll</HintPath>
-    </Reference>
-    <Reference Include="Domas.Service.Base.Agent">
-      <HintPath>D:\View\Trunk\Domas.Component\Service\Domas.Service.Base.Agent.dll</HintPath>
-    </Reference>
-    <Reference Include="Domas.Web.QueryFramework.Agent">
-      <HintPath>D:\View\DomasV5\trunk\Domas.Component\Web\Domas.Web.QueryFramework.Agent.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>D:\View\Trunk\Domas.Component\DAP\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\View\Trunk\Domas.Component\DAP\RestSharp.dll</HintPath>
@@ -71,12 +41,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
-    <Reference Include="System.Runtime">
-      <HintPath>..\packages\Microsoft.Bcl.1.0.19\lib\net40\System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>..\packages\Microsoft.Bcl.1.0.19\lib\net40\System.Threading.Tasks.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

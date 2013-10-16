@@ -1,6 +1,6 @@
 @echo off
 :loop
 call run
-echo Waiting For One Hour... 
+echo Waiting For Ten Minutes... 
 TIMEOUT /T 60 /NOBREAK
 goto loop

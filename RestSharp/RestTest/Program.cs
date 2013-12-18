@@ -15,7 +15,8 @@ namespace RestTest
     {
         static void Main(string[] args)
         {
-            var client = new RestClient("http://192.168.100.254");
+            var serverIp = System.Configuration.ConfigurationManager.AppSettings["ServerIP"];
+            var client = new RestClient(string.IsNullOrEmpty(serverIp) ? "http://8.8.8.8" : "http://" + serverIp);
             var request = new RestRequest("", Method.POST);
 
             var username = args[0];

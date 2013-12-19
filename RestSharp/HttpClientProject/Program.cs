@@ -12,11 +12,35 @@ namespace HttpClientProject
     {
         static void Main(string[] args)
         {
-            var client = new RestClient("http://localhost:2616/");
-            var request = new RestRequest("api/upload/UploadFile");
-            request.Method = Method.POST;
-            request.AddFile("file", writer, "fff", "application/x-www-form-urlencoded");
-            var response = client.Execute(request);
+
+
+            using (FileStream reader = File.OpenRead("d:\\download\\professional_asp.net_3.5_security_membership_and_role_management_with_c_and_vb.pdf"))
+            {
+                var client = new RestClient("http://localhost:2616/");
+                var length = 8388608;
+
+                int bytesRead = 0;
+                int read = 0;
+                var last = reader.Length;
+                while (last > 0)
+                {
+                    var bl = (int)Math.Min(length, last);
+                    byte[] buffer = new byte[bl]; //8M buffer
+                    read = reader.Read(buffer, 0, bl);
+                    var request = new RestRequest("api/upload/UploadFile");
+
+                    request.Method = Method.POST;
+                    request.AddFile("file", buffer, "professional_asp.net_3.5_security_membership_and_role_management_with_c_and_vb.pdf");
+                    var response = client.Execute(request);
+                    //System.Threading.Thread.Sleep(TimeSpan.FromDays(1));
+                    bytesRead += read;
+                    last -= read;
+                    Console.WriteLine("uploading: " + (int)((double)bytesRead / reader.Length * 100) + "%");
+                }
+                reader.Close();
+            }
+
+
             Console.ReadKey();
         }
 

@@ -40,12 +40,34 @@ namespace Host.Controllers
         }
     }
 
-    public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
+    public class CustomMultipartFormDataStreamProvider : MultipartFileStreamProvider
     {
-        public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
+        private string path = null;
+        public CustomMultipartFormDataStreamProvider(string path)
+            : base(path)
+        {
+            this.path = path;
+        }
         public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
         {
             return headers.ContentDisposition.FileName.Replace("\"", string.Empty);
+        }
+        public override Stream GetStream(HttpContent parent, System.Net.Http.Headers.HttpContentHeaders headers)
+        {
+            var filename = Path.Combine(path, GetLocalFileName(headers));
+            FileMode fm = FileMode.Append;
+            if (!File.Exists(filename))
+            {
+                fm = FileMode.Create;
+            }
+            var fs = new FileStream(filename, fm);
+
+
+            return fs;
+        }
+        public override Task ExecutePostProcessingAsync()
+        {
+            return base.ExecutePostProcessingAsync();
         }
     }
 }

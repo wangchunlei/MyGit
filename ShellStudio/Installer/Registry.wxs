@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <ComponentGroup Id="ConsoleRegistryComponentGroup">
+      <Component Id="cmpA7C0114BDF5E4E80AB3AAE2A261A1F41" Directory="StudioShellApplicationFolder" Guid="{8168376D-8376-4AA2-AF59-EC482F1053B5}">        
+        <RegistryValue Id="regConsoleIntegration" KeyPath="yes" Action="write" Root="HKCU" Key="SOFTWARE\Code Owls LLC\StudioShell\InstallState" Name="ConsoleIntegration" Value="1" Type="integer"/>
+        <Environment Id="envA7C0114BDF5E4E80AB3AAE2A261A1F41" Action="set" Part="last" Permanent="no" System="yes" Name="PSModulePath" Value="[ProgramFilesFolder]\[CompanyFolderName]" />
+      </Component>
+    </ComponentGroup>
+    
+    <ComponentGroup Id="VS2012RegistryComponentGroup">
+      <Component Id="C_REG_VS2012" Guid="78dd33c7b9aa42409ae3da8923047935" Directory="StudioShellApplicationFolder">        
+        <RegistryValue Id="VS2012RegistryValue0"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\VisualStudio\11.0\AutomationOptions\LookInFolders"
+                       Value=""
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="VS2010RegistryComponentGroup">
+      <Component Id="C_REG_VS2010" Guid="f0e7b95242c7482d99281abee1cc5bc2" Directory="StudioShellApplicationFolder">        
+        <RegistryValue Id="VS2010RegistryValue0"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\VisualStudio\10.0\AutomationOptions\LookInFolders"
+                       Value=""
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="VS2008RegistryComponentGroup">
+      <Component Id="C_REG_VS2008" Guid="f12301d69fd14e059aa09ed416592b4a" Directory="StudioShellApplicationFolder">
+        <RegistryValue Id="VS2008RegistryValue0"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="SOFTWARE\Microsoft\VisualStudio\9.0\AutomationOptions\LookInFolders"
+                       Value=""
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>
+      </Component>
+    </ComponentGroup>
+    <ComponentGroup Id="SSMS2010RegistryComponentGroup">
+      <Component Id="C_REG_SSMS2010" Guid="ef2b93ea-1e0b-4ce6-9d73-90b17baa50fa" Directory="StudioShellApplicationFolder">
+        <RegistryValue Id="SSMS2010RegistryValue"
+                       KeyPath="yes"
+                       Action="write"
+                       Root="HKCU"
+                       Key="Software\Microsoft\SQL Server Management Studio\11.0\AutomationOptions\LookInFolders"
+                       Value=""
+                       Name="[ProgramFilesFolder][CompanyFolderName]\[ProductFolderName]\bin"
+                       Type="string"/>        
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

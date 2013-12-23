@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{78ed8c04-fc4b-43e6-b6b4-dda4b9db145e}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>CodeOwls.StudioShell.Setup.Wix</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <SuppressSpecificWarnings>
+    </SuppressSpecificWarnings>
+    <SuppressIces>ICE91</SuppressIces>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Components.wxs" />
+    <Compile Include="CustomActions.wxs" />
+    <Compile Include="Product.wxs" />
+    <Compile Include="Registry.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Variables.wxi" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Name>CodeOwls.PowerShell.Host</Name>
+      <Project>{b975efd5-7a18-4bd0-8711-38734c6f8eb1}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Paths\CodeOwls.PowerShell.Paths.csproj">
+      <Name>CodeOwls.PowerShell.Paths</Name>
+      <Project>{ed0453c7-c25a-4354-ac7a-046846d5e7ff}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.PowerShell\CodeOwls.PowerShell.Provider\CodeOwls.PowerShell.Provider.csproj">
+      <Name>CodeOwls.PowerShell.Provider</Name>
+      <Project>{b352375b-7c58-4943-95c0-14871e17a208}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols</RefProjectOutputGroups>
+      <RefTargetDir>dir4A3E4B054700A7A34172F77811D2FDAD</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

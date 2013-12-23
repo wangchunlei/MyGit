@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define StudioShellModuleRootPath = "C:\Users\beefarino\documents\project\cppstest\bin\Debug\Modules\StudioShell" ?>
+  <?define ResourcePath = "C:\Users\beefarino\documents\project\cppstest\src\CodeOwls.StudioShell.Setup.Wix\Resources" ?>
+  <?define StudioShellVersion = "1.2" ?>
+</Include>

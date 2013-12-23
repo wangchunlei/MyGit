@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
+
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<Configuration>
+    <Controls>
+        <Control>
+            <Name>CodeModel-GroupingFormat</Name>
+                    <CustomControl>
+                        <CustomEntries>
+                            <CustomEntry>
+                                <CustomItem>
+                                    <Frame>
+                                        <LeftIndent>4</LeftIndent>
+                                        <CustomItem>
+                                            <Text>Location: </Text>
+                                            <ExpressionBinding>
+                                                <ScriptBlock>$_.PSParentPath</ScriptBlock>
+                                            </ExpressionBinding>
+                                          <NewLine/>
+                                          <Text>File: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>
+                                              $script:n=($_.PSPath -replace '^.+\\([^\\//]+)\\codemodel.*$','$1');
+                                              if( $script:n -eq $_.PSPath )
+                                              {
+                                                return '';
+                                              }
+                                              return $script:n;
+                                            </ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                          <Text>Code Container: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>
+                                              $script:n=( get-item $_.PSParentPath );
+                                              if( !$script:n -or !$script:n.Kind )
+                                              {
+                                                return '';
+                                              }
+                                              return "{1} {0}" -f $script:n.Name,($script:n.Kind -replace 'vscmelement','');
+                                            </ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                          <Text>Available Operations: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                        </CustomItem> 
+                                    </Frame>
+                                </CustomItem>
+                            </CustomEntry>
+                        </CustomEntries>
+            </CustomControl>
+        </Control>
+    </Controls>
+
+    <ViewDefinitions>
+        <View>
+            <Name>CodeModelChildren</Name>
+            <ViewSelectedBy>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.IShellCodeElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeAttribute</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeAttributeArgument</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeClass</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeDelegate</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeEnum</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeEvent</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeImport</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeInterface</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeMethod</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeModelElement</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeModelElement2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeNamespace</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeParameter</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeProperty</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeProperty2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeStruct</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeType</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeTypeReference</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.CodeModel.ShellCodeVariable</TypeName>
+            </ViewSelectedBy>
+            <GroupBy>
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>CodeModel-GroupingFormat</CustomControlName>  
+            </GroupBy>
+            <TableControl>
+                <TableHeaders>
+                  <TableColumnHeader>
+                    <Width>10</Width>
+                    <Label>          </Label>
+                    <Alignment>left</Alignment>
+                  </TableColumnHeader>
+                  <TableColumnHeader>
+                    <Width>24</Width>
+                    <Label>Kind</Label>
+                    <Alignment>left</Alignment>
+                  </TableColumnHeader>
+                  <TableColumnHeader>
+                    <Width>64</Width>
+                    <Label>Name</Label>
+                    <Alignment>left</Alignment>
+                  </TableColumnHeader>
+
+                </TableHeaders>
+                <TableRowEntries>
+                  <TableRowEntry>
+                    <TableColumnItems>
+                      <TableColumnItem>
+                        <PropertyName>SSItemMode</PropertyName>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <PropertyName>Kind</PropertyName>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <PropertyName>Name</PropertyName>
+                      </TableColumnItem>
+
+                    </TableColumnItems>
+                  </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

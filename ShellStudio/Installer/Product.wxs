@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Codepage="1252" Language="1033" 
+           Manufacturer="Code Owls LLC" 
+           Name="StudioShell $(var.StudioShellVersion)" 
+           UpgradeCode="{D4680797-1E5D-442A-A513-C2648FB53805}" 
+           Version="$(var.StudioShellVersion)">
+    <Package Comments="Copyright (c) 2011 Code Owls LLC, All Rights Reserved" 
+             Compressed="yes" 
+             InstallerVersion="200" 
+             Keywords="StudioShell VisualStudio AddIn PowerShell" 
+             Languages="1033" 
+             Manufacturer="Code Owls LLC" />
+    <Binary Id="MSVBDPCADLL" SourceFile="$(var.ResourcePath)\MSVBDPCADLL" />
+    <Binary Id="VSDNETCFG" SourceFile="$(var.ResourcePath)\VSDNETCFG" />
+
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ResourcePath)\license.rtf"/>
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ResourcePath)\banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ResourcePath)\dialog.bmp" />
+
+    <Feature Id="DefaultFeature" Display="expand" AllowAdvertise="yes" Absent="disallow" 
+             Title="StudioShell $(var.StudioShellVersion)" ConfigurableDirectory="TARGETDIR" Level="1">
+      
+      <ComponentGroupRef Id="StudioShellApplicationFolderComponentGroup"/>
+      <ComponentGroupRef Id="StudioShellApplicationComponentGroup"/>
+      
+      <Feature Id="ConsoleFeature" AllowAdvertise="yes" Absent="allow" Title="PowerShell Console Integration" Level="1">
+        <ComponentGroupRef Id="ConsoleRegistryComponentGroup"/>
+      </Feature>
+      <Feature Id="VS2012Feature" AllowAdvertise="yes" Absent="allow" Title="Visual Studio 2012 Integration" Level="1">
+        <Condition Level="0">VS2012_AVAILABLE="NOT_INSTALLED"</Condition>
+        <ComponentGroupRef Id="VS2012RegistryComponentGroup"/>
+      </Feature>
+      <Feature Id="VS2010Feature" AllowAdvertise="yes" Absent="allow" Title="Visual Studio 2010 Integration" Level="1">
+        <Condition Level="0">VS2010_AVAILABLE="NOT_INSTALLED"</Condition>
+        <ComponentGroupRef Id="VS2010RegistryComponentGroup"/>
+      </Feature>
+      <Feature Id="VS2008Feature" AllowAdvertise="yes" Absent="allow" Title="Visual Studio 2008 Integration" Level="1">
+        <Condition Level="0">VS2008_AVAILABLE="NOT_INSTALLED"</Condition>
+        <ComponentGroupRef Id="VS2008RegistryComponentGroup"/>
+      </Feature>
+      <Feature Id="SSMS2010Feature" AllowAdvertise="yes" Absent="allow" Title="SQL Server Management Studio Denali Integration" Level="1">
+        <Condition Level="0">SSMS2010_AVAILABLE="NOT_INSTALLED"</Condition>
+        <ComponentGroupRef Id="SSMS2010RegistryComponentGroup"/>
+      </Feature>
+    </Feature>
+    
+    <CustomAction Id="DIRCA_TARGETDIR" Property="TARGETDIR" Value="[ProgramFilesFolder][Manufacturer]\[ProductFolderName]" Execute="firstSequence" />
+    <CustomAction Id="DIRCA_CheckFX" BinaryKey="MSVBDPCADLL" DllEntry="CheckFX" />
+    <CustomAction Id="VSDCA_VsdLaunchConditions" BinaryKey="MSVBDPCADLL" DllEntry="VsdLaunchConditions" />
+    <CustomAction Id="ERRCA_CANCELNEWERVERSION" Error="[VSDVERSIONMSG]" />
+    <CustomAction Id="ERRCA_UIANDADVERTISED" Error="[VSDUIANDADVERTISED]" />
+    <CustomTable Id="_VsdLaunchCondition">
+      <Column Id="Condition" PrimaryKey="yes" Type="string" Width="255" Category="Condition" Description="Expression which must evaluate to TRUE in order for install to commence." Modularize="Condition" />
+      <Column Id="Description" Type="string" Width="255" Localizable="yes" Category="Formatted" Description="Localizable text to display when condition fails and install must abort." Modularize="Property" />
+      <Column Id="Url" Type="string" Width="0" Category="Text" Description="URL to navigate to when condition fails and install must abort." />
+      <Row>
+        <Data Column="Condition">POWERSHELL_OK</Data>
+        <Data Column="Description">PowerShell 2.0 or newer is required to use StudioShell, but it is not installed on your local machine.  Would you like to open a web page to the PowerShell 2.0 download now?</Data>
+        <Data Column="Url">http://www.microsoft.com/download/details.aspx?id=34595</Data>
+      </Row>
+      
+      <Row>
+        <Data Column="Condition">VSDFXAvailable</Data>
+        <Data Column="Description">[VSDNETURLMSG]</Data>
+        <Data Column="Url">http://go.microsoft.com/fwlink/?LinkId=76617</Data>
+      </Row>
+    </CustomTable>
+    
+    <Icon Id="_SSIcon" SourceFile="$(var.ResourcePath)\StudioShell.ico" />
+    <Media Id="1" Cabinet="_CA173C716A7FB6C0877E7ED2EF915563" EmbedCab="yes" />
+    <Property Id="VSDFrameworkVersion" Value="v3.5" />
+    <Property Id="VSDAllowLaterFrameworkVersions" Value="False" />
+    <Property Id="ARPCONTACT" Value="Code Owls LLC" />
+    <Property Id="ARPCOMMENTS" Value="Deeply integrated PowerShell module for Visual Studio" />
+    <Property Id="ARPURLINFOABOUT" Value="http://www.studioshell.org" />
+    <Property Id="ARPPRODUCTICON" Value="_SSIcon" />
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Property Id="NEWERPRODUCTFOUND" Secure="yes" />
+    <Property Id="VSDNETURLMSG" Value="This setup requires the .NET Framework version [1].  Please install the .NET Framework and run this setup again.  The .NET Framework can be obtained from the web.  Would you like to do this now?" />
+    <Property Id="VSDIISMSG" Value="This setup requires Internet Information Server 5.1 or higher and Windows XP or higher.  This setup cannot be installed on Windows 2000.  Please install Internet Information Server or a newer operating system and run this setup again." />
+    <Property Id="VSDUIANDADVERTISED" Value="This advertised application will not be installed because it might be unsafe. Contact your administrator to change the installation user interface option of the package to basic." />
+    <Property Id="VSDNETMSG" Value="This setup requires the .NET Framework version [1].  Please install the .NET Framework and run this setup again." />
+    <Property Id="VSDINVALIDURLMSG" Value="The specified path '[2]' is unavailable. The Internet Information Server might not be running or the path exists and is redirected to another machine. Please check the status of this virtual directory in the Internet Services Manager." />
+    <Property Id="VSDVERSIONMSG" Value="Unable to install because a newer version of this product is already installed." />
+    <Property Id="MaintenanceForm_Action" Value="Repair" />
+    <Property Id="EulaForm_Property" Value="No" />
+    <Property Id="AdminMaintenanceForm_Action" Value="Repair" />
+    
+    <!--<PropertyRef Id="IntegrateOptionsDlg_NextArgs" />-->
+    <Property Id="CompanyFolderName" Value="Code Owls LLC" />
+    <Property Id="ProductFolderName" Value="StudioShell" />
+    <Property Id="POWERSHELL_OK">
+      <DirectorySearch Id="_633BEEFA917543F084AE3165315689C2" Path="[SystemFolder]\windowspowershell\v1.0" Depth="0">
+        <FileSearch Id="_633BEEFA917543F084AE3165315689C2" Name="powershell.exe" MinVersion="6.0.0.0" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="POWERSHELL3_OK">
+      <DirectorySearch Id="LOCATE_POWERSHELL_V3" Path="[SystemFolder]\windowspowershell\v1.0" Depth="0">
+        <FileSearch Id="LOCATE_POWERSHELL_V3_EXE" Name="powershell.exe" MinVersion="6.2.0.0" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="VS2012_AVAILABLE" Value="NOT_INSTALLED">
+      <RegistrySearch Id="R_133BEEFA917543F084AE3165315689C2" Key="VisualStudio.DTE.11.0" Root="HKCR" Type="raw" Win64="no" />
+    </Property>
+    <Property Id="VS2010_AVAILABLE" Value="NOT_INSTALLED">
+      <RegistrySearch Id="R_233BEEFA917543F084AE3165315689C2" Key="VisualStudio.DTE.10.0" Root="HKCR" Type="raw" Win64="no" />
+    </Property>
+    <Property Id="VS2008_AVAILABLE" Value="NOT_INSTALLED">
+      <RegistrySearch Id="R_333BEEFA917543F084AE3165315689C2" Key="VisualStudio.DTE.9.0" Root="HKCR" Type="raw" Win64="no" />
+    </Property>
+    <Property Id="SSMS2010_AVAILABLE" Value="NOT_INSTALLED">
+        <RegistrySearch Id="R_433BEEFA917543F084AE3165315689C2" Key="software\microsoft\microsoft sql server\110\tools\clientsetup" Name="Path" Root="HKLM" Type="file" Win64="no">
+          <DirectorySearch Id="D_433BEEFA917543F084AE3165315689C2" Path="[R_433BEEFA917543F084AE3165315689C2]\ManagementStudio" Depth="0">
+            <FileSearch Id="F_433BEEFA917543F084AE3165315689C2" Name="ssms.exe" />
+          </DirectorySearch>
+      </RegistrySearch>
+    </Property>
+    <Property Id="PROFILESCRIPT_EXISTS">
+      <DirectorySearch Id="_533BEEFA917543F084AE3165315689C2" Path="[PersonalFolder]\CodeOwlsLLC.StudioShell" Depth="0">
+        <FileSearch Id="_533BEEFA917543F084AE3165315689C2" Name="profile.ps1" />
+      </DirectorySearch>
+    </Property>
+    <Property Id="SETTINGSFILE_EXISTS">
+      <DirectorySearch Id="_733BEEFA917543F084AE3165315689C2" Path="[PersonalFolder]\CodeOwlsLLC.StudioShell" Depth="0">
+        <FileSearch Id="_733BEEFA917543F084AE3165315689C2" Name="settings.txt" />
+      </DirectorySearch>
+    </Property>
+
+    <Condition Message="There are no StudioShell-compatible hosts installed on your local machine.  Please install a compatible version of Visual Studio or SQL Management Studio and rerun this installer.">
+      <![CDATA[VS2012_AVAILABLE<>"NOT_INSTALLED" OR VS2010_AVAILABLE<>"NOT_INSTALLED" OR VS2008_AVAILABLE<>"NOT_INSTALLED" OR SSMS2010_AVAILABLE<>"NOT_INSTALLED"]]>
+    </Condition>
+
+    <Upgrade Id="{D4680797-1E5D-442A-A513-C2648FB53805}">
+      <UpgradeVersion
+          Property="OLD_VERSION_FOUND"
+          Minimum="1.0.0.0"
+          Maximum="1.5.0.0"
+          IncludeMinimum="yes"
+          IncludeMaximum="no"
+          OnlyDetect="no"
+          IgnoreRemoveFailure="yes"
+          MigrateFeatures="yes"
+          Language="1033" />
+    </Upgrade>
+    
+    <UIRef Id="WixUI_FeatureTree"/>
+    
+    <!--<UIRef Id="IntegrateOptions_UI"/>-->
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <InstallExecute After="RemoveExistingProducts" />
+      
+      <Custom Action="actionResetAddinVS2012" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2012Feature=3</Custom>
+      <Custom Action="actionResetAddinVS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2010Feature=3</Custom>
+      <Custom Action="actionResetAddinVS2008" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !VS2008Feature=3</Custom>
+      <Custom Action="actionResetAddinSSMS2010" After="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE AND !SSMS2010Feature=3</Custom>      
+    </InstallExecuteSequence>
+  </Product>
+</Wix>

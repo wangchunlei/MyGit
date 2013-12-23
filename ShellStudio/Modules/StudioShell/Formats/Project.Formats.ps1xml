@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
+
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<Configuration>
+    <Controls>
+        <Control>
+            <Name>Solution-GroupingFormat</Name>
+                    <CustomControl>
+                        <CustomEntries>
+                            <CustomEntry>
+                                <CustomItem>
+                                    <Frame>
+                                        <LeftIndent>4</LeftIndent>
+                                        <CustomItem>
+                                          <Text>Location: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>$_.PSParentPath</ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                          <Text>Solution: </Text>
+                                            <ExpressionBinding>
+                                                <ScriptBlock>(get-item dte:/solution).FullName -replace '.+\\([^\\]+)\.sln.*','$1'</ScriptBlock>
+                                            </ExpressionBinding>
+                                            <NewLine/>
+                                          <Text>Project: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>
+                                              $script:n=($_.PSPath -replace '^.+solution\\projects\\([^\\//]+).*$','$1');
+                                              if( $script:n -eq $_.PSPath )
+                                              {
+                                                return '';
+                                              }
+                                              return $script:n;
+                                          </ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                          <Text>Available Operations: </Text>
+                                          <ExpressionBinding>
+                                            <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                                          </ExpressionBinding>
+                                          <NewLine/>
+                                        </CustomItem>                                       
+                                    </Frame>
+                                </CustomItem>
+                            </CustomEntry>
+                        </CustomEntries>
+            </CustomControl>
+        </Control>
+        <Control>
+            <Name>Project-GroupingFormat</Name>
+                    <CustomControl>
+                        <CustomEntries>
+                            <CustomEntry>
+                                <CustomItem>
+                                    <Frame>
+                                        <LeftIndent>4</LeftIndent>
+                                        <CustomItem>
+                                            <Text>Project: </Text>
+                                            <ExpressionBinding>
+                                                <ScriptBlock>$_.Name</ScriptBlock>
+                                            </ExpressionBinding>
+                                            <NewLine/>
+                                            <Text>Kind: </Text>
+                                            <ExpressionBinding>
+                                                <ScriptBlock>get-projectType -kind $_.Kind</ScriptBlock>
+                                            </ExpressionBinding>
+                                            <NewLine/>
+                                        </CustomItem> 
+                                    </Frame>
+                                </CustomItem>
+                            </CustomEntry>
+                        </CustomEntries>
+            </CustomControl>
+        </Control>
+    </Controls>
+
+    <ViewDefinitions>
+        <View>
+            <Name>projectchildren</Name>
+            <ViewSelectedBy>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProjectItem</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellSolutionFolder</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProject</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellVSProject2</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellReference</TypeName>
+              <TypeName>CodeOwls.StudioShell.Paths.Items.ShellContainer</TypeName>
+            </ViewSelectedBy>
+            <GroupBy>
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>Solution-GroupingFormat</CustomControlName>  
+            </GroupBy>
+            <TableControl>
+                <TableHeaders>
+                  <TableColumnHeader>
+                    <Label>          </Label>
+                    <Alignment>Left</Alignment>
+                    <Width>10</Width>
+                  </TableColumnHeader>
+                  <TableColumnHeader>
+                        <Width>15</Width>
+						            <Label>Type</Label>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Width>30</Width>
+                        <Label>Name</Label>
+                    </TableColumnHeader>                    
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                      <EntrySelectedBy>
+                        <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellProject</TypeName>
+                        <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellVSProject2</TypeName>
+                      </EntrySelectedBy>
+                        <TableColumnItems>
+                          <TableColumnItem>
+                            <PropertyName>SSItemMode</PropertyName>
+                          </TableColumnItem>
+                          <TableColumnItem>
+                                <ScriptBlock>get-projectType -kind $_.Kind </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                              <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                  <TableRowEntry>
+                    <EntrySelectedBy>
+                      <TypeName>CodeOwls.StudioShell.Paths.Items.ProjectModel.ShellReference</TypeName>
+                    </EntrySelectedBy>
+                    <TableColumnItems>
+                      <TableColumnItem>
+                        <PropertyName>SSItemMode</PropertyName>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <ScriptBlock>$_.Type -replace 'prjReferenceType',''</ScriptBlock>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <PropertyName>PSChildName</PropertyName>
+                      </TableColumnItem>
+                    </TableColumnItems>
+                  </TableRowEntry>
+                  <TableRowEntry>
+                    <TableColumnItems>
+                      <TableColumnItem>
+                        <PropertyName>SSItemMode</PropertyName>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <PropertyName>ItemType</PropertyName>
+                      </TableColumnItem>
+                      <TableColumnItem>
+                        <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+                      </TableColumnItem>
+                    </TableColumnItems>
+                  </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

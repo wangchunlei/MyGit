@@ -1,0 +1,42 @@
+﻿TOPIC
+    about_StudioShell_Hosts
+
+SHORT DESCRIPTION
+    StudioShell is designed to use used from a variety of suitable hosts.
+    This topic outlines the requirements of a suitable host.
+
+LONG DESCRIPTION
+	StudioShell is not tightly coupled to its own console.  Instead it is 
+	meant to be used from any PowerShell console, allowing you to take
+	advantage of the powerfull features in a variety of situations.
+	
+	Note that the session using StudioShell must have the following properties:
+	
+	1. the machine on which the session is running has 
+		Visual Studio 2008 or 2010, or SSMS 2012 installed.  
+	2. the Visual Studio shell has the StudioShell add-in loaded.
+	3. the PowerShell host's System.Management.Automation.Host.PSHost 
+		implementation supports the IHostSupportsInteractiveSession 
+		interface;  specifically, the Runspace property is supported, 
+		but the runspace pushing methods and properties are optional.	
+	
+USING STUDIOSHELL IN OTHER HOSTS (e.g., NuGet, PowerShell.exe)
+	Assuming the StudioShell module is in your PSModulePath, you can add 
+	StudioShell	features to your session by typing the following:
+	
+		import-module StudioShell
+		
+	Several StudioShell features are enabled by default in the 
+	StudioShell	host, but are disabled by default in other hosts.  For
+	more information, type:
+
+	get-help about_StudioShell_NuGet
+	get-help about_StudioShell_PowerShell
+	
+SEE ALSO
+	about_modules
+	about_StudioShell    
+	about_StudioShell_NuGet
+	about_StudioShell_PowerShell
+	about_StudioShell_SSMS
+	start-studioShell.ps1

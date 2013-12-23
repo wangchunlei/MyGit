@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CmdletHelpPath ID="TaskCollection">
+  <!-- New-Item -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+            New-Item
+          </command:name>
+      <maml:description>
+        <maml:para>Adds a task to the task list.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>Item</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>At this path location, you can use the New-Item cmdlet to add a task to the task list.</maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <!-- com -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the tasks container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Category</maml:name>
+          <maml:description>
+            <maml:para>The task category.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Value</maml:name>
+          <maml:description>
+            <maml:para>The description of the new task.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Line</maml:name>
+          <maml:description>
+            <maml:para>The line number associated with the task.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Priority</maml:name>
+          <maml:description>
+            <maml:para>The task priority.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.vsTaskPriority</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Icon</maml:name>
+          <maml:description>
+            <maml:para>The task icon.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.vsTaskIcon</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Checkable</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the task contains a checkbox.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ReadOnly</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the task cannot be deleted by the user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>NoFlush</maml:name>
+          <maml:description>
+            <maml:para>When specified, prevents the task from being flushed to the task window.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>File</maml:name>
+          <maml:description>
+            <maml:para>The file associated with this task.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path to the tasks container.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>string[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Category</maml:name>
+        <maml:description>
+          <maml:para>The task category.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Value</maml:name>
+        <maml:description>
+          <maml:para>The description of the new task.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Line</maml:name>
+        <maml:description>
+          <maml:para>The line number associated with the task.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Priority</maml:name>
+        <maml:description>
+          <maml:para>The task priority.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">EnvDTE.vsTaskPriority</command:parameterValue>
+        <dev:type>
+          <maml:name>EnvDTE.vsTaskPriority</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>vsTaskPriorityMedium</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Icon</maml:name>
+        <maml:description>
+          <maml:para>The task icon.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">EnvDTE.vsTaskIcon</command:parameterValue>
+        <dev:type>
+          <maml:name>EnvDTE.vsTaskIcon</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>vsTaskIconUser</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Checkable</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the task contains a checkbox.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ReadOnly</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the task cannot be deleted by the user.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>NoFlush</maml:name>
+        <maml:description>
+          <maml:para>When specified, prevents the task from being flushed to the task window.  This can be useful when creating large numbers of tasks to prevent slow performance as each task is displayed in the tasks window.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>File</maml:name>
+        <maml:description>
+          <maml:para>The file associated with this task.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                Each value pipes to the New-Item cmdlet at this location will become a new error task.
+              </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+          <maml:description>The new error task.</maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                The New-Item cmdlet creates the specified error task and returns the error task object.
+              </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Tasks&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -path . -value ( "take a break at " + (get-date).addMinutes(15) )
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command adds a task to the task window reminding the user to take a break in 15 minutes.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Tasks&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -path . -value "call Jennifer" -priority vsTaskPriorityHigh 
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command adds a task "call Jennifer" to the task window with a high priority
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_Providers</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Invoke-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Rename-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Move-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Copy-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</CmdletHelpPath>

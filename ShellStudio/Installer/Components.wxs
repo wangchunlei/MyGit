@@ -1,0 +1,850 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?include Variables.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <wix:DirectoryRef Id="StudioShellApplicationFolder" xmlns:wix="http://schemas.microsoft.com/wix/2006/wi"><Component Id="cmp392D48CC7D17C4012C3D9BBDA314C51F" Guid="410A32FD-790C-4379-ADB4-8C5B13A22D75">
+                <File Id="fil37EC8C6699DDA281060B65F8B5F2801C" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\start-studioshell.psm1" />
+            </Component><Component Id="cmp21B4125DF8AFD417C84DC2C7AE46CE97" Guid="2825FD94-B8D6-4C0A-9DAD-8DFB5D1ACD9E">
+                <File Id="fil35D32837780ADF38BC0170B10A6DFB47" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\StudioShell.psd1" />
+            </Component><Directory Id="dirAFF7B92993BC1C2E79077C8C0DB42FFC" Name="bin">
+                <Component Id="cmp99C1D7A4123F454F9DB861D229AAD86F" Guid="EE58AD48-94C1-412D-8422-4D9BEFCF40FC">
+                    <Class Id="{62693E49-E254-34AC-9289-A2F7C5D2C815}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.Configuration.UISettings" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Host.Configuration.UISettings" Description="CodeOwls.PowerShell.Host.Configuration.UISettings" />
+                    </Class>
+                    <Class Id="{65C99326-A730-3410-9047-C196ADBD9812}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.Configuration.ShellConfiguration" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Host.Configuration.ShellConfiguration" Description="CodeOwls.PowerShell.Host.Configuration.ShellConfiguration" />
+                    </Class>
+                    <Class Id="{7D595EA7-924A-340B-B0BE-F9AE77015E7D}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.History.NullHistoryStackWalker" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Host.History.NullHistoryStackWalker" Description="CodeOwls.PowerShell.Host.History.NullHistoryStackWalker" />
+                    </Class>
+                    <Class Id="{965B8053-51F5-3EF6-926F-1129318C94CF}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" Description="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" />
+                    </Class>
+                    <Class Id="{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}" Context="InprocServer32" Description="CodeOwls.PowerShell.Host.AutoComplete.NullAutoCompleteWalker" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Host.AutoComplete.NullAutoCompleteWalker" Description="CodeOwls.PowerShell.Host.AutoComplete.NullAutoCompleteWalker" />
+                    </Class>
+                    <File Id="fil287AE2554E1E1DA229216CC9577C92E5" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Host.dll" />
+                    <ProgId Id="Record" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Configuration.UISettings" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Host.Configuration.UISettings" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{62693E49-E254-34AC-9289-A2F7C5D2C815}\InprocServer32" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Configuration.ShellConfiguration" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Host.Configuration.ShellConfiguration" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{65C99326-A730-3410-9047-C196ADBD9812}\InprocServer32" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.History.NullHistoryStackWalker" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Host.History.NullHistoryStackWalker" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{7D595EA7-924A-340B-B0BE-F9AE77015E7D}\InprocServer32" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Host.CommandCompleteEventArgs" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{965B8053-51F5-3EF6-926F-1129318C94CF}\InprocServer32" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.AutoComplete.NullAutoCompleteWalker" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Host.AutoComplete.NullAutoCompleteWalker" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A06D2701-1556-3B78-9DFA-EC7AC65FF6B0}\InprocServer32" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{027FFF3B-70D0-3119-A5F2-68C01D6CDB6A}\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Executors.ExecutionOptions" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{027FFF3B-70D0-3119-A5F2-68C01D6CDB6A}\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{027FFF3B-70D0-3119-A5F2-68C01D6CDB6A}\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{027FFF3B-70D0-3119-A5F2-68C01D6CDB6A}\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{0762043B-033E-3556-8F87-225C9CF03BB1}\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Console.ConsoleSize" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{0762043B-033E-3556-8F87-225C9CF03BB1}\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{0762043B-033E-3556-8F87-225C9CF03BB1}\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{0762043B-033E-3556-8F87-225C9CF03BB1}\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{3A01C70D-B25D-3D83-9711-F5F9C0137AAB}\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Console.ConsoleControlKeyStates" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{3A01C70D-B25D-3D83-9711-F5F9C0137AAB}\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{3A01C70D-B25D-3D83-9711-F5F9C0137AAB}\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{3A01C70D-B25D-3D83-9711-F5F9C0137AAB}\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8D82032B-EB45-3E7A-B3C0-CB478DDCE9BE}\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Executors.CommandExecutorState" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8D82032B-EB45-3E7A-B3C0-CB478DDCE9BE}\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8D82032B-EB45-3E7A-B3C0-CB478DDCE9BE}\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8D82032B-EB45-3E7A-B3C0-CB478DDCE9BE}\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{CEA338DB-103C-3246-A90A-D0FCA59DE6D1}\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Host.Console.ConsoleKeyInfo" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{CEA338DB-103C-3246-A90A-D0FCA59DE6D1}\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Host, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{CEA338DB-103C-3246-A90A-D0FCA59DE6D1}\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{CEA338DB-103C-3246-A90A-D0FCA59DE6D1}\1.3.2.0" Name="CodeBase" Value="file:///[#fil287AE2554E1E1DA229216CC9577C92E5]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmpC6EBF83E0403B236FE0BD3C33235BE49" Guid="968D1650-62D0-4380-8CEA-A8B696F75CAA">
+                    <File Id="filC9358B71F2A751CBED87E2680BED0BD4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Host.pdb" />
+                </Component>
+                <Component Id="cmp544496277FB3E823E2359C92E336F348" Guid="26B705E4-DF37-46F0-B4EB-D2CE2069E35E">
+                    <Class Id="{1212EAFF-285D-30A4-A359-AB5884A06D95}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.ProviderException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.ProviderException" Description="CodeOwls.PowerShell.Paths.Exceptions.ProviderException" />
+                    </Class>
+                    <Class Id="{13982274-96AA-3740-A6AF-9E9DE8767CBE}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.MamlHelpDocumentExistsButCannotBeLoadedException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.MamlHelpDocumentExistsButCannotBeLoadedException" Description="CodeOwls.PowerShell.Paths.Exceptions.MamlHelpDocumentExistsButCannotBeLoadedException" />
+                    </Class>
+                    <Class Id="{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveItemInternalException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveItemInternalException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveItemInternalException" />
+                    </Class>
+                    <Class Id="{771305BC-25D0-3102-8F06-56E50E1DECD2}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" />
+                    </Class>
+                    <Class Id="{942E72B7-39D9-36A9-9C20-8E808B32EE9E}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" />
+                    </Class>
+                    <Class Id="{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}" Context="InprocServer32" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToNonexistentContainerException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToNonexistentContainerException" Description="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToNonexistentContainerException" />
+                    </Class>
+                    <File Id="fil2701CB891FE519209E8E2CF9D7B85B37" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Paths.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.ProviderException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.ProviderException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1212EAFF-285D-30A4-A359-AB5884A06D95}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.MamlHelpDocumentExistsButCannotBeLoadedException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.MamlHelpDocumentExistsButCannotBeLoadedException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{13982274-96AA-3740-A6AF-9E9DE8767CBE}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveItemInternalException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveItemInternalException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{1998DD84-0A45-3B64-9D82-70BCCD6DDDC7}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToExistingItemException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{771305BC-25D0-3102-8F06-56E50E1DECD2}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToDifferentContainerTypeException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{942E72B7-39D9-36A9-9C20-8E808B32EE9E}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToNonexistentContainerException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.Paths.Exceptions.CopyOrMoveToNonexistentContainerException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.Paths, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{D356EABA-6D81-326B-ACAE-9CA39BB64DE9}\InprocServer32" Name="CodeBase" Value="file:///[#fil2701CB891FE519209E8E2CF9D7B85B37]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp141D596F1FD13D4514C5561CA6AD92AD" Guid="6EF0F1C7-B079-4964-B406-CD9E10E59450">
+                    <File Id="filC906D49129B0FD3CA8C7544BF7633F25" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Paths.pdb" />
+                </Component>
+                <Component Id="cmp10FEC04D5E983945B022F225F744A8D6" Guid="23500A82-F622-43F2-A3CE-81616F02FCAE">
+                    <File Id="filD0EEED4C4B9FC8BB7CD6152AEAD07CC0" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Provider.dll" />
+                </Component>
+                <Component Id="cmp0CC95BBD880B34295BC3F4C9D5679BAB" Guid="CB2A837E-911F-453F-8583-BB498DFC1EEF">
+                    <File Id="fil493BF64F54324751CF1900F1D11D000F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.Provider.pdb" />
+                </Component>
+                <Component Id="cmp2A25FDB58AEB88430A522F72F514DFEC" Guid="B126952F-F82A-4BD6-BBBF-8D05F5857A16">
+                    <Class Id="{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}" Context="InprocServer32" Description="CodeOwls.PowerShell.WinForms.PSTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.PowerShell.WinForms.PSTextBox" Description="CodeOwls.PowerShell.WinForms.PSTextBox" />
+                    </Class>
+                    <File Id="filA7F8FCB490AC033E8495B49B9D8F2D7C" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.WinForms.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32\1.3.2.0" Name="Class" Value="CodeOwls.PowerShell.WinForms.PSTextBox" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32\1.3.2.0" Name="Assembly" Value="CodeOwls.PowerShell.WinForms, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32\1.3.2.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32\1.3.2.0" Name="CodeBase" Value="file:///[#filA7F8FCB490AC033E8495B49B9D8F2D7C]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32" Name="Class" Value="CodeOwls.PowerShell.WinForms.PSTextBox" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32" Name="Assembly" Value="CodeOwls.PowerShell.WinForms, Version=1.3.2.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E9CE9B2A-88D1-48AA-843D-EFDED9CB8056}\InprocServer32" Name="CodeBase" Value="file:///[#filA7F8FCB490AC033E8495B49B9D8F2D7C]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmpB8ACAF14ED8298D136463814196D8C7F" Guid="80EA2748-35D2-49E9-AAF2-84733BD57C1F">
+                    <File Id="fil7DBF27D74D9D80567A868FE8657FADB4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.PowerShell.WinForms.pdb" />
+                </Component>
+                <Component Id="cmpE3F2E4C7AD8828D0462D8019057410A0" Guid="97BD8B4A-C3AF-4AA9-9050-A166186411AF">
+                    <Class Id="{A059A005-6915-418E-A5A2-9601B577CE7C}" Context="InprocServer32" Description="CodeOwls.StudioShell.DataPaneControls.DataPaneControl" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.DataPaneControls.DataPaneControl" Description="CodeOwls.StudioShell.DataPaneControls.DataPaneControl" />
+                    </Class>
+                    <File Id="fil761B4396B880A53678136385B3433FEA" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Cmdlets.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.DataPaneControls.DataPaneControl" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Cmdlets, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil761B4396B880A53678136385B3433FEA]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.DataPaneControls.DataPaneControl" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Cmdlets, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A059A005-6915-418E-A5A2-9601B577CE7C}\InprocServer32" Name="CodeBase" Value="file:///[#fil761B4396B880A53678136385B3433FEA]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp265532F5F4489C9AF24922AA6E7FADA1" Guid="414D65F8-81B5-4D02-A1DF-23E4EA6390BC">
+                    <File Id="filDDBA239E7C9ED139FAEAD311B35381E4" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Cmdlets.pdb" />
+                </Component>
+                <Component Id="cmp01C7705D531E49EB375EBB4DF70D298D" Guid="9C51B4F9-4703-4B29-A051-FC3FBB3CF662">
+                    <Class Id="{4531A98B-A1E7-32B9-B648-D28714D7B5BA}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" Description="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" />
+                    </Class>
+                    <Class Id="{518304EA-BB32-3E55-BFA6-E8CA45013835}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Configuration.Settings" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Common.Configuration.Settings" Description="CodeOwls.StudioShell.Common.Configuration.Settings" />
+                    </Class>
+                    <Class Id="{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.PropertyDoesNotSupportParametersException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Common.Exceptions.PropertyDoesNotSupportParametersException" Description="CodeOwls.StudioShell.Common.Exceptions.PropertyDoesNotSupportParametersException" />
+                    </Class>
+                    <Class Id="{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException" Description="CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException" />
+                    </Class>
+                    <Class Id="{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}" Context="InprocServer32" Description="CodeOwls.StudioShell.Common.Exceptions.CodeModelNodeDoesNotSupportItemTypeException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Common.Exceptions.CodeModelNodeDoesNotSupportItemTypeException" Description="CodeOwls.StudioShell.Common.Exceptions.CodeModelNodeDoesNotSupportItemTypeException" />
+                    </Class>
+                    <File Id="filF0FF057ADF1A6676207FFEBBA79EF119" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Common.dll" />
+                    <ProgId Id="Record" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.StudioShellException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{4531A98B-A1E7-32B9-B648-D28714D7B5BA}\InprocServer32" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Configuration.Settings" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Common.Configuration.Settings" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{518304EA-BB32-3E55-BFA6-E8CA45013835}\InprocServer32" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.PropertyDoesNotSupportParametersException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.PropertyDoesNotSupportParametersException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B88EE7A8-82E6-323E-8F90-9D84D4FA13E9}\InprocServer32" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.ServiceUnavailableException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{C44BB3FC-F076-3F55-AF08-1EB0E8C402C3}\InprocServer32" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.CodeModelNodeDoesNotSupportItemTypeException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Common.Exceptions.CodeModelNodeDoesNotSupportItemTypeException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F1CDDEDA-78F8-3E69-8A93-D4E1998FA134}\InprocServer32" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{71F78193-831E-3C34-BA02-4204CEB16675}\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Configuration.ConsoleChoice" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{71F78193-831E-3C34-BA02-4204CEB16675}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{71F78193-831E-3C34-BA02-4204CEB16675}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{71F78193-831E-3C34-BA02-4204CEB16675}\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{E2FB14D7-D330-3A6E-BAFF-7B47DFD6336D}\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Common.Configuration.StartupLogLevel" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{E2FB14D7-D330-3A6E-BAFF-7B47DFD6336D}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Common, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{E2FB14D7-D330-3A6E-BAFF-7B47DFD6336D}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{E2FB14D7-D330-3A6E-BAFF-7B47DFD6336D}\1.5.0.0" Name="CodeBase" Value="file:///[#filF0FF057ADF1A6676207FFEBBA79EF119]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp8213E6051C82B15D6294AD3FF693F550" Guid="0AE6AE45-306C-4AD1-8B13-22EE88F27E55">
+                    <File Id="filB278244C1DE938E6756C411ABF0EED92" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Common.pdb" />
+                </Component>
+                <Component Id="cmpEDFBE531B11C0778C9AE05DE182069F3" Guid="D57F67A1-F3E8-489A-BA35-B2AAA7266142">
+                    <Class Id="{8121A1B7-1B4B-3D81-A92A-7B6724277A28}" Context="InprocServer32" Description="CodeOwls.StudioShell.Configuration.SettingsControl" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Configuration.SettingsControl" Description="CodeOwls.StudioShell.Configuration.SettingsControl" />
+                    </Class>
+                    <Class Id="{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}" Context="InprocServer32" Description="CodeOwls.StudioShell.Connect" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Connect" Description="CodeOwls.StudioShell.Connect" />
+                    </Class>
+                    <Class Id="{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}" Context="InprocServer32" Description="StudioShellException" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="StudioShellException" Description="StudioShellException" />
+                    </Class>
+                    <File Id="filBA85BA4470B1D4C1D4CA426B95011230" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Configuration.SettingsControl" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Configuration.SettingsControl" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8121A1B7-1B4B-3D81-A92A-7B6724277A28}\InprocServer32" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Connect" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Connect" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9DCE3C30-A4B0-35A0-95A1-3C8E6091EDC9}\InprocServer32" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32\1.5.0.0" Name="Class" Value="StudioShellException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32" Name="Class" Value="StudioShellException" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{DA9E5F94-01D1-33F5-8504-B26F2D0282E3}\InprocServer32" Name="CodeBase" Value="file:///[#filBA85BA4470B1D4C1D4CA426B95011230]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp541A69764177D7C3C3DDCE9728129EEE" Guid="CD1903F2-0830-403A-9FF9-515D753C92D9">
+                    <Class Id="{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}" Context="InprocServer32" Description="CodeOwls.StudioShell.Host.StudioShellProfileInfo" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Host.StudioShellProfileInfo" Description="CodeOwls.StudioShell.Host.StudioShellProfileInfo" />
+                    </Class>
+                    <File Id="filFB7242B2C526B00C06097910F0FE71F1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Host.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Host.StudioShellProfileInfo" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Host, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filFB7242B2C526B00C06097910F0FE71F1]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Host.StudioShellProfileInfo" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Host, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A3FDABBC-50D6-3CAA-AC96-D6F8EF871E8B}\InprocServer32" Name="CodeBase" Value="file:///[#filFB7242B2C526B00C06097910F0FE71F1]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp60894DD8940B44189E8776EEC173B0B6" Guid="98678CBC-7510-42F2-AD7C-281B627D3F73">
+                    <File Id="fil7FBF2ADF5ECE0468665D095C07D854B0" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Host.pdb" />
+                </Component>
+                <Component Id="cmp41672D1ACD87D6CA0948BC2933A9928A" Guid="54DE8AA6-E2FF-45E3-B1F8-BEBBF1F41F22">
+                    <Class Id="{3159970E-AA19-38E5-A5E9-41E2F09E5153}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandNodeFactory+SetItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandNodeFactory+SetItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandNodeFactory+SetItemDynamicParameters" />
+                    </Class>
+                    <Class Id="{963A3619-96E7-3DBB-A70D-E62294C43F09}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarPopupNodeFactory+NewItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarPopupNodeFactory+NewItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarPopupNodeFactory+NewItemDynamicParameters" />
+                    </Class>
+                    <Class Id="{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarCollectionNodeFactory+NewItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarCollectionNodeFactory+NewItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarCollectionNodeFactory+NewItemDynamicParameters" />
+                    </Class>
+                    <Class Id="{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.CodeModel.NewCodeElementItemParams" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.CodeModel.NewCodeElementItemParams" Description="CodeOwls.StudioShell.Paths.Nodes.CodeModel.NewCodeElementItemParams" />
+                    </Class>
+                    <Class Id="{AFFDC43B-8C11-350E-B918-002AB82EBF52}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeModelElement2" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeModelElement2" Description="CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeModelElement2" />
+                    </Class>
+                    <Class Id="{B5E737F3-D547-3357-BF50-07D6634AA94D}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.ProjectModel.SolutionProjectsNodeFactory+NewItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.ProjectModel.SolutionProjectsNodeFactory+NewItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.ProjectModel.SolutionProjectsNodeFactory+NewItemDynamicParameters" />
+                    </Class>
+                    <Class Id="{B92ADE79-68FC-3BE2-806C-55006C321549}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.UI.TaskItemCollectionNodeFactory+NewTaskItemParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.UI.TaskItemCollectionNodeFactory+NewTaskItemParameters" Description="CodeOwls.StudioShell.Paths.Nodes.UI.TaskItemCollectionNodeFactory+NewTaskItemParameters" />
+                    </Class>
+                    <Class Id="{E03E9325-34BA-37BB-81F6-0119EF341DBE}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Items.ShellObjectFactory" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Items.ShellObjectFactory" Description="CodeOwls.StudioShell.Paths.Items.ShellObjectFactory" />
+                    </Class>
+                    <Class Id="{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarNodeFactory+NewItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarNodeFactory+NewItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarNodeFactory+NewItemDynamicParameters" />
+                    </Class>
+                    <Class Id="{F324F1C3-BA5C-3B93-977E-622D9327B268}" Context="InprocServer32" Description="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+NewItemDynamicParameters" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+NewItemDynamicParameters" Description="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+NewItemDynamicParameters" />
+                    </Class>
+                    <File Id="fil8F6868AD0F9E0118BE9A18CA02216930" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Paths.dll" />
+                    <ProgId Id="Record" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandNodeFactory+SetItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandNodeFactory+SetItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3159970E-AA19-38E5-A5E9-41E2F09E5153}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarPopupNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarPopupNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{963A3619-96E7-3DBB-A70D-E62294C43F09}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarCollectionNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarCollectionNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{A7FF2AD6-0AB9-3FAF-AC85-E4340A9FE0D1}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CodeModel.NewCodeElementItemParams" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CodeModel.NewCodeElementItemParams" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AEF6D320-3D37-3495-9810-2EE04FCF5F7C}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeModelElement2" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Items.CodeModel.NullShellCodeModelElement2" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{AFFDC43B-8C11-350E-B918-002AB82EBF52}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.ProjectModel.SolutionProjectsNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.ProjectModel.SolutionProjectsNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B5E737F3-D547-3357-BF50-07D6634AA94D}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.UI.TaskItemCollectionNodeFactory+NewTaskItemParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.UI.TaskItemCollectionNodeFactory+NewTaskItemParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B92ADE79-68FC-3BE2-806C-55006C321549}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Items.ShellObjectFactory" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Items.ShellObjectFactory" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E03E9325-34BA-37BB-81F6-0119EF341DBE}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CommandBars.CommandBarNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{E5FED1E3-B85D-32B1-9E93-A6021A5FEB01}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+NewItemDynamicParameters" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{F324F1C3-BA5C-3B93-977E-622D9327B268}\InprocServer32" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{5DE9F309-E701-44D1-8068-1860738C0084}\1.5.0.0" Name="Class" Value="VSLangProj.prjCopyProjectOption" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{5DE9F309-E701-44D1-8068-1860738C0084}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{5DE9F309-E701-44D1-8068-1860738C0084}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{5DE9F309-E701-44D1-8068-1860738C0084}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6997962B-AFA8-3C68-923D-515EB0D3D682}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoButtonStyle" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6997962B-AFA8-3C68-923D-515EB0D3D682}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6997962B-AFA8-3C68-923D-515EB0D3D682}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6997962B-AFA8-3C68-923D-515EB0D3D682}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6CE7EB3A-343C-35B4-93CC-7E39DA297354}\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.Commands.CommandCollectionPathNodeFactory+CommandUIType" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6CE7EB3A-343C-35B4-93CC-7E39DA297354}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6CE7EB3A-343C-35B4-93CC-7E39DA297354}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{6CE7EB3A-343C-35B4-93CC-7E39DA297354}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{78DCA6DC-3208-30E9-9CE9-1F3C95E5B46F}\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CodeModel.MethodType" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{78DCA6DC-3208-30E9-9CE9-1F3C95E5B46F}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{78DCA6DC-3208-30E9-9CE9-1F3C95E5B46F}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{78DCA6DC-3208-30E9-9CE9-1F3C95E5B46F}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{7B163E5F-B187-3142-A6F6-F6A2DB8C5400}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoComboStyle" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{7B163E5F-B187-3142-A6F6-F6A2DB8C5400}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{7B163E5F-B187-3142-A6F6-F6A2DB8C5400}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{7B163E5F-B187-3142-A6F6-F6A2DB8C5400}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8EE0238A-8993-38B1-BBF0-D720A2BDA47B}\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Paths.Nodes.CodeModel.AccessLevel" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8EE0238A-8993-38B1-BBF0-D720A2BDA47B}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8EE0238A-8993-38B1-BBF0-D720A2BDA47B}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{8EE0238A-8993-38B1-BBF0-D720A2BDA47B}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{9B0ED4F7-01EB-375B-8AB3-18DD81A9BC60}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoBarPosition" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{9B0ED4F7-01EB-375B-8AB3-18DD81A9BC60}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{9B0ED4F7-01EB-375B-8AB3-18DD81A9BC60}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{9B0ED4F7-01EB-375B-8AB3-18DD81A9BC60}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{A201394E-4E39-3E95-B77C-24BA788C3704}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoBarProtection" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{A201394E-4E39-3E95-B77C-24BA788C3704}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{A201394E-4E39-3E95-B77C-24BA788C3704}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{A201394E-4E39-3E95-B77C-24BA788C3704}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B21668EF-29F1-425D-85D7-118CB838C362}\1.5.0.0" Name="Class" Value="VSLangProj.prjReferenceType" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B21668EF-29F1-425D-85D7-118CB838C362}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B21668EF-29F1-425D-85D7-118CB838C362}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B21668EF-29F1-425D-85D7-118CB838C362}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{C6B29353-F0FD-341A-AF27-AAA61B981A1E}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoControlType" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{C6B29353-F0FD-341A-AF27-AAA61B981A1E}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{C6B29353-F0FD-341A-AF27-AAA61B981A1E}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{C6B29353-F0FD-341A-AF27-AAA61B981A1E}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{D53043BB-4F54-3874-A681-EB89362A1DB6}\1.5.0.0" Name="Class" Value="Microsoft.VisualStudio.CommandBars.MsoBarType" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{D53043BB-4F54-3874-A681-EB89362A1DB6}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{D53043BB-4F54-3874-A681-EB89362A1DB6}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{D53043BB-4F54-3874-A681-EB89362A1DB6}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{F111445E-A9ED-4D12-9A0E-738F5F995F10}\1.5.0.0" Name="Class" Value="VSLangProj.prjExecCommand" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{F111445E-A9ED-4D12-9A0E-738F5F995F10}\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Paths, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{F111445E-A9ED-4D12-9A0E-738F5F995F10}\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{F111445E-A9ED-4D12-9A0E-738F5F995F10}\1.5.0.0" Name="CodeBase" Value="file:///[#fil8F6868AD0F9E0118BE9A18CA02216930]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp8FAB077BB71F332BD32C9FD73CF517DC" Guid="D90FE646-5882-4DEB-8F88-3AA35C1D1911">
+                    <File Id="filE84E741541F81A6551D9EE4EA8BE4DAF" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Paths.pdb" />
+                </Component>
+                <Component Id="cmp99D862D8B2D791DEF032524B096C3E1F" Guid="DBFEE260-0D68-43A5-91DE-D80D1FFFB6ED">
+                    <File Id="filB3244BEBD3694EF09E4F635D9D8EBBF9" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.pdb" />
+                </Component>
+                <Component Id="cmp734F688F5E6F52DBE0F6DDBC78FA74AB" Guid="DC978F82-F4D2-4123-8C9B-35790094E44B">
+                    <Class Id="{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}" Context="InprocServer32" Description="CodeOwls.StudioShell.Provider.DTEProvider" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="CodeOwls.StudioShell.Provider.DTEProvider" Description="CodeOwls.StudioShell.Provider.DTEProvider" />
+                    </Class>
+                    <File Id="filFCB4B66E77D385F6AF4451ACD6B002CA" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Provider.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32\1.5.0.0" Name="Class" Value="CodeOwls.StudioShell.Provider.DTEProvider" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32\1.5.0.0" Name="Assembly" Value="CodeOwls.StudioShell.Provider, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32\1.5.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32\1.5.0.0" Name="CodeBase" Value="file:///[#filFCB4B66E77D385F6AF4451ACD6B002CA]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32" Name="Class" Value="CodeOwls.StudioShell.Provider.DTEProvider" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32" Name="Assembly" Value="CodeOwls.StudioShell.Provider, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{CA49E3A7-2B86-36A8-AC8E-491A27AA495C}\InprocServer32" Name="CodeBase" Value="file:///[#filFCB4B66E77D385F6AF4451ACD6B002CA]" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmpF80396288A5D0C01E11CC145CDE715B8" Guid="DEE34DDA-7A75-4480-A9B0-60BB4E230641">
+                    <File Id="fil85D94680414D555E1A9E01D4961A8541" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\CodeOwls.StudioShell.Provider.pdb" />
+                </Component>
+                <Component Id="cmpD1ACDF84C2E6D9C5F764B5DDA4F5F883" Guid="D8923F94-02C0-430E-A2B2-A36D52ADF20E">
+                    <File Id="fil5364EF4C3CC63E818B59C77F88A83FB0" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Extensibility.dll" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF1-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="Class" Value="Extensibility.ext_ConnectMode" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF1-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="Assembly" Value="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF1-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="RuntimeVersion" Value="v1.0.3705" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF1-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="CodeBase" Value="file:///C:/Windows/assembly/GAC/Extensibility/7.0.3300.0__b03f5f7f11d50a3a/Extensibility.dll" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF2-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="Class" Value="Extensibility.ext_DisconnectMode" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF2-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="Assembly" Value="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF2-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="RuntimeVersion" Value="v1.0.3705" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{289E9AF2-4973-11D1-AE81-00A0C90F26F4}\7.0.3300.0" Name="CodeBase" Value="file:///C:/Windows/assembly/GAC/Extensibility/7.0.3300.0__b03f5f7f11d50a3a/Extensibility.dll" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="TypeLib\{AC0714F2-3D04-11D1-AE7D-00A0C90F26F4}\1.0" Name="PrimaryInteropAssemblyName" Value="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="TypeLib\{AC0714F2-3D04-11D1-AE7D-00A0C90F26F4}\1.0" Name="PrimaryInteropAssemblyCodeBase" Value="file:///C:/Windows/assembly/GAC/Extensibility/7.0.3300.0__b03f5f7f11d50a3a/Extensibility.dll" Type="string" Action="write" />
+                </Component>
+                <Component Id="cmp4A505A9D61AC12711EB8BD8C8FBCB787" Guid="792229D7-0A8F-479F-9F0A-DF4D63D96E27">
+                    <File Id="fil34F45CF0350220A646A5E7C9CF69401F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\profile.ps1" />
+                </Component>
+                <Component Id="cmp096DE1A7EA02C91FF39700D6D69BDC33" Guid="434D98A6-15E7-4550-B3A3-DBD68936ACA0">
+                    <File Id="fil93D12194F916FD178079EFDAD6198FD1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.SSMS.AddIn" />
+                </Component>
+                <Component Id="cmp3AD5E1147A68728D8C1CF0545C40EBCD" Guid="2E3875B1-C3DF-4A84-BBB8-A0D6A38E5770">
+                    <File Id="filC36D8530EC80B4F99EFD068A2F29B9C2" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2008.AddIn" />
+                </Component>
+                <Component Id="cmpC61004657061AAE878D2616EBA37D031" Guid="8054856D-B506-41C6-8FCA-4B51B98EF5D1">
+                    <File Id="filA236382F1656B316CAF7F699FCC2416E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2010.AddIn" />
+                </Component>
+                <Component Id="cmp7FAD6E1424C44B735856B85B0F52017F" Guid="A85BBAD9-8793-4511-B630-A716D5C009B8">
+                    <File Id="fil82C368ACE9A366515628AA1D8968BC32" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\StudioShell.VS2012.AddIn" />
+                </Component>
+                <Component Id="cmp292E121FC6BDE40F9E50A691D8A5D91E" Guid="17F694B5-57B0-4316-9E86-98E769F04013">
+                    <File Id="filDE5227B513FE0BAB51C78CCD51A6CE75" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\System.Windows.Forms.DataVisualization.dll" />
+                </Component>
+                <Directory Id="dirE3EC6BCC14C9078A9DA255DD60623277" Name="Resources">
+                    <Component Id="cmpAAEBCA9C0B0313F32B773D429FA84AC4" Guid="D669BD02-FB37-48F2-92D7-3E56FCDE71F8">
+                        <File Id="fil70EA65D2961D2335C60A7DF48CDC5540" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Resources\PSIconAnimated.bmp" />
+                    </Component>
+                    <Component Id="cmp7281A1149CD8C4B8644A7648E0F7E02A" Guid="4CC36FD0-ACE4-46F6-81F0-6EC9B446805A">
+                        <File Id="fil7B530240BDA3D29653673CDE60AB56FD" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Resources\studioshell.ico" />
+                    </Component>
+                </Directory>
+                <Directory Id="dirB3B42DFBE69B2D16BE20976CA56E29D8" Name="Scripts">
+                    <Component Id="cmp80602339D1376F00CB139938DB977EDC" Guid="82EC6B10-AC8E-49B7-BCA7-05FCBCB982EF">
+                        <File Id="fil3680DA58F2FF77A97BF05312D058767D" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\get-studioShellSettings.ps1" />
+                    </Component>
+                    <Component Id="cmpE40102A30D509DD29F77151276AD915D" Guid="58EAE444-F1F5-46D1-9286-3E00FE066C7D">
+                        <File Id="fil75F229457359566B85988F1109A91BD1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\invoke-studioShellProfile.ps1" />
+                    </Component>
+                    <Component Id="cmpC67435EA07814DCB22013043F62FC93E" Guid="994B0F28-960A-4010-BC21-F3F05E5D8B6B">
+                        <File Id="fil3768AE69CF43D821D9DA5CE2CC390D97" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\save-studioShellSettings.ps1" />
+                    </Component>
+                    <Component Id="cmp70191D2C45B37EBD07060FFBB21F3C3F" Guid="35175CB6-8B5C-43CB-9E4F-F20066A2C9C4">
+                        <File Id="fil23E02A697079F2F393B5A2A3CC8B3D30" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\Scripts\start-studioShell.ps1" />
+                    </Component>
+                </Directory>
+                <Directory Id="dir700ECA902C0F66EE4AF08D36005167FC" Name="UserProfile">
+                    <Component Id="cmpB451474385AF9B9F24BE4D05B3B59C27" Guid="D12DAB35-5CB1-47DF-AF00-935567E2950D">
+                        <File Id="fil6C6F8F201348EE99FA542E5B993E27B1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\UserProfile\profile.ps1" />
+                    </Component>
+                    <Component Id="cmpAA057134A44EA57A7E6E0D144B812F94" Guid="B23E2258-70F0-4F93-A7BC-423EAD8CBE26">
+                        <File Id="fil30BEF3C4420E201E596B9028BD03C489" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\bin\UserProfile\settings.txt" />
+                    </Component>
+                </Directory>
+            </Directory><Directory Id="dir04DE719C2C2F4102005EB707BDEF6592" Name="en-US">
+                <Component Id="cmp1F4D49E51127540E150965B6D023A785" Guid="DBC4469E-0FDE-4706-B42A-B6801278C455">
+                    <File Id="fil3EF2E147EEA42ECE1FF76A02A4AF79DE" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell.help.txt" />
+                </Component>
+                <Component Id="cmpC18A5B1E4A78242E34CC31DD84D7221F" Guid="3B49DC50-92A5-4BB7-B0B2-93E17324BD8A">
+                    <File Id="fil42D5C69EDC16F69FCC59923254E0762A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Data_Panes.help.txt" />
+                </Component>
+                <Component Id="cmp57DB50B41427E82AE3787CC6A69EC8E9" Guid="51F6808E-9F53-42E2-B78F-310A01ED33E2">
+                    <File Id="fil0F3A28454CE869A6FC7D6E4C285CD692" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Drives.help.txt" />
+                </Component>
+                <Component Id="cmp1B8F2A188BB5D15FA297A295C2BFFE48" Guid="8B64F9CD-CD4A-4DDC-8DEC-43B1C5069057">
+                    <File Id="fil79A140A0529EF7FF675FA3CECD7AE062" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Hosts.help.txt" />
+                </Component>
+                <Component Id="cmpAD457551965F2CAF6311F306A17837BB" Guid="27462D48-618B-404B-A98F-60A33FAC3C7C">
+                    <File Id="fil93131540928BF0876B046A8960DF03AB" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Item_Cmdlets.help.txt" />
+                </Component>
+                <Component Id="cmp1A70B2C14339DB2274F6C9F66C35DA65" Guid="6226B36D-D18B-4B2F-823B-A3EA9F7768B1">
+                    <File Id="fil793DEE4459CA7ECC4F56C20375F84F9E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_License.help.txt" />
+                </Component>
+                <Component Id="cmp3031B986E6710FE75CC3AD0E44D3F2B7" Guid="8A82CA24-1905-4534-B427-8DD171D7CC12">
+                    <File Id="fil547FACF9C8AFEA1F4FA064EB51B7AB60" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_NuGet.help.txt" />
+                </Component>
+                <Component Id="cmpF9002640533BECB10A4BC566D17D77A8" Guid="DD2B6693-1AFB-4742-812D-D9BCE8B5EB83">
+                    <File Id="fil81455EA5296B800A87F34AF1479F66DA" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_PowerShell.help.txt" />
+                </Component>
+                <Component Id="cmpD0D1A45C1A22861184ADD5ACFA222C29" Guid="76D2A108-A780-40BC-B30A-D85E9BF7B470">
+                    <File Id="fil55475CE203C0E6E3EB8D4800732CCA22" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Profiles.help.txt" />
+                </Component>
+                <Component Id="cmp7F86D84658030D76A7B50133DC9E4E0F" Guid="5BE67545-EBE8-4F10-AA7C-C1CB383DE793">
+                    <File Id="filE862CEB73953CF9678FADA44B4BB95A2" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Settings.help.txt" />
+                </Component>
+                <Component Id="cmp3676112FA1277D5975FB4367AD88FAB6" Guid="E12300D4-9298-455B-8F49-DE9449295A46">
+                    <File Id="filDBB63CEA0CD0EDD23FA799F70DF3BB25" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Solution_Modules.help.txt" />
+                </Component>
+                <Component Id="cmpE05C5052B21427C91E220812796768FB" Guid="843D6067-8D49-4747-A76E-DCC5841EC6BC">
+                    <File Id="fil42482EE1A604519F594371755AE2C24B" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_SSMS.help.txt" />
+                </Component>
+                <Component Id="cmpBA006D97CCF30F92F2F7515ECC6A3B32" Guid="1AA7FB14-25DF-4671-9FE1-E29470F0E8B4">
+                    <File Id="fil8482F1683C2841C79C112C35DD9EF012" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Variables.help.txt" />
+                </Component>
+                <Component Id="cmpD824C97FF3E459809E6DD1729D283216" Guid="42DF557E-B502-4092-AAAC-B079409788BC">
+                    <File Id="filDD0D9EEBAB5F68AA1108189A76C79392" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\about_StudioShell_Version.help.txt" />
+                </Component>
+                <Component Id="cmpF714E2B10A06A5D54667107E9877CF73" Guid="6CD0B04F-BB58-4FF0-93F4-E0FFDC0B6C31">
+                    <File Id="fil90DA252D2F66317A553868F3E6C8E35A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\CodeOwls.StudioShell.Cmdlets.dll-help.xml" />
+                </Component>
+                <Component Id="cmp0699B771897277A6CDF44177B6BD6E47" Guid="4A582D57-14E6-4A84-824E-B5C4A8613B45">
+                    <File Id="fil13EB325AEDAC53275089F9B6F2157293" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\en-US\CodeOwls.StudioShell.Provider.dll-help.xml" />
+                </Component>
+            </Directory><Directory Id="dir9DEF9DC49A07828ABAFAC72D2E40E748" Name="Formats">
+                <Component Id="cmpCEFDCC5CE4C192FC9DB7EBD765ACA5D0" Guid="500277D7-A3E2-4A86-9DF6-F6B79D6E9E4F">
+                    <File Id="fil1E828107D80F41A7DD6282FC2971114F" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\AddIns.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpE9D2484CA0E83173F6729B122942E0C8" Guid="B824C931-CCA8-4ED3-AFDE-D3E2D25F2FC2">
+                    <File Id="fil8A5422D4E7B44B7D982C84CE4F1E631A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\CodeModel.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp01B0F3592FEB08EBB2E79FF112DE9D4A" Guid="63943F37-8753-4A0F-A008-918137204223">
+                    <File Id="fil151DB5FB7309996FFE4AA4C16F717A34" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\CommandBars.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp7FB76007B37EBB2011E1FE5C28798441" Guid="D32A0A7F-4580-453E-8689-50B252EFD7F7">
+                    <File Id="fil0E8C2FF605BA632501A8B8FA3997AAB9" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Commands.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpB65179C6758C10E194C7489E9700D396" Guid="26CB55B0-D8D5-4246-B29D-2CCBCB9E0F92">
+                    <File Id="fil11548392B1703D4ECB6609FA6917AEAB" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Debugger.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpCCF73D8E5F5A87002159DEDC7C22A684" Guid="4C2C3358-9AD9-4489-AE77-2E0C83843703">
+                    <File Id="filDB99A5339F9E3001D9FDAB986D4C1832" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Errors.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpFCE989A1FB7CA2FD1AC177F31CAA51F2" Guid="DB60342D-21BA-4066-9DFC-53450CF75410">
+                    <File Id="filE9881377F9F086077A2C7451C4F315BB" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\FontsAndColors.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp56B694FE8E33E6CCAC9C39C9DC21C346" Guid="B9C0ADD6-5E54-44D9-A94A-6B97392F2A06">
+                    <File Id="filBE0C359C7C2E84757D4EA200AE137EBD" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\OutputPanes.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpC04105919DAA582EC1EDA612BE9EEAA9" Guid="B9886F6D-A542-4913-BF0A-65AA53D3AE62">
+                    <File Id="fil6814953AEBBE1B60D15F40FEF70D048B" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Project.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp23F8859ADB72645F34DAB58174C008C2" Guid="ED21AF14-750E-48AC-8F84-0AD3149D5997">
+                    <File Id="filDF181CA3F38799F832F2F71D3F267063" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Settings.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpF8B046FE25CDEFF34D0EE98F1CB6038D" Guid="7E93510B-449C-43B0-9799-81CEFF65A116">
+                    <File Id="fil7CC42960FAAFE8DA99B121EED34A7D69" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Tasks.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpA46AE7FC0FA8FB204624917A82B1F08B" Guid="4C9FF9BA-9BE8-458E-8894-5089094F2430">
+                    <File Id="fil3F912361BA47C0C61D396177B96977F2" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Templates.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp3379941F6575B33C78342486C12468DD" Guid="B3F5BF38-4D76-42A0-A479-EECEEC7D519F">
+                    <File Id="fil3E2A46677920C16EAA1C036D93F79E2D" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\Window.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmp532568E8F46D97085BA92142799E1936" Guid="029B8BF1-806A-4C3F-8665-17713A2B4C32">
+                    <File Id="fil7DDD97908CC62D2C318B8C904AD91372" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\WindowConfiguration.Formats.ps1xml" />
+                </Component>
+                <Component Id="cmpA02F678FA14D5264A44D389079EBC3A1" Guid="50988000-ABF3-4051-BB44-A91D1730EC37">
+                    <File Id="fil5A4127012E4D9F407F39CB5E3A689BF1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Formats\_Root.Formats.ps1xml" />
+                </Component>
+            </Directory><Directory Id="dir9A594F3ADD322A6B8EC5CBE595025421" Name="InitializationScripts">
+                <Component Id="cmp4751A892A67C43A955C7CCBF52705671" Guid="AE61FB6E-C9F2-43CA-93A2-C64D0119DA19">
+                    <File Id="fil96AE0F3090416DCB3738D7F8C9CD80BD" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\InitializationScripts\register-contextMenuItems.ps1" />
+                </Component>
+                <Component Id="cmp079A127D32C629802695B05D863361C3" Guid="4D7DE214-B8EE-4FC0-B47B-AEE3B558F039">
+                    <File Id="fil5C5C631A25A377AFCB203C449120AE20" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\InitializationScripts\register-drives.ps1" />
+                </Component>
+                <Component Id="cmp481B10A8F09757ED511C3D56EAA4D427" Guid="FF52EF75-33D3-4BD9-93BD-D430386FB4E6">
+                    <File Id="filD21482B57D112CE00AA5B3D238F6D70A" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\InitializationScripts\register-solutionEvents.ps1" />
+                </Component>
+            </Directory><Directory Id="dirCB18DD94194306E7E333F7E29D655203" Name="PreferenceStack">
+                <Component Id="cmp2CD3E08B55E9E9F7C2EE7FD6177587F8" Guid="29F7DF1A-F62C-4FE3-ABAB-1EC01DB4E20A">
+                    <File Id="filDE673EBB73FB405E1CBE86F5E2D0A5C5" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\PreferenceStack\PreferenceStack.psm1" />
+                </Component>
+            </Directory><Directory Id="dir53BD8C67467C8BA58F51108202BA1A9D" Name="Scripts">
+                <Component Id="cmpB372CD363A708A6033720A64C7A02EE5" Guid="54C6B7E6-3E89-4046-A57E-A4FDAE2556AC">
+                    <File Id="fil39B460EE6B488EA124CC6F791F254334" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\get-colorString.ps1" />
+                </Component>
+                <Component Id="cmp139D31ADA3970188C711313EB93A2581" Guid="91B79A96-B7C0-4716-98C6-2FB123A9184C">
+                    <File Id="fil77A16FFC672109E755917064BAC0CA84" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\get-pathTopologyVersion.ps1" />
+                </Component>
+                <Component Id="cmp62B3F4AC2EBB41EDF7C843D5135DBFE7" Guid="3F0BA571-FFB0-4E59-8E6D-5AA7659AB320">
+                    <File Id="fil272CBDDF869666F0B2DF43FAC44C4D5E" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\get-projectType.ps1" />
+                </Component>
+                <Component Id="cmpA016644A640F5610C5D4801A1E4AD865" Guid="A5FDC34A-2DDE-4ED3-9E57-34DFB1BF76DA">
+                    <File Id="fil68EE77A660829EB2584B1DBAEA538CEF" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\get-taskIconNames.ps1" />
+                </Component>
+                <Component Id="cmpAF696216D85FD8A12FAEC676650930B9" Guid="28072953-A94B-4583-96EB-05ACD4ECC7F7">
+                    <File Id="fil39DAC56D4EB981C09F14B9BABBCD02F1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\get-taskPriorities.ps1" />
+                </Component>
+                <Component Id="cmpE44721F8A5AD6CC95745E843C327DF0D" Guid="AC71635D-E489-4410-98B9-542FB3916ED3">
+                    <File Id="fil00C70F5789139FBDD91F889AFE7A83E3" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\open-file.ps1" />
+                </Component>
+                <Component Id="cmp1308630F20D816356B3646FDCA0CE3AA" Guid="51744A79-1CCC-446B-8E8F-8FAD6C0A59A0">
+                    <File Id="fil77B6504CCD2CA4E486CF9D9CD8488A42" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\open-solution.ps1" />
+                </Component>
+                <Component Id="cmp58D85FA4A7A8F02E3A2A8D5C79EA08E5" Guid="52ABC6D7-91AB-4BE2-B94C-12DE145F66FA">
+                    <File Id="fil160C835FA4E6FBE9D9EEFF684D48BCC1" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\out-outputPane.ps1" />
+                </Component>
+                <Component Id="cmpA4F0A741209DCDF4011AA5003F5FC633" Guid="C0A67293-759E-4800-AB2A-6E63A82CD5A8">
+                    <File Id="fil53B74AC5E98C1CF06738362BC80AB81C" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\out-pipe.ps1" />
+                </Component>
+                <Component Id="cmp9E0588517E0CC892BC49C0D80D8362A9" Guid="A14AFCB9-F131-4342-A1A6-941FDAE0F113">
+                    <File Id="fil57ADF096A22BC4EB82A03E6DA4CC40C3" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\out-taskList.ps1" />
+                </Component>
+                <Component Id="cmpA1D5A3CA980F5ED6050ADF4EC7F6F73C" Guid="85015E1A-9CCB-4C6B-96DC-B9BDE6C78538">
+                    <File Id="filA33D84D65E2ABF439618E20286F8DACB" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\remove-nullSplatted.ps1" />
+                </Component>
+                <Component Id="cmp66AAEB02822998B72653E0638DE34C8A" Guid="C3711458-3D48-4CA3-93FA-0ACE8DDD081B">
+                    <File Id="fil0E1AA79C060A9F5E59B4541671C408FE" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\select-first.ps1" />
+                </Component>
+                <Component Id="cmp566D3604E657BBDFEAFC8760489C73B7" Guid="ED962810-9CFC-47D8-950D-DAF9ED57C31E">
+                    <File Id="fil3C87BE9790A22A8D44B6E6CFB2BCBF17" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\use-pathTopologyVersion.ps1" />
+                </Component>
+                <Component Id="cmp2291BB688010619DC72BA1BB29E13B5C" Guid="64A7DFC8-240A-4050-A759-FEBC1C51FF2B">
+                    <File Id="filD15169A4D698757B90AF1A891F5EA4AF" KeyPath="yes" Source="$(var.StudioShellModuleRootPath)\Scripts\write-prompt.ps1" />
+                </Component>
+            </Directory></wix:DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="StudioShellApplicationComponentGroup">
+            <ComponentRef Id="cmp392D48CC7D17C4012C3D9BBDA314C51F" />
+            <ComponentRef Id="cmp21B4125DF8AFD417C84DC2C7AE46CE97" />
+            <ComponentRef Id="cmp99C1D7A4123F454F9DB861D229AAD86F" />
+            <ComponentRef Id="cmpC6EBF83E0403B236FE0BD3C33235BE49" />
+            <ComponentRef Id="cmp544496277FB3E823E2359C92E336F348" />
+            <ComponentRef Id="cmp141D596F1FD13D4514C5561CA6AD92AD" />
+            <ComponentRef Id="cmp10FEC04D5E983945B022F225F744A8D6" />
+            <ComponentRef Id="cmp0CC95BBD880B34295BC3F4C9D5679BAB" />
+            <ComponentRef Id="cmp2A25FDB58AEB88430A522F72F514DFEC" />
+            <ComponentRef Id="cmpB8ACAF14ED8298D136463814196D8C7F" />
+            <ComponentRef Id="cmpE3F2E4C7AD8828D0462D8019057410A0" />
+            <ComponentRef Id="cmp265532F5F4489C9AF24922AA6E7FADA1" />
+            <ComponentRef Id="cmp01C7705D531E49EB375EBB4DF70D298D" />
+            <ComponentRef Id="cmp8213E6051C82B15D6294AD3FF693F550" />
+            <ComponentRef Id="cmpEDFBE531B11C0778C9AE05DE182069F3" />
+            <ComponentRef Id="cmp541A69764177D7C3C3DDCE9728129EEE" />
+            <ComponentRef Id="cmp60894DD8940B44189E8776EEC173B0B6" />
+            <ComponentRef Id="cmp41672D1ACD87D6CA0948BC2933A9928A" />
+            <ComponentRef Id="cmp8FAB077BB71F332BD32C9FD73CF517DC" />
+            <ComponentRef Id="cmp99D862D8B2D791DEF032524B096C3E1F" />
+            <ComponentRef Id="cmp734F688F5E6F52DBE0F6DDBC78FA74AB" />
+            <ComponentRef Id="cmpF80396288A5D0C01E11CC145CDE715B8" />
+            <ComponentRef Id="cmpD1ACDF84C2E6D9C5F764B5DDA4F5F883" />
+            <ComponentRef Id="cmp4A505A9D61AC12711EB8BD8C8FBCB787" />
+            <ComponentRef Id="cmp096DE1A7EA02C91FF39700D6D69BDC33" />
+            <ComponentRef Id="cmp3AD5E1147A68728D8C1CF0545C40EBCD" />
+            <ComponentRef Id="cmpC61004657061AAE878D2616EBA37D031" />
+            <ComponentRef Id="cmp7FAD6E1424C44B735856B85B0F52017F" />
+            <ComponentRef Id="cmp292E121FC6BDE40F9E50A691D8A5D91E" />
+            <ComponentRef Id="cmpAAEBCA9C0B0313F32B773D429FA84AC4" />
+            <ComponentRef Id="cmp7281A1149CD8C4B8644A7648E0F7E02A" />
+            <ComponentRef Id="cmp80602339D1376F00CB139938DB977EDC" />
+            <ComponentRef Id="cmpE40102A30D509DD29F77151276AD915D" />
+            <ComponentRef Id="cmpC67435EA07814DCB22013043F62FC93E" />
+            <ComponentRef Id="cmp70191D2C45B37EBD07060FFBB21F3C3F" />
+            <ComponentRef Id="cmpB451474385AF9B9F24BE4D05B3B59C27" />
+            <ComponentRef Id="cmpAA057134A44EA57A7E6E0D144B812F94" />
+            <ComponentRef Id="cmp1F4D49E51127540E150965B6D023A785" />
+            <ComponentRef Id="cmpC18A5B1E4A78242E34CC31DD84D7221F" />
+            <ComponentRef Id="cmp57DB50B41427E82AE3787CC6A69EC8E9" />
+            <ComponentRef Id="cmp1B8F2A188BB5D15FA297A295C2BFFE48" />
+            <ComponentRef Id="cmpAD457551965F2CAF6311F306A17837BB" />
+            <ComponentRef Id="cmp1A70B2C14339DB2274F6C9F66C35DA65" />
+            <ComponentRef Id="cmp3031B986E6710FE75CC3AD0E44D3F2B7" />
+            <ComponentRef Id="cmpF9002640533BECB10A4BC566D17D77A8" />
+            <ComponentRef Id="cmpD0D1A45C1A22861184ADD5ACFA222C29" />
+            <ComponentRef Id="cmp7F86D84658030D76A7B50133DC9E4E0F" />
+            <ComponentRef Id="cmp3676112FA1277D5975FB4367AD88FAB6" />
+            <ComponentRef Id="cmpE05C5052B21427C91E220812796768FB" />
+            <ComponentRef Id="cmpBA006D97CCF30F92F2F7515ECC6A3B32" />
+            <ComponentRef Id="cmpD824C97FF3E459809E6DD1729D283216" />
+            <ComponentRef Id="cmpF714E2B10A06A5D54667107E9877CF73" />
+            <ComponentRef Id="cmp0699B771897277A6CDF44177B6BD6E47" />
+            <ComponentRef Id="cmpCEFDCC5CE4C192FC9DB7EBD765ACA5D0" />
+            <ComponentRef Id="cmpE9D2484CA0E83173F6729B122942E0C8" />
+            <ComponentRef Id="cmp01B0F3592FEB08EBB2E79FF112DE9D4A" />
+            <ComponentRef Id="cmp7FB76007B37EBB2011E1FE5C28798441" />
+            <ComponentRef Id="cmpB65179C6758C10E194C7489E9700D396" />
+            <ComponentRef Id="cmpCCF73D8E5F5A87002159DEDC7C22A684" />
+            <ComponentRef Id="cmpFCE989A1FB7CA2FD1AC177F31CAA51F2" />
+            <ComponentRef Id="cmp56B694FE8E33E6CCAC9C39C9DC21C346" />
+            <ComponentRef Id="cmpC04105919DAA582EC1EDA612BE9EEAA9" />
+            <ComponentRef Id="cmp23F8859ADB72645F34DAB58174C008C2" />
+            <ComponentRef Id="cmpF8B046FE25CDEFF34D0EE98F1CB6038D" />
+            <ComponentRef Id="cmpA46AE7FC0FA8FB204624917A82B1F08B" />
+            <ComponentRef Id="cmp3379941F6575B33C78342486C12468DD" />
+            <ComponentRef Id="cmp532568E8F46D97085BA92142799E1936" />
+            <ComponentRef Id="cmpA02F678FA14D5264A44D389079EBC3A1" />
+            <ComponentRef Id="cmp4751A892A67C43A955C7CCBF52705671" />
+            <ComponentRef Id="cmp079A127D32C629802695B05D863361C3" />
+            <ComponentRef Id="cmp481B10A8F09757ED511C3D56EAA4D427" />
+            <ComponentRef Id="cmp2CD3E08B55E9E9F7C2EE7FD6177587F8" />
+            <ComponentRef Id="cmpB372CD363A708A6033720A64C7A02EE5" />
+            <ComponentRef Id="cmp139D31ADA3970188C711313EB93A2581" />
+            <ComponentRef Id="cmp62B3F4AC2EBB41EDF7C843D5135DBFE7" />
+            <ComponentRef Id="cmpA016644A640F5610C5D4801A1E4AD865" />
+            <ComponentRef Id="cmpAF696216D85FD8A12FAEC676650930B9" />
+            <ComponentRef Id="cmpE44721F8A5AD6CC95745E843C327DF0D" />
+            <ComponentRef Id="cmp1308630F20D816356B3646FDCA0CE3AA" />
+            <ComponentRef Id="cmp58D85FA4A7A8F02E3A2A8D5C79EA08E5" />
+            <ComponentRef Id="cmpA4F0A741209DCDF4011AA5003F5FC633" />
+            <ComponentRef Id="cmp9E0588517E0CC892BC49C0D80D8362A9" />
+            <ComponentRef Id="cmpA1D5A3CA980F5ED6050ADF4EC7F6F73C" />
+            <ComponentRef Id="cmp66AAEB02822998B72653E0638DE34C8A" />
+            <ComponentRef Id="cmp566D3604E657BBDFEAFC8760489C73B7" />
+            <ComponentRef Id="cmp2291BB688010619DC72BA1BB29E13B5C" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

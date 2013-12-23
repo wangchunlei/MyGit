@@ -1,0 +1,248 @@
+﻿TOPIC
+    about_StudioShell
+
+COPYRIGHT
+   Copyright (c) 2011 Code Owls LLC
+ 
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+   
+   For more information see about_StudioShell_License
+   
+SHORT DESCRIPTION
+    Deeply integrates Visual Studio extensibility features with a PowerShell
+    session.
+
+LONG DESCRIPTION
+	StudioShell exposes most of the IDE and programmatic features of Visual 
+	Studio as part of a PowerShell provider.  In addition, StudioShell adds
+	several behaviors to Visual Studio that simplify using PowerShell
+	as a way to interact with your code, projects, and IDE.
+	
+	StudioShell supports the following features:
+
+  Profile Scripts 
+	
+	StudioShell fully supports for your existing PowerShell profile scripts.
+	In addition, you can save customizations that are specific to StudioShell 
+	in a StudioShell profile script.
+	
+	For more information type:
+		
+		get-help about_StudioShell_Profiles
+		
+  Solution Modules
+  
+	StudioShell recognizes a special PowerShell module located in a solution 
+	as a "Solution Module".  These Solution Modules are automatically imported
+	when the solution is loaded into the IDE, and removed when the solution is
+	closed, making them a great way to save	StudioShell customizations on a 
+	per-solution basis.
+	
+	For more information type:
+		
+		get-help about_StudioShell_Solution_Modules
+		
+  DTE Drive
+	
+	StudioShell surfaces most of the Visual Studio extensibility features
+	through a special PowerShell drive named "dte".  This drive allows you
+	to access things like the IDE windows, menus, projects, files, and code
+	as if they were just files on your hard drive.
+	
+	For more information type:
+		
+		get-help PSDTE
+		get-help about_StudioShell_Drives
+	
+  PowerShell-based IDE Commands
+  
+	PowerShell scripts can be invoked by Visual Studio IDE elements, such as 
+	menus and toolbar buttons.  You can create elaborate and powerful UI 
+	customizations using nothing but PowerShell.
+	
+	For more information type:
+		
+		get-help dte:/commands new-item
+		get-help dte:/commandbars new-item
+
+  Data Visualizations
+  
+	StudioShell includes several simple data visualization cmdlets that make
+	quick work of summarizing or organizing data from your PowerShell session.
+	
+ 	For more information type:
+		
+		get-help about_StudioShell_Data_Panes
+  
+  Automatic Variables
+  
+	StudioShell extends the PowerShell session with several variables that
+	track certain Visual Studio states, such as the currently selected project
+	or code element, the active window, or the current stack frame.
+	
+	For more information type:
+		
+		get-help about_StudioShell_Variables
+		
+  Host Agnostic
+
+	StudioShell includes two basic consoles - one that docks in the Visual 
+	Studio IDE and the default process I/O console.  However, StudioShell is 
+	designed to provide access to the Visual Studio extensibility features
+	in any PowerShell console.
+	
+    For more information type:
+    
+        get-help about_StudioShell_Hosts
+			
+USING STUDIOSHELL
+
+	StudioShell provides two consoles, an integrated console window that
+	docks in the Visual Studio UI, and the default process console that behaves
+	like the standard PowerShell executable.  However, you can use StudioShell 
+	from almost any PowerShell host.
+	
+  	From the StudioShell console:
+	
+		You do not need to do anything to use StudioShell features from one of 
+		the included consoles.  These consoles load the StudioShell module
+		automatically.
+	
+  	From NuGet, PowerGUI VSX, or the PowerShell console:
+	
+		Open your console and type:
+		
+			import-module studioshell
+		
+		This will load the studioshell module into your PowerShell host, run
+		any initialization scripts necessary, and set up the DTE
+		provider inside of your chosen host.
+
+GETTING STARTED
+
+	Once the StudioShell module is loaded, you can start poking around by 
+	typing the following:
+	
+		cd dte:
+				
+	This will change your current directory to the dte: drive, which represents
+	the root of the Visual Studio IDE.  Then type:
+	
+		ls
+		
+	or
+	
+		dir
+		
+	to get a list of the major areas of Visual Studio you can access from 
+	the console:
+	
+
+	    Container: PSDTE::\
+
+
+		           Name                    
+		---------- ----                    
+		d  <       AddIns                  
+		d+ <       CommandBars             
+		d+ <       Commands                
+		d  <       Debugger                
+		d+ <       Errors                  
+		d+ <       OutputPanes             
+		d  <       Properties              
+		d  <       SelectedItems           
+		d  <       Solution                
+		d+ <       Tasks                   
+		d  <       Templates               
+		d+ <       WindowConfigurations    
+		d  <       Windows                 
+
+
+	
+	StudioShell leverages common PowerShell cmdlets whenever possible.  One 
+	thing you should note is the sequence of characters in the left-most
+	column.  This column indicates what common cmdlets are available at each 
+	node location.  This column is used throughout the StudioShell DTE: drive
+	as a way of indicating what nodes support what operations.
+	
+	The available cmdlets are encoded as follows:
+	
+		d : the node can contain child elements, and you can use the 
+			set-location and get-childitems cmdlets on this node.
+			
+		+ : the node supports the new-item cmdlet.
+		
+		~ : the node supports the remove-item cmdlet.
+		
+		< : the node supports the get-item cmdlet.
+		
+		> : the node supports the set-item cmdlet.
+		
+		0 : the node supports the clear-item cmdlet.
+		
+		c : the node supports the copy-item cmdlet.
+		
+		m : the node supports the move-item cmdlet.
+		
+		r : the node supports the rename-item cmdlet.
+		
+		i : the node supports the invoke-item cmdlet.
+		
+	In short, the same cmdlets you would use to work with files will also
+	work with your projects, the menus, your code, etc.  For example, this
+	command will create a new file:
+	
+		new-item -path c:\myfile.txt -type file -value "Hello World!"
+		
+	and this command will create a new menu item:
+	
+		new-item -path dte:\commandBars\menuBar\help\MyMenuItem
+	
+	While there are not many new cmdlets to learn, some common cmdlets can
+	accept parameters specific to the path with which you're trying to work.
+	These parameters are documented for StudioShell paths - simply call 
+	get-help for the cmdlet you wish to use, and specify the path in the cmdlet's
+	path parameter:
+	
+		get-help new-item -path dte:\commandBars\menuBar\help
+	
+	For a complete list of StudioShell-specific commands, type:
+	
+		get-command -module StudioShell
+
+QUICK EXAMPLE
+
+	1) Open the StudioShell console using the instructions in USING STUDIOSHELL.
+	2) Open a solution you've been working on recently.
+	3) In the StudioShell console, type the following (note that the example spans
+		several lines for readability, but you should enter this as one line):
+	
+		dir dte:/solution/codemodel -recurse | 
+			where { $_ -match 'class' } | 
+			set-itemproperty -name Comment -value "updated by StudioShell"
+			
+	This will place a comment before every class in your solution.
+
+SEE ALSO
+    http://studioshell.codeplex.com
+    http://www.studioshell.org
+    about_StudioShell_License
+    about_StudioShell_Version
+    about_StudioShell_Profiles
+    about_StudioShell_Settings
+    about_StudioShell_Drives
+    about_StudioShell_Variables
+    about_StudioShell_Data_Panes
+    about_StudioShell_Hosts
+	about_StudioShell_Solution_Modules
+    PSDTE

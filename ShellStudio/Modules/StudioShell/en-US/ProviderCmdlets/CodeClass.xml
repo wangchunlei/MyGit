@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CmdletHelpPath ID="CodeClass">
+  <!-- New-Item -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+            New-Item
+          </command:name>
+      <maml:description>
+        <maml:para>Creates a new class-level code element.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>Item</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>At this path location, you can use the New-Item cmdlet to create a new class-level code element.</maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <!-- new class or struct -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Bases</maml:name>
+          <maml:description>
+            <maml:para>The list of base types for the new class or struct.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ImplementedInterfaces</maml:name>
+          <maml:description>
+            <maml:para>The list of implemented interfaces for the new class, struct, or interface.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new attribute -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true" position="named">
+          <maml:name>Value</maml:name>
+          <maml:description>
+            <maml:para>A comma separated list of parameter values.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new method -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MethodType</maml:name>
+          <maml:description>
+            <maml:para>The type of method to create.  Either method, constructor, destructor, operator, virtual, or abstract.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.MethodType</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MemberType</maml:name>
+          <maml:description>
+            <maml:para>The type returned by the method or property.  Specify a full type name or "void" to indicate no return value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new property -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MemberType</maml:name>
+          <maml:description>
+            <maml:para>The type returned by the method or property.  Specify a full type name or "void" to indicate no return value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Get</maml:name>
+          <maml:description>
+            <maml:para>Creates a readable property.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">bool</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Set</maml:name>
+          <maml:description>
+            <maml:para>Creates a writeable property.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">bool</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new event or delegate -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MemberType</maml:name>
+          <maml:description>
+            <maml:para>The type of the event or delegate.  Specify a full type name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new variable -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MemberType</maml:name>
+          <maml:description>
+            <maml:para>The type of the event or delegate.  Specify a full type name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Value</maml:name>
+          <maml:description>
+            <maml:para>The value of the variable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">object</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- new enum -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Bases</maml:name>
+          <maml:description>
+            <maml:para>The base type for the new enum.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AccessLevel</maml:name>
+          <maml:description>
+            <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AccessLevel</maml:name>
+        <maml:description>
+          <maml:para>The access level, either public, private, protected, internal, or protected internal.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.AccessLevel</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Default</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Bases</maml:name>
+        <maml:description>
+          <maml:para>The base type for the new class or struct.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Get</maml:name>
+        <maml:description>
+          <maml:para>Creates a readable property.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ImplementedInterfaces</maml:name>
+        <maml:description>
+          <maml:para>The list of implemented interfaces for the new class, struct, or interface.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string[]</command:parameterValue>
+        <dev:type>
+          <maml:name>string[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ItemType</maml:name>
+        <maml:description>
+          <maml:para>
+                The type of code element to create.  Appropriate values for this path include "parameter", "attribute", "class", "delegate", "enum", "event", "method", "property", "interface", "namespace", "struct", "variable", or "import".
+              </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>MemberType</maml:name>
+        <maml:description>
+          <maml:para>The type of the method, property, variable, event, or delegate.  Specify a full type name, or "void" for methods that return no value.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>MethodType</maml:name>
+        <maml:description>
+          <maml:para>The type of method to create.  Either method, constructor, destructor, operator, virtual, or abstract.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">CodeOwls.StudioShell.PathNodes.MethodType</command:parameterValue>
+        <dev:type>
+          <maml:name>CodeOwls.StudioShell.PathNodes.MethodType</maml:name>
+          <maml:uri />
+          <dev:defaultValue>method</dev:defaultValue>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>The name of the new code element.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path to the code element container.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Position</maml:name>
+        <maml:description>
+          <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Value</maml:name>
+        <maml:description>
+          <maml:para>The value of the variable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">object</command:parameterValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Set</maml:name>
+        <maml:description>
+          <maml:para>Creates a writeable property.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                You can pipe a variable or attribute parameter value to the New-Item cmdlet at this location.
+              </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+          <maml:description>The new code element.</maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                The New-Item cmdlet adds the specified code element to the code model and returns the added code element.
+              </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -Path .\MyNamespace\MyClass\MyNewMethod -Type Method -MemberType 'System.String'
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command creates a new private method named MyMethod in the class MyClass.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -Path ./MyNameSpace/MyClass -name MyEvent -type event -membertype System.EventHandler -access public
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command adds a new public event to the MyClass class.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_Providers</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Invoke-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Rename-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Move-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Copy-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</CmdletHelpPath>

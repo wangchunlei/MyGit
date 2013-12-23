@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
+
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<helpItems schema="maml" xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev=
+               "http://schemas.microsoft.com/maml/dev/2004/10">
+      <command:details>
+        <command:name>Out-Chart</command:name>
+        <maml:description>
+          <maml:para>Displays numeric and categorical data in a chart pane.</maml:para>
+        </maml:description>
+        <maml:copyright>
+          <maml:para />
+        </maml:copyright>
+        <command:verb>Out</command:verb>
+        <command:noun>Chart</command:noun>
+        <dev:version />
+      </command:details>
+      <maml:description>
+        <maml:para>This cmdlet displays a graphical summary of data obtained from a pipeline.  The cmdlet can create line, bar, column, pie, point, area, and spline charts.</maml:para>
+      </maml:description>
+      <command:syntax>
+        <command:syntaxItem>
+          <command:name>Out-chart</command:name>
+          <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+            <maml:name>ChartType</maml:name>
+            <maml:description>
+              <maml:para>The type of chart to create.  Can be &quot;area&quot;, &quot;bar&quot;, &quot;column&quot;, &quot;line&quot;, &quot;pie&quot;, &quot;point&quot;, or &quot;spline&quot;.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          </command:parameter>
+
+          <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+            <maml:name>GroupAxis</maml:name>
+            <maml:description>
+              <maml:para>The property to use as the category axis.  E.g., in a bar chart, this property would contain the name under each bar.</maml:para>
+			  <maml:para>Aliases: X, Label, Group, Category.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          </command:parameter>
+          
+          <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+            <maml:name>Include</maml:name>
+            <maml:description>
+              <maml:para>The properties to use as the data axis.  E.g., in a bar chart, this property would contain the numeric value for each bar.</maml:para>
+			  <maml:para>Aliases: Columns, Property, DataAxis, Y.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          </command:parameter>
+          
+          <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="Named">
+            <maml:name>Input</maml:name>
+            <maml:description>
+              <maml:para>The data to display in the chart.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          </command:parameter>
+          
+          <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="0">
+            <maml:name>Name</maml:name>
+            <maml:description>
+              <maml:para>The name of the data pane in which to display the chart.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          </command:parameter>
+        </command:syntaxItem>
+      </command:syntax>
+      <command:parameters>
+
+        <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+          <maml:name>ChartType</maml:name>
+          <maml:description>
+            <maml:para>The type of chart to create.  Can be &quot;area&quot;, &quot;bar&quot;, &quot;column&quot;, &quot;line&quot;, &quot;pie&quot;, &quot;point&quot;, or &quot;spline&quot;.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>bar</dev:defaultValue>
+        </command:parameter>
+
+        <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+          <maml:name>GroupAxis</maml:name>
+          <maml:description>            
+			<maml:para>The property to use as the category axis.  E.g., in a bar chart, this property would contain the name under each bar.</maml:para>
+			  <maml:para>Aliases: X, Label, Group, Category.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="true" variableLength="false" globbing="false" pipelineInput="false" postion="Named">
+          <maml:name>Include</maml:name>
+          <maml:description>
+            <maml:para>The properties to use as the data axes.  E.g., in a bar chart, this property would contain the numeric value for each bar.</maml:para>
+			<maml:para>Aliases: Columns, Property, DataAxis, Y.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="Named">
+          <maml:name>Input</maml:name>
+          <maml:description>
+            <maml:para>The data to display in the chart.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="0">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the data pane in which to display the chart.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Data</dev:defaultValue>
+        </command:parameter>
+        
+      </command:parameters>
+      <command:inputTypes>
+        <command:inputType>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para />
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:inputType>
+      </command:inputTypes>
+      <command:returnValues>
+        <command:returnValue>
+          <dev:type>
+            <maml:name>None</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para />
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:returnValue>
+      </command:returnValues>
+      <command:terminatingErrors />
+      <command:nonTerminatingErrors />
+      <maml:alertSet>
+        <maml:title />
+        <maml:alert>
+          <maml:para />
+        </maml:alert>
+      </maml:alertSet>
+      <command:examples>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 1 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>C:\PS&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>ls | where{ !$_.PSIsContainer } | out-chart -charttype pie -groupaxis Name -dataaxis Length</dev:code>
+          <dev:remarks>
+            <maml:para>Displays a pie chart of file sizes in the current directory.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 2 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>DTE:\Solution\CodeModel\MyProject&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>$allMethods = ls -recurse | where {  -match 'method' };
+          $methodData = $allMethods | select-object Name,@{'Name'='ParameterCount';'Expression'={[int]@(.Parameters).Count}};
+          $methodData | out-chart -charttype bar -groupaxis Name -dataaxis ParameterCount</dev:code>
+          <dev:remarks>
+            <maml:para>Displays a bar chart of the numer of parameters accepted by each method defined in the MyProject project.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+      </command:examples>
+      <maml:relatedLinks>
+        <maml:navigationLink>
+          <maml:linkText>Out-Grid</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-Chart</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-HTML</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+      </maml:relatedLinks>
+    </command:command>
+   
+    <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev=
+               "http://schemas.microsoft.com/maml/dev/2004/10">
+      <command:details>
+        <command:name>Out-Grid</command:name>
+        <maml:description>
+          <maml:para>Displays data from the pipeline in a grid.</maml:para>
+        </maml:description>
+        <maml:copyright>
+          <maml:para />
+        </maml:copyright>
+        <command:verb>Out</command:verb>
+        <command:noun>Grid</command:noun>
+        <dev:version />
+      </command:details>
+      <maml:description>
+        <maml:para>Displays pipeline data in a grid.  Input object properties are isolated in columns.</maml:para>
+      </maml:description>
+      <command:syntax>
+        <command:syntaxItem>
+          <command:name>Out-Grid</command:name>
+          <command:parameter require="false" variableLength="false" globbing="true" pipelineInput="false" postion="0">
+            <maml:name>Include</maml:name>
+            <maml:description>
+              <maml:para>The list of input object properties to include in the grid. Wildcard patterns are accepted.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          </command:parameter>
+
+          <command:parameter require="false" variableLength="false" globbing="true" pipelineInput="false" postion="0">
+            <maml:name>Exclude</maml:name>
+            <maml:description>
+              <maml:para>The list of input object properties to exclude from the grid. Wildcard patterns are accepted.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          </command:parameter>
+
+          <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="0">
+            <maml:name>Input</maml:name>
+            <maml:description>
+              <maml:para>The list of objects to display in the grid.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          </command:parameter>
+          
+          <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="0">
+            <maml:name>Name</maml:name>
+            <maml:description>
+              <maml:para>The name of the data pane in which to display the grid.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          </command:parameter>
+        </command:syntaxItem>
+      </command:syntax>
+      <command:parameters>
+        <command:parameter require="false" variableLength="false" globbing="true" pipelineInput="false" postion="0">
+          <maml:name>Include</maml:name>
+          <maml:description>
+            <maml:para>The list of input object properties to include in the grid. Wildcard patterns are accepted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="false" variableLength="false" globbing="true" pipelineInput="false" postion="0">
+          <maml:name>Exclude</maml:name>
+          <maml:description>
+            <maml:para>The list of input object properties to exclude from the grid. Wildcard patterns are accepted.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="0">
+          <maml:name>Input</maml:name>
+          <maml:description>
+            <maml:para>The list of objects to display in the grid.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+
+        <command:parameter require="false" variableLength="false" globbing="false" pipelineInput="false" postion="0">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the data pane in which to display the grid.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Data</dev:defaultValue>
+        </command:parameter>
+      </command:parameters>
+      <command:inputTypes>
+        <command:inputType>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para>The objects to display in the grid.</maml:para>
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:inputType>
+      </command:inputTypes>
+      <command:returnValues>
+        <command:returnValue>
+          <dev:type>
+            <maml:name>None.</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para />
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:returnValue>
+      </command:returnValues>
+      <command:terminatingErrors />
+      <command:nonTerminatingErrors />
+      <maml:alertSet>
+        <maml:title />
+        <maml:alert>
+          <maml:para />
+        </maml:alert>
+      </maml:alertSet>
+      <command:examples>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 1 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>C:\PS&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>ls | out-grid -name files</dev:code>
+          <dev:remarks>
+            <maml:para>Displays the contents of the current directory in a grid.  The grid is placed in a data pane named &quot;files&quot;.  All properties of each file info item are displayed in the grid.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 2 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>ls -recurse | out-grid -include Name,Kind</dev:code>
+          <dev:remarks>
+            <maml:para>Displays every code element in Program.cs in a grid.  Only the Name and Kind properties are displayed.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+      </command:examples>
+      <maml:relatedLinks>
+        <maml:navigationLink>
+          <maml:linkText>Out-Grid</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-Chart</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-HTML</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+      </maml:relatedLinks>
+    </command:command>
+   
+    <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev=
+               "http://schemas.microsoft.com/maml/dev/2004/10">
+      <command:details>
+        <command:name>Out-HTML</command:name>
+        <maml:description>
+          <maml:para>Displays the contents of the pipeline in an HTML window.</maml:para>
+        </maml:description>
+        <maml:copyright>
+          <maml:para />
+        </maml:copyright>
+        <command:verb>Out</command:verb>
+        <command:noun>HTML</command:noun>
+        <dev:version />
+      </command:details>
+      <maml:description>
+        <maml:para>Displays the contents of the pipeline in an HTML window.</maml:para>
+		<maml:para>The HTML window created by this cmdlet is a full Visual Studio tool window rather than a data pane.</maml:para>
+      </maml:description>
+      <command:syntax>
+        <command:syntaxItem>
+          <command:name>Out-HTML</command:name>
+          <command:parameter require="true" variableLength="true" globbing="false" pipelineInput="true" postion="0">
+            <maml:name>Input</maml:name>
+            <maml:description>
+              <maml:para>The data to display.</maml:para>
+            </maml:description>
+            <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          </command:parameter>
+        </command:syntaxItem>
+      </command:syntax>
+      <command:parameters>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+          <maml:name>Input</maml:name>
+          <maml:description>
+            <maml:para>The data to display.  If an HTML string is supplied, it is rendered without modification.  A collection of objects is formatted using ConvertTo-HTML.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue />
+        </command:parameter>
+      </command:parameters>
+      <command:inputTypes>
+        <command:inputType>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para>A preformatted HTML string, or an object to format as HTML.</maml:para>
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:inputType>
+      </command:inputTypes>
+      <command:returnValues>
+        <command:returnValue>
+          <dev:type>
+            <maml:name>None.</maml:name>
+            <maml:uri />
+            <maml:description>
+              <maml:para />
+            </maml:description>
+          </dev:type>
+          <maml:description />
+        </command:returnValue>
+      </command:returnValues>
+      <command:terminatingErrors />
+      <command:nonTerminatingErrors />
+      <maml:alertSet>
+        <maml:title />
+        <maml:alert>
+          <maml:para />
+        </maml:alert>
+      </maml:alertSet>
+      <command:examples>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 1 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>C:\PS&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>ls | out-html</dev:code>
+          <dev:remarks>
+            <maml:para>Displays a web page containing information about the contents of the current directory.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 2 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>C:\PS&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>$currentStackFrame.Locals | out-html</dev:code>
+          <dev:remarks>
+            <maml:para>Displays a web page containing the list of local variable and parameter values that are in the current stack frame.</maml:para>
+            <maml:para>This example is only effective when the debugger is running and stopped at a breakpoint.</maml:para>
+            <maml:para>This example uses the $currentStackFrame automatic variable.  This variable always returns the topmost stack frame in the debugged process.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+        <command:example>
+          <maml:title>--------------  EXAMPLE 3 --------------</maml:title>
+          <maml:introduction>
+            <maml:para>C:\PS&amp;gt;</maml:para>
+          </maml:introduction>
+          <dev:code>ls | convertto-html -property Name,Length | out-html</dev:code>
+          <dev:remarks>
+            <maml:para>Displays a web page containing the list of local file names and lengths.</maml:para>
+            <maml:para />
+            <maml:para />
+            <maml:para />
+            <maml:para />
+          </dev:remarks>
+          <command:commandLines>
+            <command:commandLine>
+              <command:commandText />
+            </command:commandLine>
+          </command:commandLines>
+        </command:example>
+      </command:examples>
+      <maml:relatedLinks>
+        <maml:navigationLink>
+          <maml:linkText>Out-HTML</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-Chart</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+        <maml:navigationLink>
+          <maml:linkText>Out-Grid</maml:linkText>
+          <maml:uri />
+        </maml:navigationLink>
+      </maml:relatedLinks>
+    </command:command>
+
+</helpItems>

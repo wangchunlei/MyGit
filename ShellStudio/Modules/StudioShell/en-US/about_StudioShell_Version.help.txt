@@ -1,0 +1,363 @@
+﻿TOPIC
+    about_StudioShell_Version
+
+VERSION
+    You are running version 1.5 of StudioShell.
+
+CHANGE LOG
+  Description
+    The changelog documents the changes placed in each release of 
+	StudioShell.  Each item is identified by its codeplex work item 
+	number(s) if available.
+
+1.5
+  Resolved Issues
+  1.5.1
+    55: Visual Studio version detection in nuget install script now uses product version 
+    of the environment command line.  
+
+    55: Installer now checks for OLE object definitions in HKCR to verify existence
+    of Visual Studio installations.
+
+    Tab expansion works again for variable names.
+
+    50: Error management and reporting has been revamped in several ways.  First, 
+    exceptions explicitly thrown from the console are now reported rather than silently
+    disappearing.  Second, errors that occur during non-interactive use of the runspace,
+    such as calculating the prompt or running a scriptblock as part of a menu item, no 
+    longer propagate out to the Visual Studio process as exceptions.
+
+  1.5.0
+    You can now add a reference to a project by its name when the project is 
+    contained in a solution folder.
+
+    The installer no longer assumes default install locations, and instead
+    uses paths from the registry to locate prerequisites.
+
+    Canceling a running pipeline (CTRL+SHIFT+C) doesn't require you to Tonya 
+    Harding the entire runspace anymore.    
+	
+    Fixed rename-item implementation to work against multiple matched path 
+    nodes.
+
+	Fixed CanGet property logic in ShellCodeProperty2.
+
+	Removed dependency on PostSharp; this allows StudioShell and PostSharp to be
+	successfully used in the same instance of Visual Studio.
+
+	Fixed initialization script errors related to stricter variable interpolation
+	rules introduces in PowerShell v3.
+    
+    Addressed several issues with command bars; in particular, comboboxes have 
+    been removed as a control option since you can't create them via automation 
+    anyway.
+    
+    Buttons are now the default itemtype for new-item when working in the 
+    commandbars path node.
+    
+    The default StudioShell prompt was updated to remove the PowerShell 
+    Provider Path preamble in v3 hosts.
+    
+    42: Massive changes to NuGet init.ps1 logic.  NuGet package now verifies 
+    the state of your Visual Studio session, as well as checking for installed 
+    versions of StudioShell before attempting a module install.
+    
+    New-Item in solution/projects no longer appends project file extension to 
+    project name.  This can cause the VS template mechanism to fail in some 
+    situations and seems to set off VS2012 in a big way.    
+    
+    26: Tab expansion behaves closer to the console standard.
+    
+    The StudioShell module no longer adds its internal Scripts folder to the 
+    path.  This was causing commands to be discovered as both functions of the 
+    module and script files, and generally mucking up the help for these 
+    script-based commands.
+    
+    MSI installer now modifies Visual Studio current user registry settings, 
+    rather than machine-wide settings.
+    
+    27: Importing into the ISE is now functional.
+		
+  Added Features
+  1.5.1:
+    51: Added intercept for unsupported console applications.  Attempting to
+    run an known interactive console application from the StudioShell console
+    will result in an error as it does in the ISE console.
+
+  1.5.0:
+    Added StudioShellVersion entry to existing psversiontable variable.    
+
+    43: Add-in and build install support for VS 2012.
+
+	Support for PowerShell v3 hosts.
+    
+    Support for PowerShell v3 tab expansion mechanisms.       
+    
+    Invoke-Item now supported on commandbar buttons (menu items with actions, 
+    but not popups).  Note that an error is raised if the commandbar button 
+    is disabled when invoked; because of this, buttons linked to scriptblocks 
+    are not immediately invokable, since these buttons are disabled when the 
+    StudioShell runspace is unavailable (such as during a call to invoke-item). 
+    
+    Cache templates are now listed in the dte:/templates hive.
+	
+    Added Pester unit tests to source hive.       
+    
+1.3
+  Resolved Issues
+    1.3.1
+	The initial release of 1.3 contained a bug that broke the path topology
+	management mechanism, effectively leaving the following path nodes useless:
+	/solution/codemodel 
+	/selectedItems/codemodel
+
+    1.3.0
+	23: Project folders now support the new-item cmdlet properly.
+
+  	31: The exit command closes the console window but not reset the PowerShell
+		session.  A new menu command was added to reset the session.  This
+		command effectively associates a new PowerShell runspace with the
+		StudioShell console.
+
+		The reason the exit command doesn't reset the console session is 
+		that there are many features of StudioShell that rely on the under-
+		lying PowerShell runspace backing the console.  E.g., solution 
+		modules.		
+
+	25, 32: The StudioShell console now supports multi-line statements and 
+		nested prompting.  E.g., if you enter a command and a pipe, the 
+		console will prompt you for the next pipeline command.
+
+	36: The NuGet initialization script would fail if the AddIns folder did not
+		exist.  Now the AddIn folder is explicitly created.
+		
+	38: It was not possible to specify a path to an assembly file when adding
+		a reference to the dte:/solution/projects/.../references node.
+		PowerShell would interpret the file path as part of the item path.
+		The reference collection node was modified to accept an assembly
+		path or name in the new-item -value parameter.
+
+  Added Features
+
+1.2
+  Resolved Issues
+	The user's home drive is no longer assumed to be the same drive on which
+	StudioShell is installed.  Previously scripts used the "home folder" ~
+	assuming it always referenced the user's home folder (a la the Linux 
+	meaning of ~) which is typically c:\users\<username>.  If StudioShell is
+	installed on the C: drive, but the user's home drive is, say, H:, the 
+	settings data and profile scripts would not be accessed properly, resulting
+	in strange behavior in the console.
+	
+	The 'exit' command just hides the console; reinitializing the runspace 
+	proved to cause unintented side-effects when the UI has been altered with
+	custom script commands. 
+	
+	Visual Studio command objects are now guaranteed to always have a name.  
+	Previously commands that didn't have name were unreferenceable, but would
+	appear in the list of items in the command path node.  This would disrupt
+	the console output and falsely show multiple containers under the command
+	node.  Nameless commands are now identified by their numeric ID value.
+	
+	Formats are now defined and working for the following path nodes:
+	  * project templates
+	  * project item templates
+	  * tasks
+	  * errors
+	  * addins
+	  * fonts / color settings
+
+	10: The default console warning and error color selections are 
+		readible (color on black background)
+
+	17: Slashes are normalized as backslashes (\) in PSDTE paths even though 
+		forward slashes (/) are clearly superior.
+
+		In addition, the dte:/ drive name is no longer present in the 
+		PSPath information returned by the provider.
+		
+		For more information on this path issue see:
+		http://www.nivot.org/post/2010/03/05/PowerShellThePatchworkOfPathsPSPathsAndProviderPaths.aspx
+
+	19: Variables are now tested for existence before attempting to
+		create them to avoid errors; e.g., the $dte variable is already 
+		defined in the NuGet Package Manager Console, and attempting
+		to redefine the variable results in an error.
+
+		A list of variables that cannot be defined is still issued
+		in a debug message to the console, with one exception - 
+		if the $dte variable already exists, it is assumed to be 
+		the root DTE variable for the Visual Studio Shell and no 
+		message is issued.
+
+	23: Project folders now support the ability to add new items.
+
+	24: Support for read-host is now properly implemented.  Both -prompt and 
+		-assecurestring parameters behave as they do in the standard PowerShell 
+		console.
+
+  Added Features    
+	The Cancel Executing Pipeline command actually works now.  At some
+		point while toying with NuGet support, I had disabled this command
+		functionality.  In addition, the pipeline monitoring backing the
+		command is now off of the main UI thread; this makes canceling pipes
+		that are leveraging UI-thread items (such as Visual Studio) more
+		responsive.
+
+    Accessing AddIns no longer crashes VisualStudio.  The AddIns node 
+		now closes access to the AddIn.Instance property; accessing this 
+		property apparantly causes Visual Studio to crash.  Don't know why.
+
+	Improved support for usage from NuGet.  All of the StudioShell PSDTE
+		functionality is available from the NuGet Package Manager Console once
+		you import the StudioShell module.  Previously, menu items and commands 
+		added via the DTE drive would be created, but would never execute if
+		created from the package manager console.  
+		
+		See http://studioshell.codeplex.com/discussions/255426 and
+		http://studioshell.codeplex.com/discussions/255413
+
+	Integrated NuGet Packaging with StudioShell build.  StudioShell can now
+		be installed via NuGet.  Search for the package named "StudioShell" in
+		the public NuGet package repository.  
+
+	Support for using the PSDTE provider outside of Visual Studio.  You can now
+		load the PSDTE provider in a standard PowerShell console and get access
+		to the DTE: drive without running Visual Studio explicitly.  
+		
+		Support for	this scenario should be considered beta; some aspects of 
+		the DTE: drive behave differently outside of Visual Studio.  In 
+		addition, the visualization	cmdlets available in StudioShell do not work 
+		from the console.				
+		
+	Support for SQL Server Management Studio (SSMS) installations.  SSMS support
+		is experimental at the moment.  Moreover, several key path nodes are not
+		supported by SSMS and are therefore not available on the DTE drive: 
+
+		* the project hive cannot be manipulated because the SSMS object model
+		  does not support it.
+
+		* there is no code model implemented for T-SQL, and therefore there are
+		  no code model hives in the DTE drive in SSMS.
+
+		* it is very likely that other portions of the DTE drive are 
+		  non-functional or at least unstable.
+		  
+		You have been warned, use with _extreme caution_.
+
+  DTE Drive Path Topology Changes
+    
+	Code Model Relocation
+	
+	The code model is now isolated from project items.  In previous versions, the
+	code model was available as a hive beneath each particular project item:
+
+	dte:/solution/projects/<project name>/<item name>/codemodel
+
+	Project item properties were available in a peer of the code model node:
+
+	dte:/solution/projects/<project name>/<item name>/itemproperties
+
+	This path topology proved inefficient for working with project items.  The
+	code model hive is generally massive in comparison, making recursive 
+	operations targeting the project items cumbersome and slow.  E.g.,:
+
+	ls dte:/solution/projects -recurse -include 'packages.config'
+
+	Moving the code model addresses this issue, and provides a cleaner
+	and simpler path topology.  Project items remain in the same location:
+
+	dte:/solution/projects/<project name>/<item name>/itemproperties
+
+	The code model hive is now available under the following node:
+
+	dte:/solution/codemodel/<project name>/<item name>/
+
+	The code model is still organized by project and file, which is necessary
+	to permit modifying operations to the code model.
+	
+	Selected Items Reorganization
+
+  	Previously the SelectedItems path node listed currently selected code model
+	elements individually; in this release the SelectedItems node is expanded with 
+	a new CodeModel container node that houses the currently selected code model
+	objects.
+
+1.1 (private release)
+  Resolved Issues
+    7: clear-item is now supported in the default console
+
+	8: UI thread deadlocking has been addressed in all cases except nested 
+		consoles.
+
+	13: using shift-home and shift-end in default console selects from the 
+		current position to start-of-input and end-of-input respectively.
+
+	14: tab completion now manages existing quotes and adds missing quotes 
+		to paths as required
+
+	using 'exit' in the default studioshell console now releases the existing
+		runspace.  re-opening the console will create a new runspace initialized 
+		to the default studioshell state.
+
+  Added Features
+    Added support for unregister-<SolutionModuleName> function in solution
+		modules.  This function will be invoked just before the module
+		is removed from the session.  The existing mechanism for catching
+		the unload event for the solution module proved too difficult for
+		the author to remember reliably:
+
+		$m = $MyInvocation.MyCommand.ScriptBlock.Module;
+		$m.OnRemove = {
+			# ...
+		}
+
+		This method still works of course, but you can now opt for the
+		simpler and more understandable:
+		
+		function unregister-MySolutionModule
+		{
+			#..
+		}
+
+    Project item properties are now available in the DTE hive:
+	    ls dte:/solution/projects/MyProject/Program.cs/itemproperties
+
+		See http://studioshell.codeplex.com/discussions/248899
+1.0.1 
+  Resolved Issues
+	1: Tab completion and history walking have been hardened in the console.
+
+	2,6: Solution Folders are now recognized as containers in the console.
+
+	5: Solution Modules are now unloaded automatically if the 
+		"AutoManageSolutionProfiles" setting is enabled.
+
+	9: The PowerShell AllUsersCurrentHost is no longer loaded.  The 
+		"LoadPowerShellProfiles" setting now only applies
+		to your Current User profile script located at 
+		~\documents\windowspowershell\profile.ps1.
+
+	11: Data panes (visualizations) now reliably appear in VS2010.
+
+	12: The default console window now consumes all available client area of
+		the tool window at startup.
+
+  Added Features
+	10: Project item properties are now avaialble in the path heirarchy.
+		See dte:/solution/projects/<project>/<file>/properties.
+
+	The locals and arguments nodes under the stack frame tree now add missing
+		quotes to strings when you attempt to set an expression value.
+
+	The default PowerShell module path is now added to the process environment
+		when StudioShell is started.
+	  
+1.0.0 
+  Initial Release
+
+SEE ALSO
+    http://studioshell.codeplex.com
+    http://www.studioshell.org
+    about_StudioShell_License
+    PSDTE

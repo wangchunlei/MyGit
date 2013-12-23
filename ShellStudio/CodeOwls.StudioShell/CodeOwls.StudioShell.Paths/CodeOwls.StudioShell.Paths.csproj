@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39F26A21-934A-49D2-92F1-2BB4AAA6014F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeOwls.StudioShell.Paths</RootNamespace>
+    <AssemblyName>CodeOwls.StudioShell.Paths</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.PowerShell.ConsoleHost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VSLangProj2, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VSLangProj80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="VSLangProj90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\CodeOwls.AssemblyInfo.cs">
+      <Link>Properties\CodeOwls.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CodeOwls.StudioShell.AssemblyInfo.cs">
+      <Link>Properties\CodeOwls.StudioShell.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Items\AddIns\ShellAddIn.cs" />
+    <Compile Include="Items\CodeModel\IShellCodeModelElement2.cs" />
+    <Compile Include="Items\CodeModel\NullShellCodeModelElement2.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeAttribute.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeAttributeArgument.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeClass.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeDelegate.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeEnum.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeEvent.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeImport.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeInterface.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeMethod.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeModelElement2.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeNamespace.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeParameter.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeProperty.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeProperty2.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeStruct.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeType.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeTypeReference.cs" />
+    <Compile Include="Items\CodeModel\ShellCodeVariable.cs" />
+    <Compile Include="Items\CommandBars\ShellCommandBar.cs" />
+    <Compile Include="Items\CommandBars\ShellCommandBarButton.cs" />
+    <Compile Include="Items\CommandBars\ShellCommandBarComboBox.cs" />
+    <Compile Include="Items\CommandBars\ShellCommandBarPopup.cs" />
+    <Compile Include="Items\Commands\ShellCommand.cs" />
+    <Compile Include="Items\Debugger\ShellBreakpoint.cs" />
+    <Compile Include="Items\Debugger\ShellDebugger.cs" />
+    <Compile Include="Items\Debugger\ShellExpression.cs" />
+    <Compile Include="Items\Debugger\ShellProcess.cs" />
+    <Compile Include="Items\Debugger\ShellStackFrame.cs" />
+    <Compile Include="Items\Debugger\ShellThread.cs" />
+    <Compile Include="Items\ProjectModel\ShellProject.cs" />
+    <Compile Include="Items\ProjectModel\ShellProjectItem.cs" />
+    <Compile Include="Items\ProjectModel\ShellReference.cs" />
+    <Compile Include="Items\ProjectModel\ShellSolutionFolder.cs" />
+    <Compile Include="Items\ProjectModel\ShellVSProject2.cs" />
+    <Compile Include="Items\PropertyModel\ShellColorableItem.cs" />
+    <Compile Include="Items\PropertyModel\ShellProperty.cs" />
+    <Compile Include="Items\ShellContainer.cs" />
+    <Compile Include="Items\ShellDTE.cs" />
+    <Compile Include="Items\ShellObjectFactory.cs" />
+    <Compile Include="Items\ShellSolution.cs" />
+    <Compile Include="Items\Templates\ShellTemplate.cs" />
+    <Compile Include="Items\UI\ShellErrorListItem.cs" />
+    <Compile Include="Items\UI\ShellOutputPane.cs" />
+    <Compile Include="Items\UI\ShellTaskList.cs" />
+    <Compile Include="Items\UI\ShellWindow.cs" />
+    <Compile Include="Items\UI\WindowConfiguration.cs" />
+    <Compile Include="Nodes\CodeModel\AccessLevel.cs" />
+    <Compile Include="Nodes\CodeModel\CodeAttributeArgumentNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeAttributeNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeClassNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeDelegateNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeElementNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeElementWithChildrenNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeEnumNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeEventNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeInterfaceNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeItemTypes.cs" />
+    <Compile Include="Nodes\CodeModel\CodeMethodNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeNamespaceNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeParameterNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodePropertyNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeStructNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\CodeVariableNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\FileCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\CodeModel\MethodType.cs" />
+    <Compile Include="Nodes\CodeModel\NewCodeElementItemParams.cs" />
+    <Compile Include="Nodes\CodeModel\ProjectCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\CollectionNodeFactoryBase.cs" />
+    <Compile Include="Nodes\CommandBars\CommandBarCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\CommandBars\CommandBarNodeFactory.cs" />
+    <Compile Include="Nodes\Commands\CommandCollectionPathNodeFactory.cs" />
+    <Compile Include="Nodes\Commands\CommandNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\BreakpointCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\BreakpointNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\DebuggerNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\ExpressionCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\ExpressionNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\ProcessCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\ProcessNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\StackFrameNodeFactory.cs" />
+    <Compile Include="Nodes\Debugger\ThreadNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\AddInNodeCollectionFactory.cs" />
+    <Compile Include="Nodes\DTE\AddInNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\RootNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\SelectedCodeModelItemNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\SelectedCodeModelItemsCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\SelectedItemsNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\SelectedProjectItemsNodeFactory.cs" />
+    <Compile Include="Nodes\DTE\SelectedProjectsNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\NewProjectItemManager.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectFolderCodeModelItemNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectFolderItemNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemNodeFactoryBase.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectItemTemplateCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ProjectNodeFactoryBase.cs" />
+    <Compile Include="Nodes\ProjectModel\ReferenceCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\ReferenceNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\SolutionCodeModelNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\SolutionNodeFactory.cs" />
+    <Compile Include="Nodes\ProjectModel\SolutionProjectsNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\ColorableItemFontsAndColorsPropertyNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\FontsAndColorsPropertyNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\PropertyCategoriesNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\PropertyCategoryNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\PropertyCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\PropertyNodeFactory.cs" />
+    <Compile Include="Nodes\PropertyModel\PropertyPageNodeFactory.cs" />
+    <Compile Include="Nodes\UI\ErrorListItemNodeFactory.cs" />
+    <Compile Include="Nodes\UI\ErrorListNodeFactory.cs" />
+    <Compile Include="Nodes\UI\OutputPaneCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\UI\OutputPaneNodeFactory.cs" />
+    <Compile Include="Nodes\UI\TaskItemCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\UI\TaskItemNodeFactory.cs" />
+    <Compile Include="Nodes\UI\WindowCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\UI\WindowConfigurationCollectionNodeFactory.cs" />
+    <Compile Include="Nodes\UI\WindowConfigurationNodeFactory.cs" />
+    <Compile Include="Nodes\UI\WindowNodeFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\CommandUtilities.cs" />
+    <Compile Include="Utility\DTEExtensions.cs" />
+    <Compile Include="Utility\FunctionUtilities.cs" />
+    <Compile Include="Utility\InternalErrorListProvider.cs" />
+    <Compile Include="Utility\WindowKinds.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Paths\CodeOwls.PowerShell.Paths.csproj">
+      <Project>{ED0453C7-C25A-4354-AC7A-046846D5E7FF}</Project>
+      <Name>CodeOwls.PowerShell.Paths</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Common\CodeOwls.StudioShell.Common.csproj">
+      <Project>{C7F94204-C1EC-4FC8-AF93-01C5E9E63671}</Project>
+      <Name>CodeOwls.StudioShell.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

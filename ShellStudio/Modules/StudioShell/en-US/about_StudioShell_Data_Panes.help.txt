@@ -1,0 +1,34 @@
+﻿TOPIC
+    about_StudioShell_Data_Panes
+
+SHORT DESCRIPTION
+    StudioShell extends the Visual Studio IDE with simple visualization 
+    controls.
+
+LONG DESCRIPTION
+	StudioShell adds a Data Panes window to the Visual Studio IDE.  This window 
+	contains a collection of grids and charts that have been created from the
+	StudioShell environment.
+	
+	Each data pane is identified by its name, and you can create as many data 
+	panes as you need.  
+	
+	You can create a new data pane using the out-grid or out-chart cmdlet.
+	
+	For more information, please see the out-grid and out-chart cmdlets.
+
+EXAMPLES
+
+	The code below creates a pie chart showing class size:
+	
+	ls dte:/solution/codemodel -recurse | `
+	  where {$_ -match 'property' -or $_ -match 'method'} | `
+	  group {$_.PSParentPath | split-path -leaf} | `
+	  out-chart -type pie -x Name -data Count
+	  
+
+SEE ALSO
+    out-grid
+    out-chart
+    out-html
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <CustomAction Id="actionResetAddinVS2012" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">
+      <![CDATA[
+var shell = new ActiveXObject( "WScript.Shell" );
+var path = shell.RegRead( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VisualStudio\\11.0\\InstallDir" );
+shell.Run( '"' + path + 'DEVENV.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
+           ]]>
+    </CustomAction>
+    <CustomAction Id="actionResetAddinVS2010" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">
+      <![CDATA[
+var shell = new ActiveXObject( "WScript.Shell" );
+var path = shell.RegRead( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VisualStudio\\10.0\\InstallDir" );
+shell.Run( '"' + path + 'DEVENV.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
+           ]]>
+
+    </CustomAction>
+    <CustomAction Id="actionResetAddinVS2008" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">
+      <![CDATA[
+var shell = new ActiveXObject( "WScript.Shell" );
+var path = shell.RegRead( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\VisualStudio\\9.0\\InstallDir" );
+shell.Run( '"' + path + 'DEVENV.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
+           ]]>
+    </CustomAction>
+
+    <CustomAction Id="actionResetAddinSSMS2010" Script="jscript" Execute="deferred" Return="ignore" Impersonate="yes">
+      <![CDATA[
+var shell = new ActiveXObject( "WScript.Shell" );
+shell.Run( '"c:\program files\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\SSMS.EXE" /ResetAddIn CodeOwls.StudioShell.Connect /Command File.Exit' );             
+           ]]>
+    </CustomAction>
+  </Fragment>
+</Wix>

@@ -1,0 +1,75 @@
+TOPIC
+    about_StudioShell_NuGet
+
+SHORT DESCRIPTION
+    StudioShell is designed to use used from a variety of suitable hosts.
+    This topic describes how to use StudioShell features from the NuGet 
+	package manager console and package scripts.
+
+LONG DESCRIPTION
+	Assuming the StudioShell module is in your PSModulePath, you can add 
+	StudioShell	features to your NuGet session by typing the following:
+	
+		import-module StudioShell
+		
+	This will load the StudioShell PSDTE provider and create the DTE: drive
+	in your Package Manager console session.
+		
+	Several StudioShell features are enabled by default in the 
+	StudioShell	host, but are disabled by default in the NuGet host.
+	
+  LOADING PROFILES
+	The StudioShell host user profile script is NOT loaded when the StudioShell
+	module is imported directly.  
+	
+	In non-default hosts this profile script must be executed explicitly by 
+	dot-sourcing the profile script:
+	
+		pushd $env:HOMEDRIVE
+		. ~/CodeOwlsLLC.StudioShell/profile.ps1
+		popd
+	
+  USING SOLUTION MODULES
+	Solution modules are not automatically loaded and unloaded when using the 
+	StudioShell module in other hosts.  
+	
+	To enable this feature,	you can run the following script after importing 
+	the StudioShell module:
+	
+		. ( get-module StudioShell | `
+			select -expand ModuleBase | `
+			join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
+
+SPECIAL NOTES FOR NUGET USERS
+  STUDIOSHELL.README.TXT
+    In order to take advantage of NuGet's uninstall.ps1 script feature, the 
+	NuGet package Content folder must contain at least one item.  So, the
+	StudioShell.ReadMe.txt file is an innocuous text file that is added to
+	your project by NuGet when you install the StudioShell package.  You
+	can safely remove this file at any time without impacting your project,
+	StudioShell, or NuGet.
+	
+  STUDIOSHELL ADD-IN
+	Some features of StudioShell require an Add-In to be loaded by Visual 
+	Studio.  This add-in is configured and loaded when you install the 
+	StudioShell NuGet package.  Add-Ins are managed outside of the
+	NuGet packaging system - once installed the StudioShell Add-In will be 
+	loaded by all instances of Visual Studio regardless of whether the 
+	loaded solution relies on the StudioShell NuGet package.
+
+  UNINSTALLING THE STUDIOSHELL PACKAGE
+	Because the StudioShell package relies on a managed Add-In assembly,
+	uninstalling the package produces a myriad of Access Denied errors
+	as the binary files are locked by the Visual Studio process.  To fully
+	remove the StudioShell package contents, you will need to manually remove
+	the StudioShell folder from your solution packages folder once you close
+	Visual Studio.	
+
+SEE ALSO
+	about_modules
+	about_StudioShell    
+	about_StudioShell_Hosts
+	about_StudioShell_PowerShell
+	about_StudioShell_SSMS
+	about_StudioShell_Solution_Modules
+	start-studioShell.ps1

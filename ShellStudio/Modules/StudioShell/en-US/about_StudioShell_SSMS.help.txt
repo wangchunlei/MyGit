@@ -1,0 +1,42 @@
+TOPIC
+    about_StudioShell_SSMS
+
+SHORT DESCRIPTION
+    StudioShell is designed to use used from a variety of suitable hosts.
+    This topic describes how to use StudioShell features from SQL Server
+	Management Studio 2012 (SSMS).
+
+LONG DESCRIPTION
+	SSMS integration is only available if you installed StudioShell using
+	the MSI installer and selected the SSMS Integration feature.
+
+	Once installed, the StudioShell console is available in SSMS from the 
+	View menu.
+
+	The StudioShell host in SSMS is identical is nearly all respects to the 
+	host in Visual Studio.  They share the same profile scripts, feature
+	sets, and path topologies.
+
+  	SSMS support is experimental at the moment.  Moreover, several key path 
+	nodes are not supported by the SSMS object model and are therefore not 
+	available on the DTE drive: 
+
+	* the project hive cannot be manipulated because the SSMS object model
+	  does not support it.
+
+	* there is no code model implemented for T-SQL, and therefore there are
+	  no code model hives in the DTE drive in SSMS.
+
+	* it is very likely that other portions of the DTE drive are 
+	  non-functional or unstable.
+		  
+	You have been warned, use with _extreme caution_.
+
+SEE ALSO
+	about_modules
+	about_StudioShell    
+	about_StudioShell_Hosts
+	about_StudioShell_NuGet
+	about_StudioShell_PowerShell
+	about_StudioShell_Solution_Modules
+	start-studioShell.ps1

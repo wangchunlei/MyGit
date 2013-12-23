@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CmdletHelpPath ID="BreakpointCollection">
+  <!-- New-Item -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+            New-Item
+          </command:name>
+      <maml:description>
+        <maml:para>Creates a new breakpoint.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>Item</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>At this path location, you can use the New-Item cmdlet to create a new breakpoint.</maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <!-- function -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the breakpoint container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Function</maml:name>
+          <maml:description>
+            <maml:para>The name of the function on which the breakpoint is set.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Condition</maml:name>
+          <maml:description>
+            <maml:para>The breakpoint condition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ConditionType</maml:name>
+          <maml:description>
+            <maml:para>The condition type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgBreakpointConditionType</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Language</maml:name>
+          <maml:description>
+            <maml:para>The programming language in which the function is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCount</maml:name>
+          <maml:description>
+            <maml:para>The hit count for the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCountType</maml:name>
+          <maml:description>
+            <maml:para>The hit count type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgHitCountType</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- file -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the breakpoint container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>File</maml:name>
+          <maml:description>
+            <maml:para>The file name in which to set the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Line</maml:name>
+          <maml:description>
+            <maml:para>The line number of the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Column</maml:name>
+          <maml:description>
+            <maml:para>The column of the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Condition</maml:name>
+          <maml:description>
+            <maml:para>The breakpoint condition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ConditionType</maml:name>
+          <maml:description>
+            <maml:para>The condition type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgBreakpointConditionType</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Language</maml:name>
+          <maml:description>
+            <maml:para>The programming language in which the function is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCount</maml:name>
+          <maml:description>
+            <maml:para>The hit count for the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCountType</maml:name>
+          <maml:description>
+            <maml:para>The hit count type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgHitCountType</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- address -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the breakpoint container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Address</maml:name>
+          <maml:description>
+            <maml:para>The memory address, in decimal or hex format.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Condition</maml:name>
+          <maml:description>
+            <maml:para>The breakpoint condition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ConditionType</maml:name>
+          <maml:description>
+            <maml:para>The condition type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgBreakpointConditionType</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Language</maml:name>
+          <maml:description>
+            <maml:para>The programming language in which the function is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCount</maml:name>
+          <maml:description>
+            <maml:para>The hit count for the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCountType</maml:name>
+          <maml:description>
+            <maml:para>The hit count type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgHitCountType</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <!-- data -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the breakpoint container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Data</maml:name>
+          <maml:description>
+            <maml:para>The name of the variable on which the breakpoint is set.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>DataCount</maml:name>
+          <maml:description>
+            <maml:para>If the variable specified in the Data parameter is an array, the number of elements to watch.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Condition</maml:name>
+          <maml:description>
+            <maml:para>The breakpoint condition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ConditionType</maml:name>
+          <maml:description>
+            <maml:para>The condition type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgBreakpointConditionType</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Language</maml:name>
+          <maml:description>
+            <maml:para>The programming language in which the function is written.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCount</maml:name>
+          <maml:description>
+            <maml:para>The hit count for the breakpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>HitCountType</maml:name>
+          <maml:description>
+            <maml:para>The hit count type.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">EnvDTE.dbgHitCountType</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Address</maml:name>
+        <maml:description>
+          <maml:para>The memory address, in decimal or hex format.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Column</maml:name>
+        <maml:description>
+          <maml:para>The column of the breakpoint.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>int</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Condition</maml:name>
+        <maml:description>
+          <maml:para>The breakpoint condition.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ConditionType</maml:name>
+        <maml:description>
+          <maml:para>The condition type.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">EnvDTE.dbgBreakpointConditionType</command:parameterValue>
+        <dev:type>
+          <maml:name>EnvDTE.dgbBreakpointConditionType</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Data</maml:name>
+        <maml:description>
+          <maml:para>The name of the variable on which the breakpoint is set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>DataCount</maml:name>
+        <maml:description>
+          <maml:para>If the variable specified in the Data parameter is an array, the number of elements to watch.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>File</maml:name>
+        <maml:description>
+          <maml:para>The file name in which to set the breakpoint.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Function</maml:name>
+        <maml:description>
+          <maml:para>The name of the function on which the breakpoint is set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>HitCount</maml:name>
+        <maml:description>
+          <maml:para>The hit count for the breakpoint.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>HitCountType</maml:name>
+        <maml:description>
+          <maml:para>The hit count type.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">EnvDTE.dbgHitCountType</command:parameterValue>
+        <dev:type>
+          <maml:name>EnvDTE.dbgHitCountType</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Default</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Line</maml:name>
+        <maml:description>
+          <maml:para>The line number of the breakpoint.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Language</maml:name>
+        <maml:description>
+          <maml:para>The programming language in which the function is written.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path to the breakpoint container.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                The values piped to New-Item at this location are ignored.
+              </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+          <maml:description>The new breakpoint.</maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                The New-Item cmdlet creates the specified breakpoint and returns the breakpoint object.
+              </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Debugger\Breakpoints&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -path . -file Program.cs -line 17
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command creates a new breakpoint at line 17 in file Program.cs.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Debugger\Breakpoints&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -Path . -function MyApplication.MyClass.Execute
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command adds a breakpoint to the Execute method of the MyClass class.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_Providers</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Invoke-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Rename-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Move-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Copy-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</CmdletHelpPath>

@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
+
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<helpItems schema="maml" xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    
+  <providerHelp >
+
+  <Name>
+    PSDTE
+  </Name>
+
+  <Drives>
+    <Para>DTE</Para>
+  </Drives>
+  <Synopsis>
+    Provides access to the Visual Studio DTE extensibility environment.
+  </Synopsis>
+
+  <DetailedDescription>
+    <para>
+      The PSDTE provider for Windows PowerShell lets you work with Visual Studio extensibility features from your PowerShell session.
+
+      The PSDTE provider exposes a Windows PowerShell drive with a directory structure that corresponds to your Visual Studio IDE and solution.
+
+      Directory Hierarchy
+      -------------------
+      The current directory hierarchy of the PSDTE provider for the local computer is outlined below.  Items listed [in brackets] represent variable content that will change based on the Visual Studio environment.  For example, the contents of the DTE:/Solution/Projects node change based on the contents of the currently loaded solution.
+
+      DTE:\
+      --- AddIns\
+      --- Debugger\
+      ----------- Breakpoints\
+      ----------- DebuggedProcesses\
+      ---------------------------- [process threads]\
+      --------------------------------------------- [stack frames]\
+      ----------------------------------------------------------- Arguments\
+      ----------------------------------------------------------- Locals\
+      ----------- LocalProcesses\
+      --- CommandBars\
+      -------------- [command bar heirarchy]
+      --- Commands\
+      --- Errors\
+      --- OutputPanes\
+      --- Properties\
+      ------------- [property category heirarchy]\
+      ------------------------------------------ [properties]
+      --- SelectedItems\
+	  ---------------- CodeModel\
+      ------------------------- Class\
+      ------------------------- Enum\
+      ------------------------- Interface\
+      ------------------------- Method\
+      ------------------------- Namespace\
+      ------------------------- Property\      
+	  ------------------------- Struct\
+	  ---------------- ProjectItems\
+      ---------------- Projects\      
+      --- Solution\
+      ----------- CodeModel\
+	  -------------------- [projects]\
+	  ------------------------------ [project items]\
+	  --------------------------------------------- [code model heirarchy]\
+      ----------- Projects\
+      ------------------- [projects]\
+      ----------------------------- References\
+      ----------------------------- [project items]\      
+	  -------------------------------------------- [properties]\
+      --- Tasks\
+      --- Templates\
+      ------------ ProjectItems\
+      ------------------------ [language or template classification name]\
+      ------------ Projects\
+      -------------------- [language or template classification name]\
+      --- WindowConfigurations\
+      --- Windows\
+
+
+      Supported Item Operations
+      -------------------------
+      StudioShell uses standard PowerShell cmdlets over custom cmdlets whenever possible.  You can determine what operations a path node supports by inspecting its encoded item operations string.
+
+      For example, using the get-childitem cmdlet to return a list of available nodes will also tell you what cmdlets those nodes support.  This example shows the operations supported by various menus in the IDE:
+
+        DTE:\commandbars\menubar&gt;ls
+
+
+        Location: PSDTE::dte:\commandbars\menubar
+        Command Bar: MenuBar
+        Available Operations: d+~&lt;      
+
+                   Id       Index Type                 Name                    
+        ---------- --       ----- ----                 ----                    
+        d+~&lt;       32768    1     msoControlPopup      File                    
+        d+~&lt;       32768    2     msoControlPopup      Edit                    
+        d+~&lt;       32768    3     msoControlPopup      View                    
+        
+        ...
+                
+        d+~&lt;       32768    32    msoControlPopup      Help                    
+        d+~&lt;       32768    33    msoControlPopup      Addins                  
+        d+~&lt;       32768    34    msoControlPopup      Macros                  
+          ~&lt;       178      35    msoControlButton     Full Screen             
+
+
+      The cmdlets supported by each node are encoded in the left-most column as follows:
+      
+        d : the node can contain child elements, and you can use the
+            set-location and get-childitems cmdlets on this node.
+
+        + : the node supports the new-item cmdlet.
+
+        ~ : the node supports the remove-item cmdlet.
+
+        &lt; : the node supports the get-item cmdlet.
+		
+        &gt; : the node supports the set-item cmdlet.
+
+        0 : the node supports the clear-item cmdlet.
+
+        c : the node supports the copy-item cmdlet.
+
+        m : the node supports the move-item cmdlet.
+
+        r : the node supports the rename-item cmdlet.
+  
+        i : the node supports the invoke-item cmdlet.
+
+
+      Custom Provider Help
+      --------------------
+      Custom help is available for most item cmdlets in the PSDTE heirarchy.  To get help for an item cmdlet as it applies to a specific PSDTE location, pass the location to the -path parameter of get-help.  For example:
+
+      get-help new-item -path dte:\solution\projects
+
+      You can also change the current location to the area of interest on the dte: drive and invoke get-help for the cmdlet in question:
+
+        DTE:\commandbars\menubar&gt;set-location dte:\debugger\breakpoints
+        DTE:\Debugger\Breakpoints&gt;get-help clear-item
+    </para>
+  </DetailedDescription>
+
+  <Capabilities>
+    <para></para>
+  </Capabilities>
+  <Filters>
+    <para></para>
+  </Filters>
+  <Notes>
+
+  </Notes>
+  <Tasks>
+    <Task>
+      <Title>
+        Navigating the DTE: Drive
+      </Title>
+
+      <Description>
+        <para></para>
+      </Description>
+
+      <Examples>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 1 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Set-Location cmdlet to change the current location to the DTE: drive.</para>
+          </Introduction>
+          <Code>
+            Set-Location DTE:
+          </Code>
+          <Remarks>
+            <para></para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 2 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Set-Location command to change the current location to the solution's projects.  Use a backslash (\) or forward slash (/) to indicate a level of the DTE: drive.</para>
+          </Introduction>
+          <Code>
+            Set-Location -Path solution/projects
+          </Code>
+          <Remarks>
+            <para>If you are not in the DTE: drive, begin the path with the drive name.</para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 3 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Set-Location command to change the current location to the task list.  Use a backslash (\) or forward slash (/) to indicate a level of the DTE: drive.</para>
+          </Introduction>
+          <Code>
+            Set-Location -Path  DTE:\Tasks
+          </Code>
+          <Remarks>
+            <para>
+            </para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 4 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Set-Location command to change the current location to the code model of a specific file.  Use a backslash (\) or forward slash (/) to indicate a level of the DTE: drive.</para>
+          </Introduction>
+          <Code>
+            Set-Location -Path dte:/solution/CodeModel/MyProject/Main.cs
+          </Code>
+          <Remarks>
+            <para>If you are not in the DTE: drive, begin the path with the drive name.
+            
+            Note that the names MyProject and Main.cs are project-specific and are for example only.  In practice you will need to use the names of your projects and files.
+            </para>
+          </Remarks>
+        </Example>
+      </Examples>
+    </Task>
+    <Task>
+      <Title>
+        Displaying the Contents of the DTE: Drive
+      </Title>
+
+      <Description>
+        <para></para>
+      </Description>
+
+      <Examples>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 1 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Get-Childitem cmdlet to display the list of projects in the currently loaded solution.</para>
+          </Introduction>
+          <Code>
+            get-childitem -path DTE:\Solution\Projects
+          </Code>
+          <Remarks>
+            <para>If you are in the DTE: drive, you can omit the drive name.</para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 2 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Get-Childitem cmdlet to display the command bars associated with the task list window.</para>
+          </Introduction>
+          <Code>
+            get-childitem -path &quot;DTE:\Windows\Task List\CommandBars&quot;
+          </Code>
+          <Remarks>
+            <para>
+              If you are in the DTE: drive, you can omit the drive name.
+
+              When a path contains a space, you need to surround the path with singe (&apos;) or double (&quot;) quotes.
+            </para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 3 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Get-Childitem cmdlet to display the current stack frame locals.</para>
+          </Introduction>
+          <Code>
+            get-childitem -path dte:/debugger/debuggedprocesses/MainThread/Current/Locals
+          </Code>
+          <Remarks>
+            <para>
+              If you are in the DTE: drive, you can omit the drive name.
+
+              In this example the name MainThread is for example purposes only.  In practice you would use the name or ID assigned to a particular thread.
+            </para>
+          </Remarks>
+        </Example>
+      </Examples>
+    </Task>
+    <Task>
+      <Title>
+        Manipulating the Contents of the DTE: Drive
+      </Title>
+
+      <Description>
+        <para></para>
+      </Description>
+
+      <Examples>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 1 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the New-Item cmdlet to create a new named window configuration.</para>
+          </Introduction>
+          <Code>
+            new-item -path DTE:\WindowConfigurations\MyWindowConfig
+          </Code>
+          <Remarks>
+            <para>
+              If you are in the DTE: drive, you can omit the drive name.
+
+              The new window configuration will be named MyWindowConfig.
+            </para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 2 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Invoke-Item cmdlet to apply a named window configuration.</para>
+          </Introduction>
+          <Code>
+            invoke-item -path dte:/windowConfigurations/myWindowConfig
+          </Code>
+          <Remarks>
+            <para>If you are in the DTE: drive, you can omit the drive name.</para>
+          </Remarks>
+        </Example>
+        <Example>
+          <Title>
+            -------------------------- EXAMPLE 3 --------------------------
+          </Title>
+          <Introduction>
+            <para>This command uses the Set-ItemProperty cmdlet to update the comment for a class in a project.</para>
+          </Introduction>
+          <Code>
+            set-itemproperty -path dte:/solution/codemodel/MyProject/Main.cs/MyProgram/Program -name Comment -value ( get-date )
+          </Code>
+          <Remarks>
+            <para>
+              If you are in the DTE: drive, you can omit the drive name.
+
+              In this example the names MyProject, Main.cs, MyProgram, and Program are for example purposes only.  In practice you would use the names of your projects, files, namespaces, and classes.
+            </para>
+          </Remarks>
+        </Example>
+      </Examples>
+    </Task>
+  </Tasks>
+  <RelatedLinks>
+    <navigationLink>
+      <linkText>about_StudioShell</linkText>
+      <uri/>
+    </navigationLink>
+	<navigationLink>
+      <linkText>about_StudioShell_License</linkText>
+      <uri/>
+    </navigationLink>
+	<navigationLink>
+      <linkText>about_StudioShell</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_License</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_Version</linkText>
+      <uri/>
+    </navigationLink>
+    <navigationLink>
+      <linkText>about_StudioShell_Item_Cmdlets</linkText>
+      <uri/>
+    </navigationLink>
+
+    <navigationLink>
+      <linkText>about_StudioShell_Profiles</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Settings</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Drives</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Variables</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Data_Panes</linkText>
+      <uri/>
+    </navigationLink>
+    	<navigationLink>
+      <linkText>about_StudioShell_Hosts</linkText>
+      <uri/>
+    </navigationLink>
+		<navigationLink>
+      <linkText>about_StudioShell_Solution_Modules</linkText>
+      <uri/>
+    </navigationLink>
+
+  </RelatedLinks>
+
+  <CmdletHelpPaths>
+
+    
+  </CmdletHelpPaths>
+
+</providerHelp>
+</helpItems>

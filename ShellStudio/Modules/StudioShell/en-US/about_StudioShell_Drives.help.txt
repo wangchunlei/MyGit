@@ -1,0 +1,44 @@
+﻿TOPIC
+    about_StudioShell_Drives
+
+SHORT DESCRIPTION
+    StudioShell adds a custom PowerShell drive to your session.  This drive
+    provides access to the extensibility features of Visual Studio.
+
+LONG DESCRIPTION
+	Visual Studio exposes many internal features to developers for the purposes
+	of extending the IDE to perform new tasks.  StudioShell exposes many of
+	these features in the form of a "drive" in your PowerShell session.  This 
+	drive allows you to manipulate the IDE, your projects and code, the 
+	debugger, etc, treating all of these things as if they were a filesystem.
+	
+	The drive is named "dte" and is referred to in this documentation as the
+	dte: drive.  The drive is exposed by a provider with the name "PSDTE".
+	
+	You can use the dte: drive just like any other drive in your PowerShell 
+	session.  For instance, the following script gets a list of all projects
+	in the currently-loaded solution:
+	
+		ls dte:/solution/projects	
+
+	For details on the contents of the dte: drive, type:
+		
+		get-help PSDTE
+		
+ADDITIONAL DRIVES
+
+	The default StudioShell profile defines several drives at specific 
+	locations in the dte: drive for convenience.
+	
+	For a complete list of these drives, type:
+	
+		get-psdrive -psprovider psdte
+
+	You can also create your own drive from any valid path in the DTE: drive.
+	For example, this script will mount the breakpoints collection as a drive
+	named "bkpts:"
+	
+		new-psdrive -psprovider psdte -root 'dte:/debugger/breakpoints' -name 'bkpts'
+		
+SEE ALSO
+	PSDTE

@@ -16,7 +16,7 @@ namespace HttpClientProject
 
             using (FileStream reader = File.OpenRead("d:\\download\\professional_asp.net_3.5_security_membership_and_role_management_with_c_and_vb.pdf"))
             {
-                var client = new RestClient("http://localhost:2616/");
+                var client = new RestClient("http://localhost/");
                 var length = 8388608;
 
                 int bytesRead = 0;
@@ -24,10 +24,11 @@ namespace HttpClientProject
                 var last = reader.Length;
                 while (last > 0)
                 {
+                    var request = new RestRequest("api/upload/UploadFile?chunk={chunk}");
+                    request.AddUrlSegment("chunk", bytesRead.ToString());
                     var bl = (int)Math.Min(length, last);
                     byte[] buffer = new byte[bl]; //8M buffer
                     read = reader.Read(buffer, 0, bl);
-                    var request = new RestRequest("api/upload/UploadFile");
 
                     request.Method = Method.POST;
                     request.AddFile("file", buffer, "professional_asp.net_3.5_security_membership_and_role_management_with_c_and_vb.pdf");

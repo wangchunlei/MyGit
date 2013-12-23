@@ -1,0 +1,54 @@
+﻿TOPIC
+    about_StudioShell_Profiles
+
+SHORT DESCRIPTION
+    StudioShell supports your existing PowerShell profiles, as well as custom
+    profiles specific to StudioShell.
+
+LONG DESCRIPTION
+	StudioShell recognizes your user PowerShell profile script.  For more 
+	information about this standard profile script, type:
+	
+		get-help about_Profiles
+		
+	In addition, you can create profile scripts specific to StudioShell.  This
+	allows you to save commonly used session customizations, such as functions, 
+	import of PowerShell modules, etc, so they are applied each time you use
+	StudioShell.
+	
+	StudioShell uses a single "All Users" profile script.  This script is 
+	availabe at:
+	
+		<Installation Folder>\bin\profile.ps1
+		
+	where <Installation Folder> is the location where StudioShell is installed.
+	
+	Per-user profile scripts are available at:
+	
+		~\Documents\CodeOwlsLLC.StudioShell\profile.ps1
+		
+	where ~ represents the user's home directory (e.g., C:\Users\Beefarino).
+	
+	It is recommended that you create a user profile script instead of editing
+	the "All Users" profile script, since the "All Users" profile script contains 
+	script that is vital to certain StudioShell features.
+	
+CREATING YOUR STUDIOSHELL PROFILE SCRIPT
+
+	To create a StudioShell profile script, type the following:
+	
+		new-item -path ~\Documents\CodeOwlsLLC.StudioShell\profile.ps1 -type file
+
+NOTES
+
+	The StudioShell profile scripts are specific to the StudioShell host.  If you
+	use StudioShell in another host, such as NuGet or PowerShell.exe, these profile
+	scripts will not be loaded.  You can, however, execute the profile script 
+	explicitly by dot-sourcing the profile script:
+	
+		. ~/CodeOwlsLLC.StudioShell/profile.ps1
+		
+SEE ALSO
+	about_Profiles
+    about_StudioShell_Settings
+	about_StudioShell_Hosts

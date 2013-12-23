@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC11A6DB-0F1E-42D3-9352-B4A3C42DE5E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeOwls.StudioShell.Cmdlets</RootNamespace>
+    <AssemblyName>CodeOwls.StudioShell.Cmdlets</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization">
+      <HintPath>..\..\..\lib\System.Windows.Forms.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\CodeOwls.AssemblyInfo.cs">
+      <Link>Properties\CodeOwls.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\CodeOwls.StudioShell.AssemblyInfo.cs">
+      <Link>Properties\CodeOwls.StudioShell.AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="OutChartCmdlet.cs" />
+    <Compile Include="OutDataPaneCmdletBase.cs" />
+    <Compile Include="OutGridCmdlet.cs" />
+    <Compile Include="OutHtmlCmdlet.cs" />
+    <Compile Include="OutSubsetDataPaneCmdletBase.cs" />
+    <Compile Include="DataPaneControls\DataChartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataPaneControls\DataChartControl.Designer.cs">
+      <DependentUpon>DataChartControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataPaneControls\DataGridControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataPaneControls\DataGridControl.Designer.cs">
+      <DependentUpon>DataGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataPaneControls\DataPaneControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataPaneControls\DataPaneControl.Designer.cs">
+      <DependentUpon>DataPaneControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSObjectBindingList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DataPaneControls\DataChartControl.resx">
+      <DependentUpon>DataChartControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataPaneControls\DataGridControl.resx">
+      <DependentUpon>DataGridControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataPaneControls\DataPaneControl.resx">
+      <DependentUpon>DataPaneControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeOwls.PowerShell\CodeOwls.PowerShell.Host\CodeOwls.PowerShell.Host.csproj">
+      <Project>{B975EFD5-7A18-4BD0-8711-38734C6F8EB1}</Project>
+      <Name>CodeOwls.PowerShell.Host</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeOwls.StudioShell.Common\CodeOwls.StudioShell.Common.csproj">
+      <Project>{C7F94204-C1EC-4FC8-AF93-01C5E9E63671}</Project>
+      <Name>CodeOwls.StudioShell.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

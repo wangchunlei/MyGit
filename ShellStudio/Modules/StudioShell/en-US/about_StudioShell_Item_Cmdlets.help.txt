@@ -1,0 +1,118 @@
+﻿TOPIC
+    about_StudioShell_Item_Cmdlets
+
+SHORT DESCRIPTION
+    StudioShell enables Visual Studio extensibility through the standard 
+	PowerShell provider cmdlets.
+
+LONG DESCRIPTION
+	StudioShell exposes most of the IDE and programmatic features of Visual 
+	Studio as part of a PowerShell provider.  Visual Studio extensibility 
+	features are available through a special PowerShell drive named "dte".  
+	This drive enables access to things like the IDE windows, menus, projects,
+	files, and code as if they were just files on your hard drive.
+	
+	Different paths in the DTE drive will support different provider 
+	operations.  StudioShell uses an encoded marker to indicate what common 
+	cmdlets are available at each path location.  This encoding is used 
+	throughout the StudioShell DTE: drive as a way of indicating what nodes 
+	support what operations.
+	
+	The available cmdlets for a specific node are encoded as follows:
+	
+		d : the node can contain child elements, and you can use the 
+			set-location and get-childitems cmdlets on this node.
+			
+		+ : the node supports the new-item cmdlet.
+		
+		~ : the node supports the remove-item cmdlet.
+		
+		< : the node supports the get-item cmdlet.
+		
+		> : the node supports the set-item cmdlet.
+		
+		0 : the node supports the clear-item cmdlet.
+		
+		c : the node supports the copy-item cmdlet.
+		
+		m : the node supports the move-item cmdlet.
+		
+		r : the node supports the rename-item cmdlet.
+		
+		i : the node supports the invoke-item cmdlet.
+
+	Note that by design, all nodes support the get-item cmdlet (<) at a minimum.
+
+PROVIDER CMDLET SUPPORT
+	The following table defines the cmdlet support for nodes in the DTE: drive
+	using the encoding described above.  Additional notes are provided were 
+	necessary to further elaborate on cmdlet operations.
+	
+	Path Node			 Operations	 Notes
+	-------------------- ----------- ------------------------------------------
+	Add-In				  <				
+	Attribute (code)	 d< +     i	 invoke-item navigates to the code item
+	Breakpoint			  <  ~0   i  remove-item deletes the breakpoint
+									 clear-item disables the breakpoint
+									 invoke-item enables the breakpoint
+	Class (code)		 d< +     i  invoke-item navigates to the code item
+	Debugged Process	 d<        
+	Debugged Thread		 d<        
+	Delegate (code)		 d< +     i  invoke-item navigates to the code item
+	Enum (code)			 d< +     i
+	Error List			 d< +~    i  new-item creates an error, warning, or
+									   message in the error list
+									 invoke-item navigates to the file/location
+									   specified in the error list item
+	Event (code)		 d< +     i  invoke-item navigates to the code item
+	Frame Argument		  <        
+	IDE Command			 d<>+~    i  new-item creates a new IDE command that
+									   runs a script block; can also associate
+									   key bindings to the script block command
+									 set-item updates key bindings for the
+									   script block command
+	IDE Command Bar		 d< +~       new-item creates a new IDE command bar to 
+									   which you can attach menus, buttons, and
+									   drop-downs; can also add command bar 
+									   controls to a command bar and associate
+									   with a script block command.									 
+	IDE Setting			 d<>       
+	Import (code)		 d< +     i  invoke-item navigates to the code item
+	Interface (code)	 d< +     i  invoke-item navigates to the code item
+	Local Variable		  <        
+	Method (code)		 d< +     i  invoke-item navigates to the code item
+	Namespace (code)	 d< +     i  invoke-item navigates to the code item
+	Output Pane			  < + 0   i  new-item creates a new named output pane
+									   and displays it in the IDE
+									 invoke-item activates the output pane
+	Parameter (code)	 d< +     i  invoke-item navigates to the code item
+	Project				 d< +~   r   new-item creates a new project from an 
+									   existing file or template
+	Project Item		 d< +~ cmri  new-item creates a new project item from 
+									   an existing file or template	
+									 invoke-item opens the default editor for
+									   the project item
+	Project Reference	  < +~       new-item adds a project, assembly, or COM
+									   reference to the containing project
+	Property (code)		 d< +     i  invoke-item navigates to the code item
+	Selected Item		  <        
+	Solution			 d<        
+	Stack Frame			 d<        
+	Struct (code)		 d< +     i  invoke-item navigates to the code item
+	Task List Item		  <>+~0      new-item creates a new task in the list
+									 set-item updates the task item state
+									 clear-item clears the task description
+ 	Variable (code)		 d< +     i  invoke-item navigates to the code item
+	Window				  <       i  invoke-item activates the window, making
+									   it visible and giving it input focus
+	Window Configuration  <>+~    i  new-item defines a new configuration
+									   based on the current IDE window layout
+									 set-item updates a configuration using
+									   the current IDE window layout
+									 invoke-item applies a configuration to 
+									   the IDE, arranging the windows according
+									   to the saved window configuration state
+									   
+SEE ALSO
+    about_StudioShell_Version
+    PSDTE

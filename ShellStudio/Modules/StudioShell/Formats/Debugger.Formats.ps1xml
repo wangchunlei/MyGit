@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   Copyright (c) 2011 Code Owls LLC, All Rights Reserved.
+
+   Licensed under the Microsoft Reciprocal License (Ms-RL) (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.opensource.org/licenses/ms-rl
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<Configuration>
+  <Controls>
+    <Control>
+      <Name>Debugger-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+    <Control>
+      <Name>Thread-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Threads for Process: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).PSChildName</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+    <Control>
+      <Name>Frame-GroupingFormat</Name>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <Frame>
+                <LeftIndent>4</LeftIndent>
+                <CustomItem>
+                  <Text>Location: </Text>
+                  <ExpressionBinding>
+                    <PropertyName>PSParentPath</PropertyName>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Frames for Thread: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>if( $_.Thread.Name -match 'no name' ) { $_.ID } else { $_.Name }</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                  <Text>Available Operations: </Text>
+                  <ExpressionBinding>
+                    <ScriptBlock>(get-item $_.PSParentPath).SSItemMode</ScriptBlock>
+                  </ExpressionBinding>
+                  <NewLine/>
+                </CustomItem>
+              </Frame>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </Control>
+  </Controls>
+
+  <ViewDefinitions>
+    <View>
+      <Name>debugger-breakpoints</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellBreakpoint</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>Debugger-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>7</Width>
+            <Label>Enabled</Label>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>15</Width>
+            <Label>Type</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if( $_.Enabled ) { '*' } </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.LocationType -replace 'dbgBreakpointLocationType',''</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PSChildName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>debugger-processes</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellProcess</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>Debugger-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>12</Width>
+            <Label>ID</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ProcessID</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PSChildName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>debugger-thread</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellThread</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>Thread-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>6</Width>
+            <Label>Frozen</Label>
+            <Alignment>center</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>5</Width>
+            <Label>Alive</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>10</Width>
+            <Label>Thread ID</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if($_.IsFrozen){'*'}</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>if($_.IsAlive){'*'}</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ID</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>debugger-expression</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellExpression</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>Debugger-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>15</Width>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>20</Width>
+            <Label>Type</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PSChildName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>debugger-stackframe</Name>
+      <ViewSelectedBy>
+        <TypeName>CodeOwls.StudioShell.Paths.Items.Debugger.ShellStackFrame</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>PSParentPath</PropertyName>
+        <CustomControlName>Frame-GroupingFormat</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>          </Label>
+            <Alignment>Left</Alignment>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>8</Width>
+            <Label>Language</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>40</Width>
+            <Label>Location</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>12</Width>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SSItemMode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Language</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>FunctionName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>$_.PSChildName,$_.Name | select -first 1</ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>StudioShell</id>
+    <version>$id$</version>
+    <authors>Code Owls LLC</authors>
+    <owners>Code Owls LLC</owners>
+    <licenseUrl>http://studioshell.codeplex.com/license</licenseUrl>
+    <projectUrl>http://studioshell.codeplex.com</projectUrl>
+    <iconUrl>http://download.codeplex.com/Download?ProjectName=studioshell&amp;DownloadId=211977</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>PowerShell module that deeply integrates Visual Studio extensibility with your PowerShell session.</description>
+    <releaseNotes><![CDATA[
+        $relnotes$
+        ]]></releaseNotes>
+    <copyright>Copyright (c) 2011 Code Owls LLC, All Rights Reserved</copyright>
+    <tags>StudioShell PowerShell VisualStudio DTE</tags>    
+  </metadata>
+</package>

@@ -1,0 +1,70 @@
+TOPIC
+    about_StudioShell_PowerShell
+
+SHORT DESCRIPTION
+    StudioShell is designed to use used from a variety of suitable hosts.
+    This topic describes how to use StudioShell features from the standard
+	PowerShell console.
+
+LONG DESCRIPTION
+	Assuming the StudioShell module is in your PSModulePath, you can add 
+	StudioShell	features to your PowerShell session by typing the following:
+	
+		import-module StudioShell
+		
+	This will load the StudioShell PSDTE provider and create the DTE: drive
+	in your PowerShell session.
+		
+	Several StudioShell features are enabled by default in the 
+	StudioShell	host, but are disabled by default in the standard PowerShell 
+	host.
+	
+  LOADING PROFILES
+	The StudioShell host user profile script is NOT loaded when the StudioShell
+	module is imported directly.  
+	
+	In non-default hosts this profile script must be executed explicitly by 
+	dot-sourcing the profile script:
+	
+		pushd $env:HOMEDRIVE
+		. ~/CodeOwlsLLC.StudioShell/profile.ps1
+		popd
+	
+  USING SOLUTION MODULES
+	Solution modules are not automatically loaded and unloaded when using the 
+	StudioShell module in other hosts.  
+	
+	To enable this feature,	you can run the following script after importing 
+	the StudioShell module:
+	
+		. ( get-module StudioShell | `
+			select -expand ModuleBase | `
+			join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
+
+SPECIAL NOTES FOR POWERSHELL USERS
+  VISUAL STUDIO INSTANCE
+	When used from the PowerShell host, a hidden instance of Visual Studio is 
+	created and manipulated by the StudioShell module.  This Visual Studio
+	instance is closed automatically when the StudioShell module is removed from
+	the PowerShell session (or when the session itself ends).
+
+	If the hidden Visual Studio instance is closed by some means outside of the
+	StudioShell module unloading (e.g., though task manager or using 
+	PowerShell), any attempt to use the StudioShell module from the session 
+	will raise an error.
+
+	At this time is it not possible to use StudioShell from a PowerShell 
+	console to drive SQL Server Management Studio.
+
+  VISUALIZATION CMDLETS
+	When used from the PowerShell host, the data visualization cmdlets (e.g.,
+	out-grid and out-chart) will raise an error.  
+
+SEE ALSO
+	about_modules
+	about_StudioShell    
+	about_StudioShell_Hosts
+	about_StudioShell_NuGet
+	about_StudioShell_SSMS
+	about_StudioShell_Solution_Modules
+	start-studioShell.ps1

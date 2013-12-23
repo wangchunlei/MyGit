@@ -1,0 +1,62 @@
+﻿TOPIC
+    about_StudioShell_UnsupportedApplications
+
+SHORT DESCRIPTION
+    The StudioShell console does not support running child console applications.  
+    If you attempt to run an application that is not supported, you will 
+    receive an error.
+
+LONG DESCRIPTION
+    StudioShell is not true console; it cannot pass control to child console
+    applications in the same way as cmd.exe or powershell.exe.
+
+    StudioShell maintains a list of unsupported application names in the
+    $psUnsupportedConsoleApplications variable.  If you attempt to run an
+    application in this list you will receive an error.
+
+    The initial list of unsupported applications is as follows:
+    
+    cmd
+    cmd.exe
+    diskpart
+    diskpart.exe
+    edit.com
+    netsh
+    netsh.exe
+    nslookup
+    nslookup.exe
+    powershell
+    powershell.exe
+    vim
+    vim.exe
+    wmic
+    wmic.exe
+
+    If you wish to alter this list, you may do so by changing the contents of the
+    $psUnsupportedConsoleApplications variable.  
+
+NOTES
+    Removing an application from $psUnsupportedConsoleApplications WILL NOT make the 
+    application magically start working in the StudioShell console.  The application 
+    will run but you will not be able to interact with it and Visual Studio will hang.
+
+    These limitations apply only to the default StudioShell console.  The "old school"
+    process console does not have these limitations and can pass control to child 
+    console processes without issue.
+
+EXAMPLE
+    PS dte:/> powershell.exe
+
+    The application "powershell.exe" cannot be started because it is in the list of unsupported applications for this host.
+    To view or modify the list of unsupported applications for this host, see the $psUnsupportedConsoleApplications variable, or type "get-help about_StudioShell_UnsupportedApplications".
+    Alternatively, you may try running the application as a unique process using the Start-Process cmdlet.
+        + CategoryInfo          : ResourceUnavailable: (powershell.exe:String) [], NotSupportedException
+        + FullyQualifiedErrorId : UnsupportedApplication
+
+    This example attempt to run powershell.exe from the StudioShell console.	
+	
+SEE ALSO
+	about_StudioShell_Variables
+	about_StudioShell_NuGet
+	about_StudioShell_PowerShell
+	about_StudioShell_SSMS

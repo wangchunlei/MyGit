@@ -1,0 +1,102 @@
+﻿TOPIC
+    about_StudioShell_Variables
+
+SHORT DESCRIPTION
+    StudioShell defines several automatic variables that track various states
+    of the Visual Studio IDE and provide access to IDE events.
+
+LONG DESCRIPTION
+	StudioShell defines several automatic variables that track various states
+    of the Visual Studio IDE.  These variables provide useful shortcuts to 
+    accessing common IDE components that change frequently.
+    
+  General
+  
+	$dte : the root EnvDTE.DTE object exposed by Visual Studio
+	$psUnsupportedConsoleApplications : a list of applications the StudioShell console is prohibited to run
+	
+  Current Selections
+
+	$activeWindow : the window in which the user is currently working.  Note
+					that when this variable is accessed from the console,
+					the value will always be the console window; however, when
+					this variable is accessed in a script that is responding to
+					an IDE command (such as a menu item), the value will be
+					whatever window currently has input focus.
+					
+	$selectedProjectItems : the list of selected project items from the
+							Solution Explorer window.
+							
+	$selectedProjects : the list of selected projects from the Solution
+						Explorer window.
+	
+	$selectedNamespace : the namespace code model element that contains the 
+						current insertion point.
+
+	$selectedClass : the class code model element that contains the current
+						insertion point.
+						
+	$selectedMethod : the method code model element that contains the current
+						insertion point.
+						
+	$selectedProperty : the property code model element that contains the 
+						current insertion point.
+					
+  Debugger 
+  		
+	$currentDebugMode : identifies the current mode of the integrated debugger.
+	
+	$currentProcess : the process currently being debugged.
+	
+	$currentThread : the thread currently active in the debugger.
+	
+	$currentStackFrame : the current stack frame.
+	
+  IDE Events
+    
+	$buildEvents : the EnvDTE.BuildEvents interface exposing build events.
+    
+    $debuggerEvents : the EnvDTE.DebuggerEvents interface exposing various 
+						debugger events.
+						
+	$debuggerProcessEvents : the EnvDTE.DebuggerProcessEvents interface 
+								exposing a process state change event.
+						
+	$debuggerExpressionEvaluationEvents : the interface exposing an event
+											raised when a debugger expression
+											is undergoing evaluation.
+											
+	$dteEvents : the EnvDTE.DTEEvents interface exposing environment state
+					events.
+					
+	$findEvents : the EnvDTE.FindEvents interface exposing events raised 
+					during find operations.
+					
+	$miscFilesEvents : the EnvDTE.ProjectItemsEvents interface exposing events
+						raised during the management of "miscellaneous" 
+                        solution files.
+                           
+	$publishEvents : the EnvDTE.PublishEvents interface exposing events raised
+						during the publish task.
+
+	$solutionEvents : the EnvDTE.SolutionEvents interface that exposes solution
+						events, such as solution opening and closing.
+						
+	$solutionItemsEvents : the EnvDTE.ProjectItemsEvents interface exposing
+							events raised during the management of solution-
+							level items.
+						
+	$projectEvents : the EnvDTE.ProjectsEvents interface exposing project 
+						events, such as adding or removing projects.
+						
+	$projectItemEvents : the EnvDTE.ProjectItemsEvents interface exposing 
+							project item events, such as adding or 
+							removing project items.
+                           
+    $selectionEvents : the EnvDTE.SelectionEvents interface exposing an event
+						raised when the current selection is changed.
+							                           
+SEE ALSO
+    about_StudioShell
+    about_StudioShell_UnsupportedApplications
+

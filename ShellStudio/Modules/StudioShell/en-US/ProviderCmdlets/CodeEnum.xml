@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CmdletHelpPath ID="CodeEnum">
+  <!-- New-Item -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+            New-Item
+          </command:name>
+      <maml:description>
+        <maml:para>Creates a new enumeration member or enumeration attribute.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>Item</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>At this path location, you can use the New-Item cmdlet to create a new enumeration member or enumeration attribute.</maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <!-- new attribute or variable -->
+        <maml:name>New-Item</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>The path to the code element container.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of the new code element.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Position</maml:name>
+          <maml:description>
+            <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ItemType</maml:name>
+          <maml:description>
+            <maml:para>The type of code element to create.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true" position="named">
+          <maml:name>Value</maml:name>
+          <maml:description>
+            <maml:para>A comma separated list of parameter values.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ItemType</maml:name>
+        <maml:description>
+          <maml:para>
+                The type of code element to create.  Appropriate values for this path include "variable" to create a new enumeration member, or "attribute" to create a new enumeration attribute.
+              </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>The path to the code element container.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Position</maml:name>
+        <maml:description>
+          <maml:para>The position of the new code element.  Use 0 to place at the beginning, -1 to place at the end, or specify an explicit index value.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>0</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Value</maml:name>
+        <maml:description>
+          <maml:para>The value of the enumeration member or attribute parameters.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">object</command:parameterValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                You can pipe an enumeration member value or attribute parameter value to the New-Item cmdlet at this location.
+              </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>object</maml:name>
+          <maml:uri />
+          <maml:description>The new code element.</maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+                The New-Item cmdlet adds the specified code element to the code model and returns the added code element.
+              </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 1 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs\MyEnum&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -Type variable -Name FirstValue -Value 1
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command adds a value to the MyEnum enumeration with the name FirstValue and assigns it a value of 1.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>
+              -------------------------- EXAMPLE 2 --------------------------
+            </maml:title>
+        <maml:introduction>
+          <maml:para>DTE:\Solution\CodeModel\MyProject\Program.cs\MyEnum&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+              New-Item -name Serializable -type attribute
+            </dev:code>
+        <dev:remarks>
+          <maml:para>
+                This command decorates the MyEnum enumeration with a Serializable attribute.
+              </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>about_Providers</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Clear-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Invoke-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Rename-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Move-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Copy-Item</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</CmdletHelpPath>

@@ -1,0 +1,86 @@
+﻿TOPIC
+    about_StudioShell_Solution_Modules
+
+SHORT DESCRIPTION
+    StudioShell imports specific modules when a solution is loaded.  The
+    modules are removed when the solution is closed.
+
+LONG DESCRIPTION
+	Solution Modules provide an easy way to save StudioShell customizations
+	with a particular solution.  For instance, if a solution uses the psake
+	module to control its build process, the solution module could update
+	the Visual Studio UI to invoke psake instead of MSBuild when any of the
+	build commands are executed.
+	
+	A solution module can be a script module (.psm1 file) or module definition
+	(.psd1 file) that:
+	
+	1. resides in the same directory as the solution (.sln) file.
+	2. has the same name as the solution file, except for the extension.
+	
+	For example, if a solution file exists at:
+	
+		c:\code\mysolution.sln
+		
+	the solution module would be found at:
+	
+		c:\code\mysolution.psm1
+		or
+		c:\code\mysolution.psd1
+		
+	Solution modules are automatically imported after the solution is opened,
+	and they are automatically removed as the solution is closed.  However, 
+	you can override this behavior by modifying the StudioShell settings.
+	
+	
+	Running Scripts on Module Unload
+	--------------------------------
+	While it is possible to attach code to the OnRemove event for a solution
+	module, the syntax is cumbersome:
+	
+	$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
+		# ...		
+		write-host 'solution module has been unloaded'
+	}
+	
+	Frankly, the author has to Google how to do this every time he needs to 
+	use this feature, so a shortcut was added.  If your module exposes a
+	function named:
+	
+	unregister-<ModuleName>
+	
+	It will be invoked automatically during the module unload process.
+	
+	For example, if your solution is named 'MongoProvider' then your solution
+	module unregister function would be named:
+	
+	unregister-MongoProvider
+	
+	The function will be invoked with no parameters.  Below is an example of 
+	a complete unregister function for a solution module named 'MySolution'.
+	
+	function unregister-MySolution
+	{
+		write-host 'solution module has been unloaded'
+	}
+	
+	
+NOTES
+	Solution modules are only imported when your console is open.  If you 
+	open the console after the solution is loaded in the IDE, the solution 
+	module will be imported immediately after StudioShell is initialized.
+	
+	Solution modules are enabled by default in the standard StudioShell host.
+	If you import the solution module in another host, such as NuGet or
+	PowerShell.exe, you will need to enable this feature manually.  You
+	can do this with the following script:
+	
+	. ( get-module StudioShell | `
+		select -expand Path | `
+		split-path -parent | `
+		join-path -child '..\InitializationScripts\register-solutionevents.ps1' )
+
+
+SEE ALSO
+	about_StudioShell_Settings
+	about_StudioShell_Hosts

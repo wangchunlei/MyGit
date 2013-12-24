@@ -29,6 +29,7 @@ namespace Host.Controllers
                         while (reader.Read(buffer, 0, actualLength) > 0)
                         {
                             outputStream.WriteAsync(buffer, 0, actualLength);
+                            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(10));
                             startlength -= actualLength;
                             if (startlength<length)
                             {

@@ -59,8 +59,9 @@ namespace HttpClientProject
                             }
 
                             // Read response stream
-                            byte[] readBuffer = new byte[512];
+                            byte[] readBuffer = new byte[1024 * 1024 * 8];
                             ReadResponseStream(streamTask.Result, readBuffer);
+                            Console.WriteLine("transover");
                         });
                 });
         }

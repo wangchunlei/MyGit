@@ -12,6 +12,34 @@ namespace Host.Controllers
 {
     public class UploadController : ApiController
     {
+        [System.Web.Http.HttpGet]
+        public HttpResponseMessage DownloadFile(string fileName)
+        {
+            string fileSaveLocation = System.Web.HttpContext.Current.Server.MapPath("~/App_Data");
+            var response = Request.CreateResponse();
+            response.Content = new PushStreamContent(
+                (outputStream, httpContent, transportContext) =>
+                {
+                    using (var reader = File.OpenRead(Path.Combine(fileSaveLocation, fileName)))
+                    {
+                        var length = 8388608;//8M buffer
+                        var buffer = new byte[length];
+                        var startlength = (int)reader.Length;
+                        var actualLength = (int)Math.Min(length, startlength);
+                        while (reader.Read(buffer, 0, actualLength) > 0)
+                        {
+                            outputStream.WriteAsync(buffer, 0, actualLength);
+                            startlength -= actualLength;
+                            if (startlength<length)
+                            {
+                                actualLength = startlength;
+                            }
+                        }
+                    }
+                });
+
+            return response;
+        }
         public async Task<HttpResponseMessage> UploadFile()
         {
             if (!Request.Content.IsMimeMultipartContent())

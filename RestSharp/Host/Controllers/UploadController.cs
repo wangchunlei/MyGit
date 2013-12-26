@@ -6,13 +6,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace Host.Controllers
 {
     public class UploadController : ApiController
     {
-        [System.Web.Http.HttpGet]
         public HttpResponseMessage DownloadFile(string fileName)
         {
             string fileSaveLocation = System.Web.HttpContext.Current.Server.MapPath("~/App_Data");
@@ -31,7 +29,7 @@ namespace Host.Controllers
                             outputStream.WriteAsync(buffer, 0, actualLength);
                             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(10));
                             startlength -= actualLength;
-                            if (startlength<length)
+                            if (startlength < length)
                             {
                                 actualLength = startlength;
                             }
@@ -41,7 +39,8 @@ namespace Host.Controllers
 
             return response;
         }
-        public async Task<HttpResponseMessage> UploadFile()
+
+        public async Task<FileResult> UploadFile(string appendfilename = null)
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -49,54 +48,76 @@ namespace Host.Controllers
             }
 
             string fileSaveLocation = System.Web.HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+            var provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation, appendfilename);
             var files = new List<string>();
             try
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                foreach (MultipartFileData file in provider.FileData)
+                return new FileResult
                 {
-                    files.Add(Path.GetFileName(file.LocalFileName));
-                }
-
-                return Request.CreateResponse(HttpStatusCode.OK, files);
+                    FileNames = provider.FileData.Select(entry => entry.LocalFileName),
+                    Submitter = provider.FormData["submitter"]
+                };
             }
             catch (Exception ex)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                return null;
             }
         }
     }
 
-    public class CustomMultipartFormDataStreamProvider : MultipartFileStreamProvider
+    public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
     {
         private string path = null;
-        public CustomMultipartFormDataStreamProvider(string path)
+        private string filename = null;
+        public CustomMultipartFormDataStreamProvider(string path, string filename = null)
             : base(path)
         {
             this.path = path;
+            this.filename = filename;
         }
-        public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
-        {
-            return headers.ContentDisposition.FileName.Replace("\"", string.Empty);
-        }
-        public override Stream GetStream(HttpContent parent, System.Net.Http.Headers.HttpContentHeaders headers)
-        {
-            var filename = Path.Combine(path, GetLocalFileName(headers));
-            FileMode fm = FileMode.Append;
-            if (!File.Exists(filename))
-            {
-                fm = FileMode.Create;
-            }
-            var fs = new FileStream(filename, fm);
+        //public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
+        //{
+        //    if (string.IsNullOrEmpty(filename))
+        //    {
+        //        filename = string.Format("{0}{1}", Guid.NewGuid(), ".file");
+        //    }
 
+        //    return filename;
+        //}
+        //public override Stream GetStream(HttpContent parent, System.Net.Http.Headers.HttpContentHeaders headers)
+        //{
+        //    FileMode fm = FileMode.Append;
+        //    if (!File.Exists(GetLocalFileName(headers)))
+        //    {
+        //        fm = FileMode.Create;
+        //    }
+        //    var fs = new FileStream(filename, fm);
 
-            return fs;
-        }
+        //    return fs;
+        //}
         public override Task ExecutePostProcessingAsync()
         {
             return base.ExecutePostProcessingAsync();
         }
+    }
+    public class FileResult
+    {
+        /// <summary>
+        /// Gets or sets the local path of the file saved on the server.
+        /// </summary>
+        /// <value>
+        /// The local path.
+        /// </value>
+        public IEnumerable<string> FileNames { get; set; }
+
+        /// <summary>
+        /// Gets or sets the submitter as indicated in the HTML form used to upload the data.
+        /// </summary>
+        /// <value>
+        /// The submitter.
+        /// </value>
+        public string Submitter { get; set; }
     }
 }

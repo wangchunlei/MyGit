@@ -14,7 +14,8 @@ namespace HttpClientProject
         static void Main(string[] args)
         {
             // Upload();
-            RunClient();
+            //RunClient();
+            UploadClient.RunClient();
             //var client = new RestClient("http://localhost:2616/api/upload/downloadfile?filename=1.pdf");
             //var request = new RestRequest("api/upload/downloadfile?filename=1.pdf");
 
